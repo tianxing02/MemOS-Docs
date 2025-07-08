@@ -5,7 +5,7 @@ const route = useRoute()
 const { toc } = useAppConfig()
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-// 去掉路径末尾的斜杠以匹配内容路径
+// Remove trailing slash to match content path
 const normalizedPath = route.path.replace(/\/$/, '') || '/'
 
 const { data: page } = await useAsyncData(normalizedPath, () => {
@@ -21,11 +21,11 @@ const surround = await useSurroundWithDesc(normalizedPath, navigation?.value || 
 const description = computed(() => {
   const frontmatterDesc = Object.keys(page.value || {}).includes('desc') ? page.value?.desc : undefined
   return frontmatterDesc
-    // 处理代码块
+    // Process code blocks
     ?.replace(/(?:<code>|`)(.*?)(?:<\/code>|`)/g, '<code class="px-1.5 py-0.5 text-sm font-mono font-medium rounded-md inline-block border border-muted text-highlighted bg-muted">$1</code>')
-    // 处理粗体
+    // Process bold text
     .replace(/(?:<strong>|\*\*)(.*?)(?:<\/strong>|\*\*)/g, '<strong style="color: var(--ui-text-highlighted)">$1</strong>')
-    // 处理链接 [text](url)
+    // Process links [text](url)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary hover:underline">$1</a>')
 })
 
@@ -69,7 +69,7 @@ useHead({
         </template>
       </UPageHeader>
 
-      <!-- 文档内容 -->
+      <!-- Document content -->
       <UPageBody>
         <ContentRenderer
           v-if="page"

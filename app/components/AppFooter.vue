@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const { footer } = useAppConfig()
+const route = useRoute()
+const isHomePage = computed(() => route.path === '/')
 </script>
 
 <template>
-  <UFooter class="fixed bottom-0 w-full">
+  <UFooter :class="{ 'fixed bottom-0 w-full': isHomePage }">
     <template #left>
       {{ footer.credits }}
     </template>

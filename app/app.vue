@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
 
-console.log('route:', route.path)
 const contentNavigation = useContentNavigation()
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
@@ -33,10 +32,10 @@ provide('navigation', contentNavigation)
       <UMain>
         <UContainer>
           <UPage>
-            <!-- 文档导航 -->
+            <!-- Document navigation -->
             <template #left>
               <UPageAside class="overflow-auto scrollbar-hide">
-                <!-- 使用 keep-alive 保持菜单状态 -->
+                <!-- Use keep-alive to maintain menu state -->
                 <keep-alive>
                   <UContentNavigation
                     :navigation="contentNavigation"
@@ -68,14 +67,14 @@ provide('navigation', contentNavigation)
               </UPageAside>
             </template>
 
-            <!-- 文档内容 -->
+            <!-- Document content -->
             <NuxtPage />
           </UPage>
         </UContainer>
       </UMain>
     </template>
 
-    <!-- 文档首页 -->
+    <!-- Document home page -->
     <template v-else>
       <NuxtPage />
     </template>

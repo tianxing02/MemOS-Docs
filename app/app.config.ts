@@ -15,7 +15,7 @@ export default defineAppConfig({
   },
   header: {
     title: '',
-    to: '/',
+    to: 'https://memos.openmem.net',
     logo: {
       alt: '',
       light: '',

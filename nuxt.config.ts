@@ -1,6 +1,5 @@
 import yaml from '@rollup/plugin-yaml'
 
-console.log('NUXT_UI_PRO_LICENSE:', process.env.NUXT_UI_PRO_LICENSE)
 const config = {
   modules: [
     '@nuxt/eslint',
