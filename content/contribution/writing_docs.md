@@ -79,29 +79,6 @@ For remote images (hosted on external servers), use standard Markdown image synt
 ![MemOS Architecture](https://statics.memtensor.com.cn/memos/memos-architecture.png)
 ```
 
-#### Banner Images in Frontmatter
-
-For page banners, specify the image URL in the frontmatter:
-
-```yaml
----
-title: My Page
-banner: https://statics.memtensor.com.cn/memos/memos-banner.gif
----
-```
-
-::note
-**Image Usage Guidelines:**
-1. For local assets in `public/assets`:
-   - Use the `Base64Image` component
-   - Always start paths with `/assets/`
-2. For remote images:
-   - Use standard Markdown syntax `![alt](url)`
-   - Ensure the URL is stable and accessible
-3. Always provide meaningful `alt` text for accessibility
-4. Use `banner` in frontmatter only for page header images
-::
-
 ### Steps
 
 Use `steps` to create step-by-step guides from document headings. The `steps` component automatically numbers headings, creating a numbered guide for processes and tutorials.
