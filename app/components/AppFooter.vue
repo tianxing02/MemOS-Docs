@@ -3,19 +3,15 @@ const { footer } = useAppConfig()
 </script>
 
 <template>
-  <UFooter>
+  <UFooter class="fixed bottom-0 w-full">
     <template #left>
       {{ footer.credits }}
     </template>
 
     <template #right>
-      <template v-if="footer?.links">
-        <UButton
-          v-for="(link, index) of footer?.links"
-          :key="index"
-          v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
-        />
-      </template>
+      <NuxtLink to="https://www.memtensor.com.cn/">
+        <img src="https://statics.memtensor.com.cn/logo/memtensor-w.png" alt="Memtensor" class="w-5 h-5">
+      </NuxtLink>
     </template>
   </UFooter>
 </template>

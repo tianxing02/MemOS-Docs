@@ -39,7 +39,7 @@ export default defineAppConfig({
     }]
   },
   footer: {
-    credits: 'Copyright @ 2025 Memtensor, Inc',
+    credits: '© 2025 Memtensor, Inc. All rights reserved.',
     colorMode: false
   },
   toc: {
