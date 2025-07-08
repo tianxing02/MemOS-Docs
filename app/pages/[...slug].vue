@@ -3,7 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 
 const route = useRoute()
 const { toc } = useAppConfig()
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<ContentNavigationItem[]>('navigation')
 
 // Remove trailing slash to match content path
 const normalizedPath = route.path.replace(/\/$/, '') || '/'
@@ -16,7 +16,7 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const surround = await useSurroundWithDesc(normalizedPath, navigation?.value || [])
+const surround = await useSurroundWithDesc(normalizedPath, navigation || [])
 
 const description = computed(() => {
   const frontmatterDesc = Object.keys(page.value || {}).includes('desc') ? page.value?.desc : undefined
