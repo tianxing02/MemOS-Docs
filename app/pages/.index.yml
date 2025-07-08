@@ -1,0 +1,14 @@
+hero:
+  title: INTELLIGENCE BEGINS WITH MEMORY
+  description: MemOS is devoted to creating a unified memory-management substrate for AGI—so intelligent systems can, like the human brain, possess adaptable, transferable, and shareable long-term and instant memories.
+  github: https://github.com/MemTensor/MemOS
+  links:
+    - label: Get Started
+      class: 'bg-linear-to-r from-state-500 to-blue-400'
+      trailingIcon: i-lucide-arrow-right
+      to: /home/overview
+    - label: Api Reference
+      to: /docs/api/info
+      variant: outline
+      color: neutral
+      # trailingIcon: i-lucide-arrow-right

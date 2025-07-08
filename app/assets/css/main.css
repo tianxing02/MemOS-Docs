@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "@nuxt/ui-pro";
+
+@source "../../../content/**/*";
+
+@theme static {
+  --font-sans: 'Public Sans', sans-serif;
+}
+
+/* open-api-docs-module reset styles */
+.oapi {
+  color: var(--color-black) !important;
+  background-color: transparent !important;
+
+  .bg-default {
+    background-color: transparent !important;
+  }
+
+  code {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+}
+
+img[alt="MemOS Banner"] {
+  width: 100%;
+}
