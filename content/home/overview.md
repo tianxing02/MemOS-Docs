@@ -1,6 +1,6 @@
 ---
 title: MemOS Documentation
-description: Welcome to the official documentation for MemOS – a Python package designed to empower large language models (LLMs) with advanced, modular memory capabilities.
+desc: Welcome to the official documentation for MemOS – a Python package designed to empower large language models (LLMs) with advanced, modular memory capabilities.
 banner: https://statics.memtensor.com.cn/memos/memos-banner.gif
 links:
   - label: 'PyPI'
