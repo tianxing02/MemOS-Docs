@@ -39,7 +39,7 @@ const { header } = useAppConfig()
         </UTooltip>
         <template #content>
           <img
-            src="https://memtensor-statics-resources.oss-cn-shanghai.aliyuncs.com/memos/contact-ui.png"
+            src="https://statics.memtensor.com.cn/memos/contact-ui.png"
             alt="WeChat QR"
             class="object-contain"
           >
