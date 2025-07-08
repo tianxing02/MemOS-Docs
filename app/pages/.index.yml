@@ -7,7 +7,7 @@ hero:
       class: 'bg-linear-to-r from-state-500 to-blue-400'
       trailingIcon: i-lucide-arrow-right
       to: /home/overview
-    - label: Api Reference
+    - label: API Reference
       to: /docs/api/info
       variant: outline
       color: neutral
