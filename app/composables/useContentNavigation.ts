@@ -120,6 +120,6 @@ export const useSurroundWithDesc = async (
 
   return base.map((item, i) => ({
     ...item,
-    description: (docs[i] as any)?.description,
+    description: (docs[i])?.desc
   }))
 }
