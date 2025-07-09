@@ -19,7 +19,7 @@ interface Version {
 // Mock data based on changelog.md content
 const versions = ref<Version[]>([
   {
-    title: 'Version 1.1.1',
+    title: '1.1.1',
     date: '2023-03-05',
     changes: [
       {
@@ -76,7 +76,7 @@ const versions = ref<Version[]>([
     }
   },
   {
-    title: 'Version 1.1.0',
+    title: '1.1.0',
     date: '2019-02-15',
     changes: [
       {
@@ -100,7 +100,7 @@ const versions = ref<Version[]>([
     }
   },
   {
-    title: 'Version 1.0.0',
+    title: '1.0.0',
     date: '2017-06-20',
     changes: [
       {
@@ -135,15 +135,32 @@ useHead({
   <UPage>
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-4xl font-bold mb-8">
-        Changelog
       </h1>
       <p class="text-lg mb-12">
         All notable changes to MemOS will be documented here.
       </p>
       <UChangelogVersions :versions="versions">
+        <template #date="{ version }">
+          <div class="flex gap-3 flex-col">
+            <span>{{ version.date }}</span>
+            <UBadge
+              color="neutral"
+              variant="outline"
+              class="text-primary rounded-full w-fit bg-primary/10"
+              >
+              v{{ version.title }}
+          </UBadge>
+          </div>
+        </template>
+        <template #title="{ version }">
+          <div class="hidden">
+            {{ version.title }}
+          </div>
+        </template>
         <template #description="{ version }">
+          <!-- Skip title and only show changes -->
           <div v-for="change in version.changes" :key="change.type" class="mb-4">
-            <h4 class="font-bold text-lg capitalize mb-2">
+            <h4 class="font-bold text-lg capitalize mb-2 text-white">
               {{ change.type }}
             </h4>
             <ul class="list-disc list-inside">
