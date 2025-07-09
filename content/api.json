@@ -888,9 +888,11 @@
           },
           "chat_model": {
             "$ref": "#/components/schemas/LLMConfigFactory",
+            "description": "LLM configuration for the chat model in the MOS"
           },
           "mem_reader": {
             "$ref": "#/components/schemas/MemReaderConfigFactory",
+            "description": "MemReader configuration for the MOS"
           },
           "mem_scheduler": {
             "anyOf": [

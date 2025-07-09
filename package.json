@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "node scripts/fetch-api.mjs && nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
@@ -20,6 +20,7 @@
     "@nuxt/ui-pro": "^3.1.3",
     "@rollup/plugin-yaml": "^4.1.2",
     "better-sqlite3": "^12.2.0",
+    "node-fetch": "^3.3.2",
     "nuxt": "^3.17.5",
     "nuxt-llms": "0.1.3",
     "nuxt-og-image": "^5.1.6",
