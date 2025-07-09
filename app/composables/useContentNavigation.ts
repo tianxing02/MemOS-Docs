@@ -11,7 +11,7 @@ const parseIconAndTitle = (raw: string): ParsedTitle => {
   const [, iconName, title] = raw.match(/\(ri:([^)]+)\)\s*(.*)/) || []
   return {
     ...(iconName ? { icon: `i-ri-${iconName}` } : {}),
-    title: title || raw,
+    title: title || raw
   } as ParsedTitle
 }
 
@@ -35,7 +35,7 @@ const toContentNav = (node: RawNav): ContentNavigationItem | null => {
       ...(icon ? { icon } : {}),
       framework: null,
       module: null,
-      class: [],
+      class: []
     }
   }
 
@@ -120,6 +120,12 @@ export const useSurroundWithDesc = async (
 
   return base.map((item, i) => ({
     ...item,
-    description: (docs[i])?.desc
+    description: docs[i]?.desc
+      // Remove code blocks
+      ?.replace(/(?:<code>|`)(.*?)(?:<\/code>|`)/g, '$1')
+      // Remove bold text markers
+      ?.replace(/(?:<strong>|\*\*)(.*?)(?:<\/strong>|\*\*)/g, '$1')
+      // Remove link markers [text](url)
+      ?.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
   }))
 }
