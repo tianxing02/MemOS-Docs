@@ -28,7 +28,7 @@ provide('navigation', contentNavigation)
 
     <AppHeader v-if="!route.path.startsWith('/api/')"/>
 
-    <template v-if="route.path !== '/' && !route.path.startsWith('/api') && route.path !== '/changelog'">
+    <template v-if="route.path !== '/' && !route.path.startsWith('/api') && !route.path.startsWith('/changelog')">
       <UMain>
         <UContainer>
           <UPage>
