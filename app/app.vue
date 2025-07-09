@@ -76,9 +76,11 @@ provide('navigation', contentNavigation)
 
     <!-- Document home page -->
     <template v-else>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
+      <ClientOnly>
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
+      </ClientOnly>
     </template>
 
     <AppFooter v-if="!route.path.startsWith('/docs/api')"/>
