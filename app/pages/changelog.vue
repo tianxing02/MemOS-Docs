@@ -135,6 +135,7 @@ useHead({
   <UPage>
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-4xl font-bold mb-8">
+        Changelog
       </h1>
       <p class="text-lg mb-12">
         All notable changes to MemOS will be documented here.
