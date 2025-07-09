@@ -8,6 +8,10 @@ const schema = z.object({
     title: z.string().optional()
   }),
   banner: z.string().optional(),
+  avatar: z.object({
+    src: z.string(),
+    alt: z.string()
+  }).optional(),
   links: z.array(z.object({
     label: z.string(),
     icon: z.string(),

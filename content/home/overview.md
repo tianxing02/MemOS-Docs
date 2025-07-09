@@ -7,7 +7,7 @@ links:
     to: https://pypi.org/project/MemoryOS/
     target: _blank
     avatar:
-      src: https:/statics.memtensor.com.cn/icon/pypi.svg
+      src: https://statics.memtensor.com.cn/icon/pypi.svg
       alt: PyPI logo
   - label: 'Open Source'
     to: https://github.com/MemTensor/MemOS

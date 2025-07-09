@@ -59,6 +59,13 @@ useHead({
         :links="page.links"
       >
         <template #description>
+          <div class="flex items-center gap-4 mb-4" v-if="page.avatar">
+            <img
+              :src="page.avatar.src"
+              :alt="page.avatar.alt"
+              class="w-12 h-12 rounded-full object-cover"
+            />
+          </div>
           <img
             v-if="page.banner"
             :src="page.banner"
