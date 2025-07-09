@@ -28,7 +28,7 @@ provide('navigation', contentNavigation)
 
     <AppHeader v-if="!route.path.startsWith('/api/')"/>
 
-    <template v-if="route.path !== '/' && !route.path.startsWith('/api')">
+    <template v-if="route.path !== '/' && !route.path.startsWith('/api') && route.path !== '/changelog'">
       <UMain>
         <UContainer>
           <UPage>
@@ -71,6 +71,8 @@ provide('navigation', contentNavigation)
             <NuxtPage />
           </UPage>
         </UContainer>
+
+        <AppFooter />
       </UMain>
     </template>
 
@@ -78,8 +80,6 @@ provide('navigation', contentNavigation)
     <template v-else>
       <NuxtPage />
     </template>
-
-    <AppFooter />
 
     <ClientOnly>
       <LazyUContentSearch
