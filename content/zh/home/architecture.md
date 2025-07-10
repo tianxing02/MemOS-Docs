@@ -1,90 +1,81 @@
 ---
-title: Architecture
-desc: MemOS is made up of **core modules** that work together to turn your LLM into a truly **memory-augmented system** — from orchestration to storage to retrieval.
+title: 架构
+desc: MemOS 由**核心模块**组成，这些模块协同工作，将您的 LLM 转变为真正的**记忆增强系统**——从编排到存储到检索。
 ---
+## 核心模块
 
-## Core Modules
+### MOS (Memory Operating System，记忆操作系统)
 
-### MOS (Memory Operating System)
+MemOS 的编排层——管理跨多种记忆类型（纯文本、激活、参数化）的预测性、异步调度，并编排**多用户、多会话**记忆工作流。
 
-The orchestration layer of MemOS — it
-  manages predictive, asynchronous scheduling across multiple memory types (plaintext, activation, parametric) and orchestrates **multi-user, multi-session** memory workflows.
-
-MOS connects memory containers (**MemCubes**) with LLMs via a unified API for adding, searching, updating, transferring, or rolling back memories. It also supports cross-model, cross-device interoperability through a unified Memory Interchange Protocol (MIP).
+MOS 通过统一 API 将记忆容器（**MemCubes**）与 LLMs 连接，用于添加、搜索、更新、传输或回滚记忆。它还通过统一的记忆交换协议 (Memory Interchange Protocol，MIP) 支持跨模型、跨设备的互操作性。
 
 ### MemCube
-A modular, portable **memory container** — think of it like a flexible cartridge that can hold one or more memory types for a **user, agent, or session**.
 
-MemCubes can be dynamically registered, updated, or removed. They support containerized storage that is transferable across sessions, models, and devices.
+一个模块化、可移植的**记忆容器**——将其视为一个灵活的卡带，可以为**用户、代理或会话**容纳一种或多种记忆类型。
 
-### Memories
+MemCubes 可以动态注册、更新或移除。它们支持可在会话、模型和设备之间传输的容器化存储。
 
-  MemOS supports several specialized memory types for different needs:
+### 记忆
 
-#### 1. **Parametric Memory**(**Coming Soon**)
+MemOS 支持几种专门的记忆类型以满足不同需求：
 
-Embedded in model weights;
-    long-term,
-    high-efficiency, but hard to edit.
+#### 1. **参数化记忆**(**即将推出**)
 
-#### 2. **Activation Memory**
+嵌入在模型权重中；长期、高效率，但难以编辑。
 
-Runtime hidden states & KV-cache; short-term,
-transient, steering dynamic behavior.
+#### 2. **激活记忆**
 
-#### 3. Plaintext Memory
+运行时的隐藏状态和 KV-cache；短期、瞬态，引导动态行为。
 
-Structured or unstructured knowledge
-blocks; editable, traceable, suitable for fast updates, personalization & multi-agent sharing.
+#### 3. 纯文本记忆
 
-- **GeneralTextMemory:** Flexible, vector-based storage for unstructured
-textual knowledge with semantic search and metadata filtering.
-- **TreeTextMemory:** Hierarchical, graph-style memory for structured
-knowledge — combining **tree-based hierarchy** and **cross-branch linking** for dynamic, evolving knowledge graphs. It supports long-term organization and multi-hop reasoning (often Neo4j-backed).
+结构化或非结构化知识块；可编辑、可追溯，适合快速更新、个性化和多代理共享。
+
+- **GeneralTextMemory:** 灵活的、基于向量的存储，用于非结构化文本知识，具有语义搜索和元数据过滤。
+- **TreeTextMemory:** 分层、图式记忆，用于结构化知识——结合**基于树的层次结构**和**跨分支链接**，实现动态、演进的知识图。它支持长期组织和多跳推理（通常由 Neo4j 支持）。
 
 ::note
-**Best Practice**<br>
-Start simple with <code>GeneralTextMemory</code> — then scale to graph or KV-cache as your needs grow.
+**最佳实践**<br>
+从 `GeneralTextMemory` 开始实践——然后随着需求的增长扩展到 graph 或 KV-cache。
 ::
 
-#### Basic Modules
+#### 基础模块
 
-Includes chunkers, embedders, LLM connectors, parsers, and interfaces for vector/graph databases. These provide the building blocks for memory extraction, semantic embedding, storage, and retrieval.
+包括分块器、嵌入器、LLM 连接器、解析器和向量/图数据库接口。这些为记忆提取、语义嵌入、存储和检索提供构建块。
 
-## Code Structure
+## 代码结构
 
-Your MemOS project is organized for clarity and plug-and-play:
+您的 MemOS 项目组织清晰，支持即插即用：
 
 ```
 src/memos/
-    api/           # API definitions
-    chunkers/      # Text chunking utilities
-    configs/       # Configuration schemas
-    embedders/     # Embedding models
-    graph_dbs/     # Graph database backends (e.g., Neo4j)
-    vec_dbs/       # Vector database backends (e.g., Qdrant)
-    llms/          # LLM connectors
-    mem_chat/      # Memory-augmented chat logic
-    mem_cube/      # MemCube management
-    mem_os/        # MOS orchestration
-    mem_reader/    # Memory readers
-    memories/      # Memory type implementations
-    parsers/       # Parsing utilities
+    api/           # API 定义
+    chunkers/      # 文本分块工具
+    configs/       # 配置模式
+    embedders/     # 嵌入模型
+    graph_dbs/     # 图数据库后端 (例如，Neo4j)
+    vec_dbs/       # 向量数据库后端 (例如，Qdrant)
+    llms/          # LLM 连接器
+    mem_chat/      # 记忆增强聊天逻辑
+    mem_cube/      # MemCube 管理
+    mem_os/        # MOS 编排
+    mem_reader/    # 记忆读取器
+    memories/      # 记忆类型实现
+    parsers/       # 解析工具
 ```
 
 ::note
-**Pro Tip**<br>
-Use <code>examples/</code> for quick experimentation and <code>docs/</code> for module deep dives.
+**专业提示**<br>
+使用`examples` 进行快速实验，使用 `docs` 进行模块深入探讨。
 ::
 
-## Extensibility
+## 可扩展性
 
-MemOS is **modular by design**.
-Add your own memory types, storage backends, or LLM connectors with minimal changes — thanks to its **unified config and factory patterns**.
-
+MemOS 是**模块化设计的**。
+添加您自己的记忆类型、存储后端或 LLM 连接器，只需最少的更改——这要归功于其**统一配置和工厂模式**。
 
 ::note
-**Pro Tip**<br>
-[Contribute](/contribution/overview) a new backend or share your custom memory
-type — it’s easy to plug in.
+**专业提示**<br>
+[贡献](/contribution/overview) 一个新的后端或分享您的自定义记忆类型——这很容易插入。
 ::
