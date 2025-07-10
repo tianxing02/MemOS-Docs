@@ -1,67 +1,68 @@
 ---
-title: Development Workflow
+title: 开发流程
 ---
 
-Follow these steps to contribute to the project.
+按照以下步骤参与项目开发。
 
 ::steps{level="4"}
 
-#### Sync with Upstream
+#### 与上游仓库同步
 
-If you've previously forked the repository, sync with the upstream changes:
+如果你之前 fork 了该仓库，请与上游仓库的变更保持同步：
 
 ```bash
-git checkout dev        # switch to dev branch
-git fetch upstream      # fetch latest changes from upstream
-git pull upstream dev   # merge changes into your local dev branch
-git push origin dev     # push changes to your fork
-```
+git checkout dev        # 切换到 dev 分支
+git fetch upstream      # 获取上游仓库的最新更改
+git pull upstream dev   # 将更改合并到本地 dev 分支
+git push origin dev     # 将合并后的代码推送到你自己的 fork
+````
 
-#### Create a Feature Branch
+#### 创建功能分支
 
-Create a new branch for your feature or fix:
+为你的新功能或修复创建一个新的分支：
 
 ```bash
 git checkout -b feat/descriptive-name
 ```
 
-#### Make Your Changes
+#### 编写你的代码
 
-Implement your feature, fix, or improvement in the appropriate files.
+在相应文件中实现你的功能、修复或改进。
 
-- For example, you might add a function in `src/memos/hello_world.py` and create corresponding tests in `tests/test_hello_world.py`.
+* 例如，你可以在 `src/memos/hello_world.py` 中添加一个函数，并在 `tests/test_hello_world.py` 中编写相应的测试用例。
 
-#### Test Your Changes
+#### 测试你的更改
 
-Run the test suite to ensure your changes work correctly:
+运行测试套件以确保更改正确：
 
 ```bash
 make test
 ```
 
-#### Commit Your Changes
+#### 提交更改
 
-Follow the project's commit guidelines (see [Commit Guidelines](./commit_guidelines.md)) when committing your changes.
+提交更改时请遵循项目的提交规范（参见 [提交规范](commit_guidelines.md)）。
 
-#### Push to Your Fork
+#### 推送到你的 Fork 仓库
 
-Push your feature branch to your forked repository:
+将功能分支推送到你 fork 的远程仓库：
 
 ```bash
 git push origin feat/descriptive-name
 ```
 
-#### Create a Pull Request
+#### 创建 Pull Request
 
-Submit your changes for review:
+提交你的更改以供审核：
 
-- **Important:** Please create your pull request against
-  - ✅ the `dev` branch of the upstream repository,
-  - ❎ not the `main` branch of the upstream repository.
-- Go to the original repository on GitHub
-- Click on "Pull Requests"
-- Click on "New Pull Request"
-- Select `dev` as the base branch, and your branch as compare
-- Fulfill the PR description carefully.
+* **重要提示：** 请务必将 Pull Request 提交到：
+
+  * ✅ 上游仓库的 `dev` 分支，
+  * ❎ 而不是上游仓库的 `main` 分支。
+* 打开 GitHub 上的原始仓库
+* 点击 "Pull Requests"
+* 点击 "New Pull Request"
+* 选择 `dev` 作为目标分支，你的分支作为对比分支
+* 仔细填写 PR 描述
 
 ::
