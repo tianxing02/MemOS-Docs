@@ -9,6 +9,10 @@ const navigation = inject<ContentNavigationItem[]>('navigation')
 const normalizedPath = route.path.replace(/\/$/, '') || '/'
 
 const { data: page } = await useAsyncData(normalizedPath, () => {
+  queryCollection('docs').all().then((res) => {
+    console.log('queryCollection all:', res);
+  })
+
   return queryCollection('docs').path(normalizedPath).first()
 })
 

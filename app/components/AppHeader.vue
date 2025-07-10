@@ -4,14 +4,11 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 const { header } = useAppConfig()
+console.log('header:', header)
 </script>
 
 <template>
   <UHeader
-    :ui="{
-      center: 'flex justify-center items-center',
-      container: 'flex items-center justify-between gap-3 h-full'
-    }"
     :to="header?.to || '/'"
   >
     <template
@@ -22,7 +19,7 @@ const { header } = useAppConfig()
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="header.memu" class="justify-center">
+    <UNavigationMenu :items="header.memus" class="justify-center">
       <template #item="{ item }">
         <div>{{ item.label }}</div>
       </template>
@@ -33,10 +30,15 @@ const { header } = useAppConfig()
         v-if="header?.search"
       />
 
+      <UButton
+        color="neutral"
+        variant="ghost"
+      >
+        <LocaleSwitch class="w-[20px] h-[20px]" />
+      </UButton>
+
       <UModal>
-        <UTooltip text="Contact Us" class="hidden lg:flex" :delay-duration="0">
-          <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" />
-        </UTooltip>
+        <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" />
         <template #content>
           <img
             src="https://statics.memtensor.com.cn/memos/contact-ui.png"

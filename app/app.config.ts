@@ -29,7 +29,7 @@ export default defineAppConfig({
       'target': '_blank',
       'aria-label': 'GitHub'
     }],
-    memu: [{
+    memus: [{
       to: 'https://memos.openmem.net',
       label: 'Home'
     }, {
