@@ -2,10 +2,8 @@ import { writeFileSync } from 'fs'
 import fetch from 'node-fetch'
 
 function processApiSpec(data) {
-  // 深拷贝对象以避免直接修改原始数据
   const processedData = JSON.parse(JSON.stringify(data))
 
-  // 删除指定的描述行
   if (processedData.components?.schemas?.MOSConfig?.properties) {
     const properties = processedData.components.schemas.MOSConfig.properties
 
