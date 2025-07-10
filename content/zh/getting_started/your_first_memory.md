@@ -1,87 +1,84 @@
 ---
-title: Your First Memory
-desc: Let’s build your first plaintext memory in MemOS! **GeneralTextMemory** is the easiest way to get hands-on with extracting, embedding, and searching simple text memories.
+title: 你的第一个记忆
+desc: 让我们在 MemOS 中构建你的第一个纯文本记忆！**GeneralTextMemory** 是提取、嵌入和搜索简单文本记忆的最简便方式。
 ---
 
-## What You'll Learn
+## 你将学到什么
 
-By the end of this guide, you will:
-- Extract memories from plain text or chat messages.
-- Store them as semantic vectors.
-- Search and manage them using vector similarity.
+完成本指南后，你将能够：
+- 从纯文本或聊天消息中提取记忆。
+- 将它们存储为语义向量。
+- 使用向量相似度搜索和管理它们。
 
-## How It Works
+## 工作原理
 
-### Memory Structure
+### 记忆结构
 
-Every memory is stored as a `TextualMemoryItem`:
-- `memory`: the main text content (e.g., "The user loves tomatoes.")
-- `metadata`: extra details to make the memory searchable and manageable — type,
-  time, source, confidence, entities, tags, visibility, and updated_at.
+每条记忆都存储为一个 `TextualMemoryItem`：
+- `memory`：主要文本内容（例如，“用户喜欢番茄。”）
+- `metadata`：额外信息，使记忆可搜索且易于管理——类型、时间、来源、置信度、实体、标签、可见性和更新时间。
 
-These fields make each piece of memory queryable, filterable, and easy to govern.
+这些字段使每条记忆都能被查询、筛选和方便治理。
 
-For each `TextualMemoryItem`:
+对于每个 `TextualMemoryItem`：
 
-| Field         | Example                   | What it means                              |
-| ------------- | ------------------------- | ------------------------------------------ |
-| `type`        | `"opinion"`               | Classify if it's a fact, event, or opinion |
-| `memory_time` | `"2025-07-02"`            | When it happened                           |
-| `source`      | `"conversation"`          | Where it came from                         |
-| `confidence`  | `100.0`                   | Certainty score (0–100)                    |
-| `entities`    | `["tomatoes"]`            | Key concepts                               |
-| `tags`        | `["food", "preferences"]` | Extra labels for grouping                  |
-| `visibility`  | `"private"`               | Who can access it                          |
-| `updated_at`  | `"2025-07-02T00:00:00Z"`  | Last modified                              |
-
-::note
-**Best Practice**<br>You can define any metadata fields that make sense for your use case!
-::
-
-
-
-### The Core Steps
-When you run this example:
-
-1. **Extract:**
-Your messages go through an `extractor_llm`, which returns a JSON list of `TextualMemoryItem`s.
-
-2. **Embed:**
-Each memory's `memory` field is turned into an embedding vector via `embedder`.
-
-3. **Store:**
-The embeddings are saved into a local **Qdrant** collection.
-
-4. **Search & Manage:**
-You can now `search` by semantic similarity, `update` by ID, or `delete` memories.
+| 字段           | 示例                      | 含义                                   |
+| -------------- | ------------------------- | -------------------------------------- |
+| `type`         | `"opinion"`               | 分类它是事实、事件还是观点             |
+| `memory_time`  | `"2025-07-02"`            | 发生时间                              |
+| `source`       | `"conversation"`          | 来源                                 |
+| `confidence`   | `100.0`                   | 置信度评分（0–100）                   |
+| `entities`     | `["tomatoes"]`            | 关键概念                              |
+| `tags`         | `["food", "preferences"]` | 分组用的额外标签                      |
+| `visibility`   | `"private"`               | 谁可以访问                           |
+| `updated_at`   | `"2025-07-02T00:00:00Z"` | 最后修改时间                         |
 
 ::note
-**Hint**<br>Make sure your embedder's output dimension matches your vector DB's `vector_dimension`.
-  Mismatch may cause search errors!
+**最佳实践**  
+你可以根据用例定义任何合适的元数据字段！
 ::
 
+### 核心步骤
+运行此示例时：
 
+1. **提取：**  
+你的消息会通过 `extractor_llm`，它返回一个包含 `TextualMemoryItem` 的 JSON 列表。
+
+2. **嵌入：**  
+每条记忆的 `memory` 字段会通过 `embedder` 转换成嵌入向量。
+
+3. **存储：**  
+嵌入向量保存到本地的 **Qdrant** 集合中。
+
+4. **搜索与管理：**  
+你现在可以按语义相似度 `search`，按 ID `update` 或 `delete` 记忆。
 
 ::note
-**Hint**<br>If your search results are too noisy or irrelevant, check whether your <code>embedder</code> config and vector DB are properly initialized.
+**提示**  
+确保你的 embedder 输出维度与向量数据库的 `vector_dimension` 匹配，否则可能导致搜索错误！
 ::
 
-### Example Flow
+::note
+**提示**  
+如果搜索结果过于杂乱或无关，检查你的 <code>embedder</code> 配置和向量数据库是否正确初始化。
+::
 
-**Input Messages:**
+### 示例流程
+
+**输入消息：**
 
 ```json
 [
-  {"role": "user", "content": "I love tomatoes."},
-  {"role": "assistant", "content": "Great! Tomatoes are healthy."}
+  {"role": "user", "content": "我喜欢番茄。"},
+  {"role": "assistant", "content": "太好了！番茄很健康。"}
 ]
-```
+````
 
-**Extracted Memory:**
+**提取的记忆：**
 
 ```json
 {
-  "memory": "The user loves tomatoes.",
+  "memory": "用户喜欢番茄。",
   "metadata": {
     "type": "opinion",
     "memory_time": "2025-07-02",
@@ -95,17 +92,18 @@ You can now `search` by semantic similarity, `update` by ID, or `delete` memorie
 }
 ```
 
-Here's a minimal script to create, extract, store, and search a memory:
+下面是一个最简脚本，用于创建、提取、存储和搜索记忆：
 
 ::steps{level="4"}
 
-#### Create a Memory Config
+#### 创建记忆配置
 
-First, create your minimal GeneralTextMemory config.
-It contains three key parts:
-- extractor_llm: uses an LLM to extract plaintext memories from conversations.
-- embedder: turns each memory into a vector.
-- vector_db: stores vectors and supports similarity search.
+首先，创建你的最简 GeneralTextMemory 配置。
+它包含三个关键部分：
+
+* extractor\_llm：使用 LLM 从对话中提取纯文本记忆。
+* embedder：将每条记忆转换成向量。
+* vector\_db：存储向量并支持相似度搜索。
 
 ```python
 from memos.configs.memory import MemoryConfigFactory
@@ -143,9 +141,8 @@ config = MemoryConfigFactory(
 m = MemoryFactory.from_config(config)
 ```
 
-
-#### Extract Memories from Messages
-Give your LLM a simple dialogue and see how it extracts structured plaintext memories.
+#### 从消息中提取记忆
+给你的 LLM 一个简单的对话，看看它如何提取结构化的纯文本记忆。
 
 ```python
 memories = m.extract(
@@ -155,8 +152,10 @@ memories = m.extract(
     ]
 )
 print("Extracted:", memories)
-```
-You'll get a list of TextualMemoryItem, with each of them like:
+````
+
+你将得到一个 TextualMemoryItem 的列表，每条内容类似：
+
 ```text
 TextualMemoryItem(
   id='...',
@@ -165,9 +164,9 @@ TextualMemoryItem(
 )
 ```
 
-#### Add Memories to Your Vector DB
+#### 将记忆添加到你的向量数据库
 
-Save the extracted memories to your vector DB and demonstrate adding a custom plaintext memory manually (with a custom ID).
+将提取的记忆保存到向量数据库中，并演示如何手动添加一条自定义纯文本记忆（带自定义 ID）。
 
 ```python
 m.add(memories)
@@ -180,27 +179,29 @@ m.add([
 ])
 ```
 
+#### 搜索记忆
 
-#### Search Memories
+现在测试相似度搜索！
+输入任何自然语言查询，查找相关记忆。
 
-Now test similarity search!
-Type any natural language query and find related memories.
 ```python
 results = m.search("Tell me more about the user", top_k=2)
 print("Search results:", results)
 ```
 
-#### Get Memories by ID
+#### 通过 ID 获取记忆
 
-Fetch any memory directly by its ID:
+直接通过 ID 获取任意记忆：
+
 ```python
 print("Get one by ID:", m.get("a19b6caa-5d59-42ad-8c8a-e4f7118435b4"))
 ```
 
-#### Update a Memory
+#### 更新记忆
 
-Need to fix or refine a memory?
-Update it by ID and re-embed the new version.
+需要修正或完善记忆？
+通过 ID 更新并重新嵌入新版本。
+
 ```python
 m.update(
     "a19b6caa-5d59-42ad-8c8a-e4f7118435b4",
@@ -221,48 +222,52 @@ m.update(
 print("Updated:", m.get("a19b6caa-5d59-42ad-8c8a-e4f7118435b4"))
 ```
 
-#### Delete Memories
+#### 删除记忆
 
-Remove one or more memories cleanly
+干净地删除一条或多条记忆：
+
 ```python
 m.delete(["a19b6caa-5d59-42ad-8c8a-e4f7118435b4"])
 print("Remaining:", m.get_all())
 ```
 
-#### Dump Memories to Disk
+#### 将记忆导出到磁盘
 
-Finally, dump all your memories to local storage:
+最后，将所有记忆导出到本地存储：
+
 ```python
 m.dump("tmp/mem")
 print("Memory dumped to tmp/mem")
 ```
-By default, your memories are saved to:
+
+默认情况下，你的记忆会保存到：
+
 ```
 <your_dir>/<config.memory_filename>
 ```
-They can be reloaded anytime with `load()`.
+
+可以随时用 `load()` 重新加载。
 
 ::note
-By default, your dumped memories are saved to the file path you set in your config.
-  Always check <code>config.memory_filename</code> if you want to customize it.
+默认情况下，导出的记忆保存到你配置中的文件路径。
+如果想自定义，请务必检查 <code>config.memory\_filename</code>。
 ::
 
 ::
 
-Now your agent remembers — no more stateless chatbots!
+现在你的智能体有记忆了——不再是无状态聊天机器人！
 
-## What's Next?
+## 接下来做什么？
 
-Ready to level up?
+准备进阶了吗？
 
-- **Try your own LLM backend:** Swap to OpenAI, HuggingFace, or Ollama.
-- **Explore [TreeTextMemory](/modules/memories/tree_textual_memory):** Build a graph-based,
-  hierarchical memory.
-- **Add [Activation Memory](/modules/memories/kv_cache_memory):** Cache key-value
-  states for faster inference.
-- **Dive deeper:** Check the [API Reference](/docs/api/info) and [Examples](/getting_started/examples) for advanced workflows.
+- **尝试自己的 LLM 后端：** 切换到 OpenAI、HuggingFace 或 Ollama。
+- **探索 [TreeTextMemory](/modules/memories/tree_textual_memory)：** 构建基于图的层级记忆。
+- **添加 [Activation Memory](/modules/memories/kv_cache_memory)：** 缓存键值状态，加速推理。
+- **深入学习：** 查看 [API Reference](/docs/api/info) 和 [Examples](/getting_started/examples) 了解高级工作流程。
 
 ::note
-**Try Graph Textual Memory**<br>Try switching to
-<code>TreeTextMemory</code> to add a graph-based, hierarchical structure to your memories.<br>Perfect for scenarios that need explainability and long-term structured knowledge.
+**试试图形文本记忆**
+尝试切换到 <code>TreeTextMemory</code>，为你的记忆增加基于图的层级结构。
+非常适合需要可解释性和长期结构化知识的场景。
 ::

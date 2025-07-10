@@ -1,35 +1,35 @@
 ---
-title: Documentation Writing Guidelines
-desc: This project uses Nuxt Content to build a documentation system that supports Markdown and rich Vue components.
+title: 文档编写指南
+desc: 本项目使用 Nuxt Content 构建支持 Markdown 和富 Vue 组件的文档系统。
 ---
 
-## Creating New Documents
+## 创建新文档
 
 ::steps
-### Create Markdown File
-Create a new `.md` file in the `content/` directory or its subdirectories. Choose an appropriate location based on your content type.
+### 创建 Markdown 文件
+在 `content/` 目录或其子目录中创建新的 `.md` 文件。根据内容类型选择合适的位置。
 
-### Add Frontmatter
-Add YAML frontmatter at the top of your file to provide metadata. The frontmatter supports the following fields:
+### 添加 Frontmatter
+在文件顶部添加 YAML frontmatter 来提供元数据。frontmatter 支持以下字段：
 
-::card{title="Frontmatter Fields"}
-**Required Fields:**
-- `title` (string) - The document title that appears in navigation and page headers
+::card{title="Frontmatter 字段"}
+**必填字段：**
+- `title`（字符串） - 显示在导航和页面标题中的文档标题
 
-**Optional Fields:**
-- `desc` (string) - Brief description of the document content
-- `banner` (string) - URL to a banner image displayed at the top of the page
-- `links` (array) - Array of related links with labels, URLs, and icons
+**可选字段：**
+- `desc`（字符串） - 文档内容的简要描述
+- `banner`（字符串） - 页面顶部展示的横幅图片链接
+- `links`（数组） - 包含标签、URL 和图标的相关链接数组
 
-![Frontmatter Example](https://statics.memtensor.com.cn/memos/frontmatter.png)
+![Frontmatter 示例](https://statics.memtensor.com.cn/memos/frontmatter.png)
 ::
 
-**Complete Frontmatter Example:**
+**完整 Frontmatter 示例：**
 
 ```yaml
 ---
-title: MemOS Documentation
-desc: Welcome to the official documentation for MemOS – a Python package designed to empower large language models (LLMs) with advanced, modular memory capabilities.
+title: MemOS 文档
+desc: 欢迎阅读 MemOS 的官方文档——一个旨在赋能大语言模型（LLMs）实现高级、模块化记忆能力的 Python 包。
 banner: https://statics.memtensor.com.cn/memos/memos-banner.gif
 links:
   - label: 'PyPI'
@@ -38,102 +38,65 @@ links:
     avatar:
       src: https://statics.memtensor.com.cn/icon/pypi.svg
       alt: PyPI logo
-  - label: 'Open Source'
+  - label: '开源地址'
     to: https://github.com/MemTensor/MemOS
     target: _blank
     icon: i-simple-icons-github
 ---
-```
+````
 
-### Write Content
-Use Markdown syntax and MDC components to write your documentation content. Take advantage of the available components to create engaging and well-structured content.
+### 编写内容
+使用 Markdown 语法和 MDC 组件撰写文档内容。利用已有组件构建结构清晰、交互友好、内容丰富的文档。
 
-### Update Navigation
-Add the new document to the `nav` section in `content/settings.yml` to make it accessible through the site navigation.
+### 更新导航
+将新文档添加到 `content/settings.yml` 中的 `nav` 部分，以便在站点导航中访问。
 
-### Merge to Main Branch
-Once changes are merged into the `main` branch, the documentation will be automatically updated and deployed.
+### 合并到主分支
+一旦变更合并到 `main` 分支，文档将自动更新并部署。
 ::
 
-## Component Examples
+## 组件示例
 
-This project uses Nuxt Content's MDC (Markdown Components) syntax, which supports using Vue components within Markdown. These components help create engaging, well-structured documentation with consistent styling and improved user experience.
+本项目使用 Nuxt Content 的 MDC（Markdown Components）语法，支持在 Markdown 中使用 Vue 组件。这些组件有助于创建风格一致、结构良好、体验优秀的文档内容。
 
-### Image References
+### 图片引用
 
-When adding images to your documentation, you can use several methods to reference them:
+为文档添加图片时，可以使用多种方式进行引用：
 
-#### Local Assets with Base64Image Component
+#### 使用 Base64Image 组件引用本地图片
 
-For images stored in the `public/assets` directory, use the `Base64Image` component. This component provides better performance by embedding the image directly in the page:
+对于存储在 `public/assets` 目录下的图片，推荐使用 `Base64Image` 组件，该组件能将图片直接嵌入页面以提高性能：
 
 ```mdc
 :Base64Image{src="/assets/memos-architecture.png" alt="MemOS Architecture"}
 ```
 
-#### Remote Images with Markdown Syntax
+#### 使用 Markdown 语法引用远程图片
 
-For remote images (hosted on external servers), use standard Markdown image syntax:
+对于托管在外部服务器上的图片，使用标准的 Markdown 图片语法：
 
 ```markdown
 ![MemOS Architecture](https://statics.memtensor.com.cn/memos/memos-architecture.png)
 ```
 
-### Steps
+### 步骤指引
 
-Use `steps` to create step-by-step guides from document headings. The `steps` component automatically numbers headings, creating a numbered guide for processes and tutorials.
+使用 `steps` 组件将文档标题自动编号，生成逐步引导的教程。
 
 ::code-preview
 ---
 class: "[&>div]:*:w-full"
 ---
   :::steps{level="4"}
-  #### Install MemOS
-  
-  ```bash
-  pip install MemoryOS
-  ```
-  
-  #### Create a Minimal Config
-  
-  For this Quick Start, we'll use the built-in GeneralTextMemory.
-  
-  ```python
-  from memos.configs.mem_os import MOSConfig
-  
-  # init MOSConfig
-  mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
-  ```
-  
-  #### Create a User & Register a MemCube
-  
-  ```python
-  import uuid
-  from memos.mem_os.main import MOS
-  
-  mos = MOS(mos_config)
-  
-  # Generate a unique user ID
-  user_id = str(uuid.uuid4())
-  
-  # Create the user
-  mos.create_user(user_id=user_id)
-  ```
-  :::
-
-#code
-````mdc
-::steps{level="4"}
-
-#### Install MemOS
+#### 安装 MemOS
 
 ```bash
 pip install MemoryOS
 ```
 
-#### Create a Minimal Config
+#### 创建最小配置
 
-For this Quick Start, we'll use the built-in GeneralTextMemory.
+本快速开始使用内置的 GeneralTextMemory。
 
 ```python
 from memos.configs.mem_os import MOSConfig
@@ -142,7 +105,7 @@ from memos.configs.mem_os import MOSConfig
 mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
 ```
 
-#### Create a User & Register a MemCube
+#### 创建用户 & 注册记忆立方
 
 ```python
 import uuid
@@ -150,10 +113,47 @@ from memos.mem_os.main import MOS
 
 mos = MOS(mos_config)
 
-# Generate a unique user ID
+# 生成唯一用户 ID
 user_id = str(uuid.uuid4())
 
-# Create the user
+# 创建用户
+mos.create_user(user_id=user_id)
+```
+  :::
+
+#code
+````mdc
+::steps{level="4"}
+
+#### 安装 MemOS
+
+```bash
+pip install MemoryOS
+```
+
+#### 创建一个最小配置
+
+本快速开始将使用内置的 GeneralTextMemory。
+
+```python
+from memos.configs.mem_os import MOSConfig
+
+# 初始化 MOSConfig
+mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
+```
+
+#### 创建用户并注册一个 MemCube
+
+```python
+import uuid
+from memos.mem_os.main import MOS
+
+mos = MOS(mos_config)
+
+# 生成一个唯一的用户 ID
+user_id = str(uuid.uuid4())
+
+# 创建该用户
 mos.create_user(user_id=user_id)
 ```
 
@@ -164,48 +164,49 @@ mos.create_user(user_id=user_id)
 
 ### Accordion
 
-Use `accordion` and `accordion-item` to create collapsible content sections. Accordions are useful for organizing FAQs, expandable details, or grouped information in an interactive way.
+使用 `accordion` 和 `accordion-item` 创建可折叠内容区域。适用于组织 FAQ、可展开详情或分组信息等场景。
 
 ::code-preview
 ---
 class: "[&>div]:*:my-0"
 ---
-  :::accordion
+ :::accordion
     ::::accordion-item
     ---
     icon: i-lucide-circle-help
-    label: Is MemOS compatible with LLMs accessed via API?
+    label: MemOS 是否兼容通过 API 访问的大语言模型（LLM）？
     ---
-    Yes. MemOS is designed to be as compatible as possible with various types of models. However, it's important to note that if you're using API-based models, activation and parametric memories cannot be utilized.
+    是的。MemOS 设计时尽可能兼容各种类型的模型。不过需要注意的是，如果你使用的是基于 API 的模型，那么激活记忆和参数记忆将无法使用。
     ::::
   
     ::::accordion-item
     ---
     icon: i-lucide-circle-help
-    label: How does MemOS improve the effectiveness of large language model applications?
+    label: MemOS 如何提升大语言模型应用的效果？
     ---
-    MemOS enhances large language model applications by providing structured, persistent memory with intelligent scheduling, long-term knowledge retention, and KV cache for fast inference. It supports fine-grained access control and user isolation, ensuring memory security in multi-user environments. Its modular architecture allows seamless integration of new memory types, LLMs, and storage backends, making it adaptable to a wide range of intelligent applications.
+    MemOS 通过提供结构化的、持久化的记忆功能、智能调度机制、长期知识保留能力，以及用于快速推理的 KV 缓存，增强了大语言模型的应用效果。它支持精细化的访问控制与用户隔离，保障在多用户环境中的记忆安全。其模块化架构使得新记忆类型、LLM 及存储后端可以无缝集成，适用于各种智能应用场景。
     ::::
   
-    ::::accordion-item{icon="i-lucide-circle-help" label="What is the pricing?"}
-    MemOS open-source is free.
+    ::::accordion-item{icon="i-lucide-circle-help" label="MemOS 的定价是多少？"}
+    MemOS 开源版本是免费的。
     ::::
-  :::
+:::
+
 
 #code
 ```mdc
 ::accordion
 
-:::accordion-item{label="Is MemOS compatible with LLMs accessed via API?" icon="i-lucide-circle-help"}
-Yes. MemOS is designed to be as compatible as possible with various types of models. However, it's important to note that if you're using API-based models, activation and parametric memories cannot be utilized.
+:::accordion-item{label="MemOS 是否兼容通过 API 访问的大语言模型（LLM）？" icon="i-lucide-circle-help"}
+是的。MemOS 的设计目标是尽可能兼容各种类型的模型。然而需要注意的是，如果你使用的是基于 API 的模型，那么激活记忆和参数记忆将无法使用。
 :::
 
-:::accordion-item{label="How does MemOS improve the effectiveness of large language model applications?" icon="i-lucide-circle-help"}
-MemOS enhances large language model applications by providing structured, persistent memory with intelligent scheduling, long-term knowledge retention, and KV cache for fast inference. It supports fine-grained access control and user isolation, ensuring memory security in multi-user environments. Its modular architecture allows seamless integration of new memory types, LLMs, and storage backends, making it adaptable to a wide range of intelligent applications.
+:::accordion-item{label="MemOS 如何提升大语言模型应用的效果？" icon="i-lucide-circle-help"}
+MemOS 通过提供结构化、持久化的记忆，配合智能调度、长期知识保留机制以及用于快速推理的 KV 缓存，有效增强了大语言模型的应用能力。它支持细粒度的访问控制与用户隔离机制，确保在多用户环境中的记忆安全。其模块化架构支持无缝集成新的记忆类型、LLM 和存储后端，能够适配多种智能应用场景。
 :::
 
-:::accordion-item{label="What is the pricing?" icon="i-lucide-circle-help"}
-MemOS open-source is free.
+:::accordion-item{label="MemOS 的定价是多少？" icon="i-lucide-circle-help"}
+MemOS 开源版本是免费的。
 :::
 
 ::
@@ -214,7 +215,7 @@ MemOS open-source is free.
 
 ### Badge
 
-Use badge to display status indicators or labels. Badges are great for highlighting version numbers, statuses, or categories within your content.
+使用 badge 展示状态指示或标签。在内容中高亮版本号、状态或分类信息时非常实用。
 
 ::code-preview
 ---
@@ -236,22 +237,22 @@ label: Preview
 
 ### Callout
 
-Use callout to emphasize important contextual information. Callouts draw attention to notes, tips, warnings, or cautions, making key information stand out.
+使用 callout 可以强调重要的上下文信息。Callout 用于引起用户注意，例如备注、提示、警告或注意事项，使关键信息更加突出。
 
-Customize with `icon` and `color` props or use `note`, `tip`, `warning`, `caution` shortcuts for pre-defined semantic styles.
+你可以通过 `icon` 和 `color` 属性自定义样式，或者使用预定义的语义样式 `note`、`tip`、`warning`、`caution` 进行快捷调用。
 
 ::code-preview
 ---
 class: "[&>div]:*:my-0 [&>div]:*:w-full"
 ---
   :::callout
-  This is a `callout` with full **markdown** support.
+  这是一个支持完整 **markdown** 的 `callout` 提示框。
   :::
 
 #code
 ```mdc
 ::callout
-This is a `callout` with full **markdown** support.
+这是一个支持完整 **markdown** 的 `callout` 提示框。
 ::
 ```
 ::
@@ -259,63 +260,63 @@ This is a `callout` with full **markdown** support.
 ::code-preview
   :::div{.flex.flex-col.gap-4.w-full}
     ::::note{.w-full.my-0}
-    Basic note content
+    基础备注内容
     ::::
 
     ::::note{.w-full.my-0 to="/getting_started/quick_start"}
-    Note with link - click to navigate to quick start guide
+    带链接的备注 —— 点击跳转到快速开始指南
     ::::
-
+    
     ::::note{.w-full.my-0 to="/modules/mem_cube" icon="ri:database-line"}
-    Note with custom icon - learn more about MemCube
+    带自定义图标的备注 —— 了解更多关于 MemCube 的信息
     ::::
-  
+    
     ::::tip{.w-full.my-0}
-    Here's a helpful suggestion.
+    这里是一个有用的建议。
     ::::
-  
+    
     ::::warning{.w-full.my-0}
-    Be careful with this action as it might have unexpected results.
+    请谨慎操作，此行为可能导致意外结果。
     ::::
-  
+    
     ::::caution{.w-full.my-0}
-    This action cannot be undone.
+    此操作无法撤销。
     ::::
   :::
 
 #code
 ```mdc
 ::note
-Basic note content
+基础备注内容
 ::
 
 ::note{to="/getting_started/quick_start"}
-Note with link - click to navigate to quick start guide
+带链接的备注 —— 点击跳转到快速开始指南
 ::
 
 ::note{to="/modules/mem_cube" icon="ri:database-line"}
-Note with custom icon - learn more about MemCube
+带自定义图标的备注 —— 了解更多关于 MemCube 的信息
 ::
 
 ::tip
-Here's a helpful suggestion.
+这里是一个有用的建议。
 ::
 
 ::warning
-Be careful with this action as it might have unexpected results.
+请小心执行此操作，它可能会导致意外结果。
 ::
 
 ::caution
-This action cannot be undone.
+此操作无法撤销。
 ::
 ```
 ::
 
 ### Card
 
-Use `card` to highlight content blocks. Cards are useful for showcasing features, resources, or related information in visually distinct and interactive containers.
+使用 `card` 可高亮展示内容模块。卡片适用于展示功能、资源或相关信息，以视觉上区分并增强交互性。
 
-Customize with `title`, `icon`, and `color` props. Cards can also act as links using `<NuxtLink>` properties for navigation.
+你可以通过 `title`、`icon` 和 `color` 属性自定义样式。Card 还支持使用 `<NuxtLink>` 属性进行导航跳转。
 
 ::code-preview
 ---
@@ -325,66 +326,66 @@ class: "[&>div]:*:my-0 [&>div]:*:w-full"
   ---
   icon: i-simple-icons-github
   target: _blank
-  title: Open Source
+  title: 开源项目
   to: https://github.com/MemTensor/MemOS
   ---
-  Use our open-source version
+  使用我们的开源版本
   :::
 
 #code
 ```mdc
 ::card
 ---
-title: Open Source
+title: 开源项目
 icon: i-simple-icons-github
 to: https://github.com/MemTensor/MemOS
 target: _blank
 ---
-Use our open-source version
+使用我们的开源版本
 ::
 ```
 ::
 
 ### CardGroup
 
-Use `card-group` to arrange cards in a grid layout. `card-group` is ideal for displaying collections of cards in a structured, visually appealing, and responsive grid.
+使用 `card-group` 可将多个卡片以网格形式排列。适合展示结构化、响应式布局的卡片集合，视觉效果良好。
 
 ::code-preview
   :::card-group{.w-full}
     ::::card
     ---
     icon: ri:play-line
-    title: Minimal Pipeline
+    title: 最简流水线
     to: /getting_started/examples#example-1-minimal-pipeline
     ---
-    The smallest working pipeline — add, search, update and dump plaintext memories.
+    最小可用流水线 — 添加、搜索、更新和导出纯文本记忆。
     ::::
-  
+    
     ::::card
     ---
     icon: ri:tree-line
-    title: TreeTextMemory Only
+    title: 仅 TreeTextMemory
     to: /getting_started/examples#example-2-treetextmemory-only
     ---
-    Use Neo4j-backed hierarchical memory to build structured, multi-hop knowledge graphs.
+    使用基于 Neo4j 的分层记忆，构建结构化、多跳的知识图谱。
     ::::
-  
+    
     ::::card
     ---
     icon: ri:database-2-line
-    title: KVCacheMemory Only
+    title: 仅 KVCacheMemory
     to: /getting_started/examples#example-3-kvcachememory-only
     ---
-    Speed up sessions with short-term KV cache for fast context injection.
+    通过短期 KV 缓存加速会话，实现快速上下文注入。
     ::::
-  
+    
     ::::card
     ---
     icon: hugeicons:share-07
-    title: Hybrid TreeText + KVCache
+    title: 混合 TreeText + KVCache
     to: /getting_started/examples#example-4-hybrid
     ---
-    Combine explainable graph memory with fast KV caching in a single MemCube.
+    在单一 MemCube 中结合可解释的图记忆与快速 KV 缓存。
     ::::
   :::
 
@@ -395,62 +396,62 @@ Use `card-group` to arrange cards in a grid layout. `card-group` is ideal for di
 :::card
 ---
 icon: ri:play-line
-title: Minimal Pipeline
+title: 最简管道示例
 to: /getting_started/examples#example-1-minimal-pipeline
 ---
-The smallest working pipeline — add, search, update and dump plaintext memories.
+最小可运行的管道示例——添加、搜索、更新及导出纯文本记忆。
 :::
 
 :::card
 ---
 icon: ri:tree-line
-title: TreeTextMemory Only
+title: 仅使用 TreeTextMemory
 to: /getting_started/examples#example-2-treetextmemory-only
 ---
-Use Neo4j-backed hierarchical memory to build structured, multi-hop knowledge graphs.
+使用基于 Neo4j 的层级记忆构建结构化的多跳知识图谱。
 :::
 
 :::card
 ---
 icon: ri:database-2-line
-title: KVCacheMemory Only
+title: 仅使用 KVCacheMemory
 to: /getting_started/examples#example-3-kvcachememory-only
 ---
-Speed up sessions with short-term KV cache for fast context injection.
+通过短期键值缓存加速会话，实现快速上下文注入。
 :::
 
 :::card
 ---
 icon: hugeicons:share-07
-title: Hybrid TreeText + KVCache
+title: 混合使用 TreeText 和 KVCache
 to: /getting_started/examples#example-4-hybrid
 ---
-Combine explainable graph memory with fast KV caching in a single MemCube.
+在单一 MemCube 中结合可解释的图记忆与高速键值缓存。
 :::
 
 ::
 ```
 ::
 
-## Navigation Icons
+## 导航图标
 
-When adding navigation entries in `content/settings.yml`, you can include icons using the syntax `(ri:icon-name)`:
+在 `content/settings.yml` 中添加导航条目时，可以使用 `(ri:图标名称)` 的语法嵌入图标：
 
 ```yaml
-- "(ri:home-line) Home": overview.md
-- "(ri:team-line) User Management": modules/mos/users.md
-- "(ri:flask-line) Writing Tests": contribution/writing_tests.md
+- "(ri:home-line) 首页": overview.md
+- "(ri:team-line) 用户管理": modules/mos/users.md
+- "(ri:flask-line) 测试编写": contribution/writing_tests.md
 ```
 
-Available icons can be found at: [https://icones.js.org/](https://icones.js.org/)
+可用图标请参考：[https://icones.js.org/](https://icones.js.org/)
 
-## Local Preview
+## 本地预览
 
-To preview the documentation locally, run the following command from the project root:
+若需本地预览文档，可在项目根目录下执行以下命令：
 
 
 ```bash
-## Make sure to install the dependencies:
+## 请先安装依赖：
 pnpm install
 ```
 
@@ -458,27 +459,28 @@ pnpm install
 pnpm dev
 ```
 
-This command will start a local web server, usually accessible at `http://127.0.0.1:3000`.
+上述命令将启动本地 Web 服务器，通常访问地址为 `http://127.0.0.1:3000`。
 
-## Learn More
+## 深入了解
 
-### Nuxt Content and Typography
+### Nuxt Content 与排版系统
 
-This project uses Nuxt Content and supports rich Typography components and styles. To learn more about available components and customization options, please refer to:
+本项目使用 Nuxt Content，支持丰富的排版组件与样式。如需了解更多组件用法与自定义选项，请参考：
 
-- [Nuxt UI Typography Documentation](https://ui.nuxt.com/getting-started/typography)
+* [Nuxt UI Typography 文档](https://ui.nuxt.com/getting-started/typography)
 
-## Best Practices
+## 编写规范
 
 ::note
-**Documentation Writing Tips**
+**文档编写建议**
 
-1. **Keep document structure clear**: Use appropriate heading levels to organize content logically
-2. **Use components wisely**: Use note, card, and other components to improve readability and engagement
-3. **Code examples**: Provide clear code examples for technical documentation with proper syntax highlighting
-4. **Icon usage**: Use appropriate icons in navigation to enhance user experience and visual hierarchy
+1. **结构清晰**：使用恰当的标题层级组织内容
+2. **合理使用组件**：如 note、card 等组件提升可读性与互动性
+3. **代码示例清晰**：为技术文档提供清晰的代码片段，并使用语法高亮
+4. **图标使用**：在导航中使用合适的图标以增强用户体验与层次感
 ::
 
 ::card{title="Quick Reference"}
-Remember to test your documentation locally before submitting. Use `npm run dev` to preview your changes and ensure all components render correctly.
+提交前请先本地测试你的文档效果。运行 `npm run dev` 以预览你的变更并确保所有组件正确渲染。
 ::
+

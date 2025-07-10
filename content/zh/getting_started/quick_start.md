@@ -1,41 +1,42 @@
 ---
-title: "Quick Start: Get Up and Running with MemOS"
+title: "快速开始：使用 MemOS 立即上手"
 ---
 
-## What You'll Learn
-Welcome! This guide will help you **install**, **initialize**, and **run your first memory-augmented LLM app** in just a few minutes.
+## 你将学到什么
+欢迎！本指南将帮助你在几分钟内完成 **安装**、**初始化**，并 **运行你的第一个带有记忆增强的大语言模型（LLM）应用**。
 
-In just a few minutes, you'll learn how to set up a **minimal, working MemOS pipeline** that connects your LLM with persistent, searchable memory.
-By the end, you'll be able to **store, retrieve, and update simple memories** for a user or session — the foundation for building memory-augmented chatbots and agents.
+只需几分钟，你将学会如何搭建一个 **最小可用的 MemOS 流水线**，将你的 LLM 与持久化且可搜索的记忆相连接。  
+完成后，你将能够 **存储、检索和更新简单的记忆**，为构建带记忆增强的聊天机器人和智能代理奠定基础。
 
 
 ::steps{}
 
-### Install MemOS
+### 安装 MemOS
 
 ```bash
 pip install MemoryOS
-```
+````
 
 ::note
-**Optional**<br>If you want to use local transformer models, make sure you have PyTorch installed.
+**可选**<br>如果你想使用本地的 transformer 模型，请确保已安装 PyTorch。
 ::
 
 ::note
-**Requirement for Neo4j Desktop**<br>If you plan to use Neo4j for graph memory, install Neo4j Desktop (community edition support coming soon!)
+**Neo4j Desktop 要求**<br>如果你计划使用 Neo4j 作为图记忆，安装 Neo4j Desktop（社区版支持即将推出！）
 ::
 
-### Create a Minimal Config
+### 创建最简配置
 
-For this Quick Start, we'll use the built-in GeneralTextMemory — no external vector DB or graph DB needed.
+本快速开始将使用内置的 GeneralTextMemory — 无需外部向量数据库或图数据库。
+
 ```python
 from memos.configs.mem_os import MOSConfig
 
-# init MOSConfig
+# 初始化 MOSConfig
 mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
 ```
 
-### Create a User & Register a MemCube
+### 创建用户并注册 MemCube
 
 ```python
 import uuid
@@ -43,69 +44,68 @@ from memos.mem_os.main import MOS
 
 mos = MOS(mos_config)
 
-# Generate a unique user ID
+# 生成唯一用户ID
 user_id = str(uuid.uuid4())
 
-# Create the user
+# 创建用户
 mos.create_user(user_id=user_id)
 
-# Register a simple memory cube for this user
+# 为该用户注册一个简单的记忆立方体
 mos.register_mem_cube("examples/data/mem_cube_2", user_id=user_id)
 ```
 
-### Add Your First Memory
+### 添加你的第一个记忆
 
 ```python
-# Add some conversational history
+# 添加一些对话历史
 mos.add(
     messages=[
-        {"role": "user", "content": "I love playing football."},
-        {"role": "assistant", "content": "That's awesome! "}
+        {"role": "user", "content": "我喜欢踢足球。"},
+        {"role": "assistant", "content": "那真棒！"}
     ],
     user_id=user_id
 )
 ```
 
-
-### Retrieve & Search Memory
+### 检索与搜索记忆
 
 ```python
-# Search for memories related to your query
+# 搜索与查询相关的记忆
 result = mos.search(
-  query="What does the user love?",
+  query="用户喜欢什么？",
   user_id=user_id
 )
 
-print("Memories found:", result["text_mem"])
+print("找到的记忆：", result["text_mem"])
 ```
 
-### Save & Load Memory
+### 保存与加载记忆
 
 ```python
-# Save your memory cube
+# 保存你的记忆立方体
 mos.dump("tmp/my_mem_cube")
 
-# Later, you can load it back
+# 之后，可以重新加载
 mos.load("tmp/my_mem_cube")
 ```
 
 ::
 
-## Next Steps
+## 后续步骤
 
-Congratulations! You've just run a minimal memory-augmented pipeline with MemOS.
+恭喜！你刚刚运行了一个最简的带记忆增强的 MemOS 流水线。
 
-Ready to level up?
-- Structured Memory: Try TreeTextMemory for graph-based, hierarchical
-knowledge.
-- Activation Memory: Speed up multi-turn chat with KVCacheMemory.
-- Parametric Memory: Use adapters/LoRA for on-the-fly skill injection.
-- Graph & Vector Backends: Connect Neo4j or Qdrant for production-scale
-  vector/graph search.
+准备升级了吗？
 
+* 结构化记忆：尝试基于图的分层知识 TreeTextMemory。
+* 激活记忆：使用 KVCacheMemory 加速多轮对话。
+* 参数化记忆：用适配器/LoRA 实现动态技能注入。
+* 图与向量后端：连接 Neo4j 或 Qdrant 实现生产级向量/图搜索。
 
-## Need Help?
-Check out:
-- [Core Concepts](/home/core_concepts)
-- [API Reference](/docs/api/info)
-- [Contribution Guide](/contribution/overview)
+## 需要帮助？
+
+请查看：
+
+* [核心概念](/home/core_concepts)
+* [API 参考](/docs/api/info)
+* [贡献指南](/contribution/overview)
