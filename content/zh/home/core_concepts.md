@@ -1,107 +1,105 @@
 ---
-title: Core Concepts
-desc: MemOS treats memory as a first-class citizen. Its core design revolves around how to orchestrate, store, retrieve, and govern memory for your LLM applications.
+title: 核心概念
+desc: MemOS 将记忆视为一等公民。其核心设计围绕如何为您的 LLM 应用程序编排、存储、检索和治理记忆。
 ---
 
-## Overview
+## 概述
 
-* [MOS (Memory Operating System)](#mos-memory-operating-system)
+* [MOS (记忆操作系统)](#mos-记忆操作系统)
 * [MemCube](#️memcube)
-* [Memory Types](#memory-types)
-* [Cross-Cutting Concepts](#cross-cutting-concepts)
+* [记忆类型](#记忆类型)
+* [横切概念](#横切概念)
 
 
-## MOS (Memory Operating System)
+## MOS (记忆操作系统)
 
-**What it is:**
-The orchestration layer that coordinates multiple MemCubes and memory operations. It connects your LLMs with structured, explainable memory for reasoning and planning.
+**它是什么：**
+协调多个 MemCube 和记忆操作的编排层。它将您的 LLMs 与结构化、可解释的记忆连接起来，用于推理和规划。
 
-**When to use:**
-Use MOS whenever you need to bridge users, sessions, or agents with consistent, auditable memory workflows.
+**何时使用：**
+当您需要将用户、会话或代理与一致、可审计的记忆工作流桥接时使用 MOS。
 
 ## MemCube
 
-**What it is:**
-A MemCube is like a flexible, swappable memory cartridge. Each user, session, or task can have its own MemCube, which can hold one or more memory types.
+**它是什么：**
+MemCube 就像一个灵活、可交换的记忆卡带。每个用户、会话或任务都可以有自己的 MemCube，它可以容纳一种或多种记忆类型。
 
-**When to use:**
-Use different MemCubes to isolate, reuse, or scale your memory as your system grows.
+**何时使用：**
+随着系统的发展，使用不同的 MemCube 来隔离、重用或扩展您的记忆。
 
-## Memory Types
+## 记忆类型
 
-MemOS treats memory like a living system — not just static data but evolving knowledge. Here's how the three core memory types work together:
+MemOS 将记忆视为一个活系统——不仅仅是静态数据，而是演进的知识。以下是三种核心记忆类型如何协同工作：
 
-| Memory Type    | Description                                  | When to Use                                 |
+| 记忆类型    | 描述                                  | 何时使用                                 |
 |----------------|----------------------------------------------|---------------------------------------------|
-| **Parametric** | Knowledge distilled into model weights        | Evergreen skills, stable domain expertise   |
-| **Activation** | Short-term KV cache and hidden states         | Fast reuse in dialogue, multi-turn sessions |
-| **Plaintext**  | Text, docs, graph nodes, or vector chunks     | Searchable, inspectable, evolving knowledge |
+| **参数记忆** | 知识提炼到模型权重中        | 常青技能、稳定领域专业知识   |
+| **激活记忆** | 短期 KV cache 和隐藏状态         | 对话中的快速重用、多轮会话 |
+| **明文记忆**  | 文本、文档、图节点或向量块     | 可搜索、可检查、演进知识 |
 
-### Parametric Memory
+### 参数记忆
 
-**What:**
-Knowledge embedded directly into the model's weights — think of this as the model's "cortex". It's always on, providing zero-latency reasoning.
+**它是什么：**
+直接嵌入到模型权重中的知识——将其视为模型的"皮层"。它始终开启，提供零延迟推理。
 
-**When to use:**
-Perfect for stable domain knowledge, distilled FAQs, or skills that rarely change.
+**何时使用：**
+非常适合稳定的领域知识、提炼的常见问题或很少改变的技能。
 
-### Activation Memory
+### 激活记忆
 
-**What:**
-Activation Memory is your model's reusable "working memory" — it includes precomputed key-value caches and hidden states that can be directly injected into the model's attention mechanism.
-Think of it as pre-cooked context that saves your LLM from repeatedly
-re-encoding static or frequently used information.
+**它是什么：**
+激活记忆是您模型的可重用"工作记忆"——它包括预计算的键值缓存和隐藏状态，可以直接注入到模型的注意力机制中。
+将其视为预处理的上下文，让您的 LLM 免于重复重新编码静态或频繁使用的信息。
 
-**Why it matters:**
-By storing stable background content (like FAQs or known facts) in a KV-cache, your model can skip redundant computation during the prefill phase.
-This dramatically reduces Time To First Token (TTFT) and improves throughput for multi-turn conversations or retrieval-augmented generation.
+**为什么重要：**
+通过在 KV-cache 中存储稳定的背景内容（如常见问题或已知事实），您的模型可以在预填充阶段跳过冗余计算。
+这大大减少了首令牌时间 (TTFT) 并提高了多轮对话或检索增强生成的吞吐量。
 
-**When to use:**
-- Reuse background knowledge across many user queries.
-- Speed up chatbots that rely on the same domain context each turn.
-- Combine with MemScheduler to auto-promote stable plaintext memory to KV format.
+**何时使用：**
+- 在多个用户查询中重用背景知识。
+- 加速依赖每轮相同领域上下文的聊天机器人。
+- 与 MemScheduler 结合，自动将稳定的纯文本记忆提升为 KV 格式。
 
-### Explicit Memory
+### 明文记忆
 
-**What:**
-Structured or unstructured knowledge units — user-visible, explainable. These can be documents, chat logs, graph nodes, or vector embeddings.
+**它是什么：**
+结构化或非结构化知识单元——用户可见、可解释。这些可以是文档、聊天日志、图节点或向量嵌入。
 
-**When to use:**
-Best for semantic search, user preferences, or traceable facts that evolve over time. Supports tags, provenance, and lifecycle states.
+**何时使用：**
+最适合语义搜索、用户偏好或随时间演进的可追溯事实。支持标签、来源和生命周期状态。
 
 
-## How They Work Together
+## 它们如何协同工作
 
-MemOS lets you orchestrate all three memory types in a living loop:
+MemOS 让您在活循环中编排所有三种记忆类型：
 
-- Hot plaintext memories can be distilled into parametric weights.
-- High-frequency activation paths become reusable KV templates.
-- Stale parametric or activation units can be downgraded to plaintext nodes for traceability.
+- 热纯文本记忆可以提炼为参数化权重。
+- 高频激活路径成为可重用的 KV 模板。
+- 陈旧的参数化或激活单元可以降级为纯文本节点以进行追溯。
 
-With MemOS, your AI doesn't just store facts — it **remembers**, **understands**, and **grows**.
-
-::note
-**Insight**<br>
-  Over time, frequently used plaintext memories can be distilled into parametric form.
-  Rarely used weights or caches can be demoted to plaintext storage for auditing and retraining.
-::
-
-## Cross-Cutting Concepts
-
-### Hybrid Retrieval
-
-Combines vector similarity and graph traversal for robust, context-aware search.
-
-### Governance & Lifecycle
-
-Every memory unit supports states (active, merged, archived), provenance tracking, and fine-grained access control — essential for auditing and compliance.
+使用 MemOS，您的 AI 不仅仅是存储事实——它**记忆**、**理解**和**成长**。
 
 ::note
-**Compliance Reminder**<br>
-Always track provenance and state changes for each memory unit.
-  This helps meet audit and data governance requirements.
+**深入理解**<br>
+  随着时间的推移，频繁使用的纯文本记忆可以提炼为参数化形式。
+  很少使用的权重或缓存可以降级为纯文本存储以进行审计和重新训练。
 ::
 
-## Key Takeaway
+## 横切概念
 
-With MemOS, your LLM applications gain structured, evolving memory — empowering agents to plan, reason, and adapt like never before.
+### 混合检索
+
+结合向量相似性和图遍历，实现稳健、上下文感知的搜索。
+
+### 治理与生命周期
+
+每个记忆单元都支持状态（活跃、合并、归档）、来源跟踪和细粒度访问控制——这对审计和合规性至关重要。
+
+::note
+**合规提醒**<br>
+始终跟踪每个记忆单元的来源和状态变化。这有助于满足审计和数据治理要求。
+::
+
+## 关键要点
+
+使用 MemOS，您的 LLM 应用程序获得结构化、演进的记忆——使代理能够前所未有地规划、推理和适应。

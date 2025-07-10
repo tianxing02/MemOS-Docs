@@ -1,20 +1,20 @@
 ---
-title: MemCube Overview
-desc: "`MemCube` is the core organizational unit in MemOS, designed to encapsulate and manage all types of memory for a user or agent. It provides a unified interface for loading, saving, and operating on multiple memory modules, making it easy to build, share, and deploy memory-augmented applications."
+title: MemCube 概述
+desc: "`MemCube` 是 MemOS 中的核心组织单元，专为封装和管理用户或代理的所有类型记忆而设计。它为加载、保存和操作多个记忆模块提供统一接口，使构建、共享和部署记忆增强应用程序变得容易。"
 ---
-## What is a MemCube?
+## 什么是 MemCube？
 
-A **MemCube** is a container that bundles three major types of memory:
+**MemCube** 是一个容器，捆绑了三种主要类型的记忆：
 
-- **Textual Memory** (e.g., `GeneralTextMemory`, `TreeTextMemory`): For storing and retrieving unstructured or structured text knowledge.
-- **Activation Memory** (e.g., `KVCacheMemory`): For storing key-value caches to accelerate LLM inference and context reuse.
-- **Parametric Memory** (e.g., `LoRAMemory`): For storing model adaptation parameters (like LoRA weights).
+- **文本记忆** (例如，`GeneralTextMemory`、`TreeTextMemory`): 用于存储和检索非结构化或结构化文本知识。
+- **激活记忆** (例如，`KVCacheMemory`): 用于存储键值缓存以加速 LLM 推理和上下文重用。
+- **参数化记忆** (例如，`LoRAMemory`): 用于存储模型适应参数（如 LoRA 权重）。
 
-Each memory type is independently configurable and can be swapped or extended as needed.
+每种记忆类型都是独立可配置的，可以根据需要进行交换或扩展。
 
-## Structure
+## 结构
 
-A MemCube is defined by a configuration (see `GeneralMemCubeConfig`), which specifies the backend and settings for each memory type. The typical structure is:
+MemCube 由配置定义（参见 `GeneralMemCubeConfig`），该配置为每种记忆类型指定后端和设置。典型结构是：
 
 ```
 MemCube
@@ -23,47 +23,47 @@ MemCube
  └── para_mem: ParametricMemory
 ```
 
-All memory modules are accessible via the MemCube interface:
+所有记忆模块都可通过 MemCube 接口访问：
 - `mem_cube.text_mem`
 - `mem_cube.act_mem`
 - `mem_cube.para_mem`
 
-## API Summary (`GeneralMemCube`)
+## API 摘要 (`GeneralMemCube`)
 
-### Initialization
+### 初始化
 ```python
 from memos.mem_cube.general import GeneralMemCube
 mem_cube = GeneralMemCube(config)
 ```
 
-### Core Methods
-| Method         | Description                                      |
+### 核心方法
+| 方法         | 描述                                      |
 | --------------| ------------------------------------------------ |
-| `load(dir)`   | Load all memories from a directory                |
-| `dump(dir)`   | Save all memories to a directory                  |
-| `text_mem`    | Access the textual memory module                  |
-| `act_mem`     | Access the activation memory module               |
-| `para_mem`    | Access the parametric memory module               |
-| `init_from_dir(dir)` | Load a MemCube from a directory            |
-| `init_from_remote_repo(repo, base_url)` | Load from remote repo   |
+| `load(dir)`   | 从目录加载所有记忆                |
+| `dump(dir)`   | 将所有记忆保存到目录                  |
+| `text_mem`    | 访问文本记忆模块                  |
+| `act_mem`     | 访问激活记忆模块               |
+| `para_mem`    | 访问参数化记忆模块               |
+| `init_from_dir(dir)` | 从目录加载 MemCube            |
+| `init_from_remote_repo(repo, base_url)` | 从远程仓库加载   |
 
-## File Storage
+## 文件存储
 
-A MemCube directory contains:
-- `config.json` (MemCube configuration)
-- `textual_memory.json` (textual memory)
-- `activation_memory.pickle` (activation memory)
-- `parametric_memory.adapter` (parametric memory)
+MemCube 目录包含：
+- `config.json` (MemCube 配置)
+- `textual_memory.json` (文本记忆)
+- `activation_memory.pickle` (激活记忆)
+- `parametric_memory.adapter` (参数化记忆)
 
-## Example Usage
+## 使用示例
 
 ```python
 from memos.mem_cube.general import GeneralMemCube
-# Load from local directory
+# 从本地目录加载
 mem_cube = GeneralMemCube.init_from_dir("examples/data/mem_cube_2")
-# Load from remote repo
+# 从远程仓库加载
 mem_cube = GeneralMemCube.init_from_remote_repo("Ki-Seki/mem_cube_2")
-# Access and print all memories
+# 访问并打印所有记忆
 for item in mem_cube.text_mem.get_all():
     print(item)
 for item in mem_cube.act_mem.get_all():
@@ -71,8 +71,8 @@ for item in mem_cube.act_mem.get_all():
 mem_cube.dump("tmp/mem_cube")
 ```
 
-## Developer Notes
+## 开发者说明
 
-* MemCube enforces schema consistency for safe loading/dumping
-* Each memory type is pluggable and independently tested
-* See `/tests/mem_cube/` for integration tests and usage patterns
+* MemCube 强制执行模式一致性以确保安全的加载/转储
+* 每种记忆类型都是可插拔的且独立测试
+* 参见 `/tests/mem_cube/` 了解集成测试和使用模式

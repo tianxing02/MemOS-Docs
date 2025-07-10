@@ -1,117 +1,115 @@
 ---
-title: What is MemOS?
-desc: "**MemOS** is a **Memory Operating System** for large language models (LLMs) and autonomous agents. It treats memory as a **first-class, orchestrated, and explainable resource**, rather than an opaque layer hidden inside model weights."
+title: 什么是 MemOS？
+desc: "**MemOS** 是大型语言模型 (LLMs) 和自主代理的**记忆操作系统**。它将记忆视为**一流的、编排的和可解释的资源**，而不是隐藏在模型权重内部的不透明层。"
 ---
 
 ![MemOS Architecture](https://statics.memtensor.com.cn/memos/memos-architecture.png)
 
 
-As LLMs advance to handle complex tasks — like multi-turn dialogue, long-term planning, decision-making, and personalized user experiences — their ability to **structure, manage, and evolve memory** becomes critical for achieving true long-term intelligence and adaptability.
+随着 LLMs 的发展，它们需要处理复杂任务——如多轮对话、长期规划、决策制定和个性化用户体验——它们**结构化、管理和演进记忆**的能力对于实现真正的长期智能和适应性变得至关重要。
 
-However, most mainstream LLMs still rely heavily on static parametric memory (model weights). This makes it difficult to update knowledge, track memory usage, or accumulate evolving user preferences. The result? High costs to refresh knowledge, brittle behaviors, and limited personalization.
+然而，大多数主流 LLMs 仍然严重依赖静态参数化记忆（模型权重）。这使得更新知识、跟踪记忆使用或积累演进的用户偏好变得困难。结果是什么？刷新知识成本高、行为脆弱以及个性化有限。
 
-**MemOS** solves these challenges by redefining memory as a **core, modular system resource** with a unified structure, lifecycle management, and scheduling logic. It provides a Python-based layer that sits between your LLM and external knowledge sources, enabling **persistent, structured, and efficient memory operations**.
+**MemOS** 通过将记忆重新定义为具有统一结构、生命周期管理和调度逻辑的**核心模块化系统资源**来解决这些挑战。它提供了一个基于 Python 的层，位于您的 LLM 和外部知识源之间，实现**持久化、结构化和高效的记忆操作**。
 
-With MemOS, your LLM can retain knowledge over time, manage context more robustly, and reason with memory that's explainable and auditable — unlocking more intelligent, reliable, and adaptive AI behaviors.
+使用 MemOS，您的 LLM 可以随时间保留知识，更稳健地管理上下文，并使用可解释和可审计的记忆进行推理——解锁更智能、可靠和自适应的 AI 行为。
 
 
 ::note
-**Tip**<br>  MemOS helps bridge the gap between static parametric weights and dynamic, user-specific memory.
-  Think of it as your agent's "brain", with plug-and-play modules for text, graph, and activation memory.
+**提示**<br>  MemOS 帮助弥合静态参数化权重和动态、用户特定记忆之间的差距。
+  将其视为您代理的"大脑"，具有文本、图和激活记忆的即插即用模块。
 ::
 
-## Why do we need a Memory OS?
+## 为什么我们需要MemOS？
 
-Modern LLMs are powerful—but static.
-They rely heavily on **parametric memory** (the weights) that is hard to inspect, update, or share.
-Typical vector search (RAG) helps retrieve external facts, but lacks unified governance, lifecycle control, or cross-agent sharing.
+现代 LLMs 很强大——但很静态。
+它们严重依赖**参数化记忆**（权重），这些权重难以检查、更新或共享。
+典型的向量搜索 (RAG) 有助于检索外部事实，但缺乏统一治理、生命周期控制或跨代理共享。
 
-**MemOS** changes this.
-Think of it like an OS for memory:
-just as an operating system schedules CPU, RAM, and files, MemOS **schedules,
-transforms, and governs** multiple memory types — from parametric weights to ephemeral caches to plaintext, traceable knowledge.
+**MemOS** 改变了这一点。
+将其视为记忆的操作系统：
+就像操作系统调度 CPU、RAM 和文件一样，MemOS **调度、转换和治理**多种记忆类型——从参数化权重到临时缓存再到纯文本、可追溯的知识。
 
 ::note
-**Insight**<br>  MemOS helps your LLM evolve, by blending parametric, activation, and plaintext memory into a living loop.
+**深入理解**<br>  MemOS 通过将参数化、激活和纯文本记忆融合到活循环中，帮助您的 LLM 演进。
 ::
 
 
-## Core Building Blocks
+## 核心构建块
 ### MemCubes
 
-**Flexible containers** that hold one or more memory types.
-Each user, session, or agent can have its own MemCube — swappable, reusable, and traceable.
+**灵活的容器**，容纳一种或多种记忆类型。
+每个用户、会话或代理都可以有自己的 MemCube——可交换、可重用和可追溯。
 
-### Memory Lifecycle
+### 记忆生命周期
 
-Each memory unit can flow through states like:
+每个记忆单元可以流经以下状态：
 
-- **Generated** → **Activated** → **Merged** → **Archived** → **Frozen**
+- **生成** → **激活** → **合并** → **归档** → **冻结**
 
-Every step is versioned with **provenance tracking** and audit logs.
-Old memories can be "time-machined" back to prior versions for recovery or counterfactual simulations.
+每个步骤都通过**来源跟踪**和审计日志进行版本控制。旧记忆可以"时间机器"回到之前的版本进行恢复或反事实模拟。
 
 
-### Operation & Governance
+### 操作与治理
 
-Modules like:
+模块包括：
 
-- **MemScheduler** — dynamically transforms memory types for optimal reuse.
-- **MemLifecycle** — manages state transitions, merging, and archiving.
-- **MemGovernance** — handles access control, redaction, compliance, and audit trails.
+- **MemScheduler** — 动态转换记忆类型以实现最佳重用。
+- **MemLifecycle** — 管理状态转换、合并和归档。
+- **MemGovernance** — 处理访问控制、编辑、合规性和审计跟踪。
 
 
 ::note
-**Compliance Reminder**<br>    Every memory unit carries full provenance metadata, so you can audit who created, modified, or queried it.
+**合规提醒**<br>    每个记忆单元都携带完整的来源元数据，因此您可以审计谁创建、修改或查询了它。
 ::
 
 
-## Multi-Perspective Memory
+## 多视角记忆
 
-MemOS blends **three memory forms** in a living loop:
+MemOS 在活循环中融合**三种记忆形式**：
 
-| Type           | Description                                          | Use Case                                       |
+| 类型           | 描述                                          | 用例                                       |
 |----------------| ---------------------------------------------------- | ---------------------------------------------- |
-| **Parametric** | Knowledge distilled into model weights               | Evergreen skills, stable domain facts          |
-| **Activation** | KV-caches and hidden states for inference reuse      | Fast multi-turn chat, low-latency generation   |
-| **Plaintext**  | Text, docs, graphs, vector chunks, user-visible facts| Semantic search, evolving, explainable memory  |
+| **参数记忆** | 知识提炼到模型权重中               | 常青技能、稳定领域事实          |
+| **激活记忆** | 用于推理重用的 KV-caches 和隐藏状态      | 快速多轮聊天、低延迟生成   |
+| **明文记忆**  | 文本、文档、图、向量块、用户可见事实| 语义搜索、演进、可解释记忆  |
 
-Over time:
+随着时间的推移：
 
-- Hot plaintext memories can be distilled into parametric weights.
-- Stable context is promoted to KV-cache for rapid injection.
-- Cold or outdated knowledge can be demoted for auditing.
-
-
-## What makes MemOS different?
-
-- Hybrid retrieval — symbolic & semantic, vector + graph.
-- Multi-agent & multi-user graphs — private and shared.
-- Provenance & audit trail — every memory unit is governed and explainable.
-- Automatic KV-cache promotion for stable context reuse.
-- Lifecycle-aware scheduling — no more stale facts or bloated weights.
+- 频繁使用的明文记忆可以提炼为参数化权重。
+- 稳定的上下文被提升为 KV-cache 以快速注入。
+- 使用频率低或过时的知识可以被降级。
 
 
-## Who is it for?
+## MemOS 有什么不同？
 
-- Conversational agents needing **multi-turn, evolving memory**
-- Enterprise copilots handling **compliance, domain updates, and personalization**
-- Multi-agent systems collaborating on a **shared knowledge graph**
-- AI builders wanting modular, inspectable memory instead of black-box prompts
+- 混合检索 — 符号和语义、向量 + 图。
+- 多代理和多用户图 — 私有和共享。
+- 来源和审计跟踪 — 每个记忆单元都被治理和可解释。
+- 自动 KV-cache 提升以重用稳定上下文。
+- 生命周期感知调度 — 不再有陈旧事实或膨胀权重。
 
-## Key Takeaway
 
-**MemOS** upgrades your LLM from "just predicting tokens"
-to an intelligent, evolving system that can **remember**, **reason**, and **adapt** —
-like an operating system for your agent's mind.
+## 适合谁？
 
-**With MemOS, your AI doesn't just store facts — it grows.**
+- 需要**多轮、演进记忆**的对话代理
+- 处理**合规性、领域更新和个性化**的企业副驾驶
+- 在**共享知识图**上协作的多代理系统
+- 想要模块化、可检查记忆而不是黑盒提示的 AI 构建者
 
-## Key Features
+## 关键要点
 
-- **Modular Memory Architecture**: Support for textual, activation (KV cache), and parametric (adapters/LoRA) memory.
-- **MemCube**: Unified container for all memory types, with easy load/save and API access.
-- **MOS**: Memory-augmented chat orchestration for LLMs, with plug-and-play memory modules.
-- **Graph-based Backends**: Native support for Neo4j and other graph DBs for structured, explainable memory.
-- **Easy Integration**: Works with HuggingFace, Ollama, and custom LLMs.
-- **Extensible**: Add your own memory modules or backends.
+**MemOS** 将您的 LLM 从"只是预测 tokens"
+升级为可以**记忆**、**推理**和**适应**的智能演进系统——
+就像您代理思维的操作系统。
+
+**使用 MemOS，您的 AI 不仅仅是存储事实——它在成长。**
+
+## 主要特性
+
+- **模块化记忆架构**: 支持文本、激活 (KV cache) 和参数化 (adapters/LoRA) 记忆。
+- **MemCube**: 所有记忆类型的统一容器，具有简单的加载/保存和 API 访问。
+- **MOS**: 面向 LLMs 的记忆增强聊天编排，具有即插即用的记忆模块。
+- **基于图的后端**: 原生支持 Neo4j 和其他图数据库，用于结构化、可解释的记忆。
+- **易于集成**: 可与 HuggingFace、Ollama 和自定义 LLMs 配合使用。
+- **可扩展**: 添加您自己的记忆模块或后端。

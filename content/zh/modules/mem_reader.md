@@ -1,13 +1,13 @@
 ---
-title: Getting Started with MemReader
-desc: This guide walks you through how to use the `SimpleStructMemReader` to extract structured memories from conversations and documents using LLMs and embedding models. It is ideal for building memory-aware conversational AI, knowledge bases, and semantic search systems.
+title: MemReader 入门
+desc: 本指南将带您了解如何使用 `SimpleStructMemReader` 通过 LLMs 和嵌入模型从对话和文档中提取结构化记忆。它非常适合构建记忆感知的对话 AI、知识库和语义搜索系统。
 ---
 
-##  Initialize a `SimpleStructMemReader`
+##  初始化 `SimpleStructMemReader`
 
-First, configure and initialize the reader with your preferred LLM and embedder models.
+首先，使用您首选的 LLM 和嵌入器模型配置并初始化读取器。
 
-### Example:
+### 示例：
 
 ```python
 from memos.configs.mem_reader import SimpleStructMemReaderConfig
@@ -18,15 +18,15 @@ reader_config = SimpleStructMemReaderConfig.from_json_file(
 reader = SimpleStructMemReader(reader_config)
 ```
 ::tip
-You can customize the model names or backends depending on your environment.
+您可以根据环境自定义模型名称或后端。
 ::
 ---
 
-## Get Your First Chat Memory
+## 获取您的第一个聊天记忆
 
-Extract structured memories from a conversation between a user and assistant.
+从用户和助手之间的对话中提取结构化记忆。
 
-### Example Input:
+### 示例输入：
 
 ```python
 conversation_data = [
@@ -38,7 +38,7 @@ conversation_data = [
 ]
 ```
 
-### Extract Memories:
+### 提取记忆：
 
 ```python
 memories = reader.get_memory(
@@ -48,7 +48,7 @@ memories = reader.get_memory(
 )
 ```
 
-### Sample Output:
+### 示例输出：
 
 ```json
 [
@@ -80,15 +80,15 @@ memories = reader.get_memory(
 ]
 ```
 ::note
-The reader extract related memories and tags from the conversation session.
+读取器从对话会话中提取相关记忆和标签。
 ::
 ---
 
-## Get Your First Document Memory
+## 获取您的第一个文档记忆
 
-Process text files to extract structured summaries and tags.
+处理文本文件以提取结构化摘要和标签。
 
-### Example Code:
+### 示例代码：
 
 ```python
 doc_paths = [
@@ -108,7 +108,7 @@ doc_memories = reader.get_memory(
 )
 ```
 
-### Sample Output:
+### 示例输出：
 
 ```json
 [
@@ -139,14 +139,14 @@ doc_memories = reader.get_memory(
 ]
 ```
 ::note
-Documents are chunked and summarized to create searchable knowledge items.
+文档被分块和摘要以创建可搜索的知识项。
 ::
 
-### Supported Files
+### 支持的文件
 
-We use [`markitdown`](https://github.com/microsoft/markitdown) to convert files to Markdown format texts.
+我们使用 [`markitdown`](https://github.com/microsoft/markitdown) 将文件转换为 Markdown 格式文本。
 
-**MarkItDown currently supports the conversion from:**  
+**MarkItDown 目前支持从以下格式转换：**  
 
 ```
 PDF  
@@ -162,12 +162,12 @@ YouTube URLs
 EPUBs  
 ... and more!
 ```
-*(Content sourced from [MarkItDown GitHub repository](https://github.com/microsoft/markitdown))*
+*(内容来源于 [MarkItDown GitHub 仓库](https://github.com/microsoft/markitdown))*
 
 ---
 
 
-## Try It Out: Print Extracted Memories
+## 试试看：打印提取的记忆
 
 ```python
 for memory_list in memories:
@@ -181,7 +181,7 @@ for memory_list in memories:
 
 ---
 
-You've now successfully:
-- Initialized a `SimpleStructMemReader`
-- Extracted structured memories from chat conversations
-- Extracted knowledge from documents
+您现在已成功：
+- 初始化了 `SimpleStructMemReader`
+- 从聊天对话中提取了结构化记忆
+- 从文档中提取了知识
