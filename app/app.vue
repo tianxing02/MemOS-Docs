@@ -2,8 +2,20 @@
 const route = useRoute()
 
 const contentNavigation = useContentNavigation()
+const { locale } = useI18n()
+
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
+})
+
+// Process files to remove language prefix
+const processedFiles = computed(() => {
+  if (!files.value) return []
+
+  return files.value.filter(file => file.id.startsWith(`/${locale.value}`)).map(file => ({
+    ...file,
+    id: file.id.replace(`/${locale.value}`, '')
+  }))
 })
 
 useHead({
@@ -89,7 +101,7 @@ provide('navigation', contentNavigation)
 
     <ClientOnly>
       <LazyUContentSearch
-        :files="files"
+        :files="processedFiles"
         :navigation="contentNavigation"
       />
     </ClientOnly>

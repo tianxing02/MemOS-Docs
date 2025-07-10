@@ -100,7 +100,6 @@ export const useContentNavigation = () => {
         return []
       }
 
-      console.log(`Loading navigation for locale ${locale.value}:`, navItems)
       return parseNavigation(navItems)
     } catch (error) {
       console.error('Error in useContentNavigation:', error)
