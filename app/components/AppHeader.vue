@@ -8,10 +8,6 @@ const { header } = useAppConfig()
 
 <template>
   <UHeader
-    :ui="{
-      center: 'flex justify-center items-center',
-      container: 'flex items-center justify-between gap-3 h-full'
-    }"
     :to="header?.to || '/'"
   >
     <template

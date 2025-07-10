@@ -7,6 +7,14 @@
   --font-sans: 'Public Sans', sans-serif;
 }
 
+:root {
+  --ui-container: var(--container-8xl);
+}
+
+header>div {
+  max-width: 100vw !important;
+}
+
 /* open-api-docs-module reset styles */
 .oapi {
   color: var(--color-black) !important;
