@@ -26,9 +26,9 @@ provide('navigation', contentNavigation)
   <UApp>
     <NuxtLoadingIndicator />
 
-    <AppHeader v-if="!route.path.startsWith('/api/')"/>
+    <AppHeader v-if="!route.path.startsWith('/docs/api/')"/>
 
-    <template v-if="route.path !== '/' && !route.path.startsWith('/api')">
+    <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api')">
       <UMain>
         <UContainer>
           <UPage>
@@ -78,8 +78,14 @@ provide('navigation', contentNavigation)
 
     <!-- Document home page -->
     <template v-else>
-      <NuxtPage />
+      <ClientOnly>
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
+      </ClientOnly>
     </template>
+
+    <AppFooter v-if="!route.path.startsWith('/docs/api')"/>
 
     <ClientOnly>
       <LazyUContentSearch

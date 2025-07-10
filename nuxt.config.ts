@@ -1,6 +1,25 @@
 import yaml from '@rollup/plugin-yaml'
 
+const armsScript = process.env.NODE_ENV === 'production'
+  ? [{ innerHTML: `var _czc = _czc || [];
+        (function () {
+          var um = document.createElement("script");
+          um.src = "https://v1.cnzz.com/z.js?id=1281423419&async=1";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(um, s);
+        })();`,
+    type: 'text/javascript' }]
+  : []
+
 const config = {
+  app: {
+    head: {
+      script: [
+        ...armsScript
+      ]
+    }
+  },
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/image',
@@ -84,5 +103,4 @@ const config = {
   }
 }
 
-// @see https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig(config)
