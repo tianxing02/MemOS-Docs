@@ -1,5 +1,5 @@
 ---
-title: Parametric Memory *(Coming Soon)*
+title: Parametric Memory (Coming Soon)
 ---
 
 ::note
