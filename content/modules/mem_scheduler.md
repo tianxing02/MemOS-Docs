@@ -2,7 +2,22 @@
 title: "MemScheduler: The Scheduler for Memory Organization"
 desc: "`MemScheduler` is a concurrent memory management system parallel running with the MemOS system, which coordinates memory operations between working memory, long-term memory, and activation memory in AI systems. It handles memory retrieval, updates, and compaction through event-driven scheduling. <br/> This system is particularly suited for conversational agents and reasoning systems requiring dynamic memory management."
 ---
+# Memory Scheduler Overview
 
+![Memory Management](https://img.shields.io/badge/Component-Memory_Management-blue)
+![Event-Driven](https://img.shields.io/badge/Architecture-Event_Driven-green)
+
+`MemScheduler` is a concurrent memory management system that works in parallel with MemOS, coordinating memory operations across working memory, long-term memory, and activation memory in AI systems. Designed for conversational agents and reasoning systems, it provides dynamic memory management through event-driven scheduling.
+
+## Key Features
+
+- 🚀 **Concurrent operation** with MemOS system
+- 🧠 **Multi-memory coordination** (Working/Long-Term/User memory)
+- ⚡ **Event-driven scheduling** for memory operations
+- 🔍 **Efficient retrieval** of relevant memory items
+- 📊 **Comprehensive monitoring** of memory usage
+- 📝 **Detailed logging** for debugging and analysis
+- 
 ## Memory Scheduler Architecture
 
 The `MemScheduler` system is structured around several key components:
@@ -11,7 +26,8 @@ The `MemScheduler` system is structured around several key components:
 2. **Memory Management**: Manages different memory types (Working, Long-Term, User)
 3. **Retrieval System**: Efficiently retrieves relevant memory items based on context
 4. **Monitoring**: Tracks memory usage, frequencies, and triggers updates
-5. **Logging**: Maintains logs of memory operations for debugging and analysis
+5. **Dispatcher (Router)**: Trigger different memory reorganization strategies by checking messages from MemOS systems.
+6. **Logging**: Maintains logs of memory operations for debugging and analysis
 
 ## Message Processing
 
@@ -24,7 +40,11 @@ The scheduler processes messages through a dispatcher with dedicated handlers:
 | `QUERY_LABEL` | `_query_message_consume`       | Handles user queries and triggers retrieval |
 | `ANSWER_LABEL`| `_answer_message_consume`      | Processes answers and updates memory usage |
 
-### Message Structure (`ScheduleMessageItem`)
+### Schedule Message Structure 
+
+The scheduler processes messages from its queue using the following format:
+
+ScheduleMessageItem:
 
 | Field         | Type                 | Description                                   |
 |---------------|----------------------|-----------------------------------------------|
@@ -36,32 +56,23 @@ The scheduler processes messages through a dispatcher with dedicated handlers:
 | `content`     | `str`                | Message content                               |
 | `timestamp`   | `datetime`           | Time when the message was submitted           |
 
-## Memory Management
 
-### Memory Types and Sizes
+Meanwhile the scheduler will send the scheduling messages by following structures.
 
-The scheduler manages multiple memory partitions with configurable capacities:
+ScheduleLogForWebItem:
 
-| Memory Type               | Description                               | Default Capacity |
-|---------------------------|------------------------------------------|------------------|
-| `long_term_memory`        | Persistent knowledge storage             | 10,000 items     |
-| `user_memory`             | User-specific knowledge and interactions | 10,000 items     |
-| `working_memory`          | Active context for current interactions  | 20 items         |
-| `transformed_act_memory`  | Transformed activation memory (dynamic)  | Not initialized  |
-
-### Configuration Parameters
-
-| Parameter                  | Description                                                                 | Default Value |
-|----------------------------|-----------------------------------------------------------------------------|---------------|
-| `top_k`                    | Number of candidates to retrieve during initial search                     | 10            |
-| `top_n`                    | Number of final results to return after processing                         | 5             |
-| `enable_parallel_dispatch` | Enable parallel message processing using thread pool                       | `True`        |
-| `thread_pool_max_workers`  | Maximum number of worker threads in the pool                                | 5             |
-| `consume_interval_seconds` | Interval (in seconds) for consuming messages from the queue                | 3             |
-| `act_mem_update_interval`  | Interval (in seconds) for updating activation memory                        | 300           |
-| `context_window_size`      | Size of the context window for conversation history                         | 5             |
-| `activation_mem_size`      | Maximum size of the activation memory
-
+| Field                  | Type               | Description                                                                 | Default Value                          |
+|------------------------|--------------------|-----------------------------------------------------------------------------|----------------------------------------|
+| `item_id`              | `str`              | Unique log entry identifier (UUIDv4)                                        | Auto-generated (`uuid4()`)             |
+| `user_id`              | `str`              | Associated user identifier                                                  | (Required)                             |
+| `mem_cube_id`          | `str`              | Linked memory cube ID                                                       | (Required)                             |
+| `label`                | `str`              | Log category identifier                                                     | (Required)                             |
+| `from_memory_type`     | `str`              | Source memory partition<br>Possible values:<br>- `"LongTermMemory"`<br>- `"UserMemory"`<br>- `"WorkingMemory"` | (Required)                             |
+| `to_memory_type`       | `str`              | Destination memory partition                                                | (Required)                             |
+| `log_content`          | `str`              | Detailed log message                                                        | (Required)                             |
+| `current_memory_sizes` | `MemorySizes`      | Current memory utilization                                                  | <pre>DEFAULT_MEMORY_SIZES = {<br>  "long_term_memory_size": -1,<br>  "user_memory_size": -1,<br>  "working_memory_size": -1,<br>  "transformed_act_memory_size": -1<br>}</pre> |
+| `memory_capacities`    | `MemoryCapacities` | Memory partition limits                                                     | <pre>DEFAULT_MEMORY_CAPACITIES = {<br>  "long_term_memory_capacity": 10000,<br>  "user_memory_capacity": 10000,<br>  "working_memory_capacity": 20,<br>  "transformed_act_memory_capacity": -1<br>}</pre> |
+| `timestamp`            | `datetime`         | Log creation time                                                           | Auto-set (`datetime.now`)              |
 
 ##  Execution Example
 
@@ -93,10 +104,6 @@ def init_task():
     ]
     return conversations, questions
 
-def show_web_logs(mem_scheduler: GeneralScheduler):
-    # Display web logs generated by the scheduler
-    # Includes memory operations, retrieval events, etc.
-
 def run_with_automatic_scheduler_init():
     # Automatic initialization: Load configuration from YAML files
     # Create user and memory cube
@@ -114,4 +121,5 @@ def run_with_manual_scheduler_init():
 if __name__ == '__main__':
     # Run both initialization methods sequentially
     run_with_automatic_scheduler_init()
-    run_with_manual_scheduler_init(
+    run_with_manual_scheduler_init()
+```
