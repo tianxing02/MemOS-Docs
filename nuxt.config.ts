@@ -24,6 +24,7 @@ const config = {
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui-pro',
+    '@nuxtjs/i18n',
     '@nuxt/content',
     [
       'nuxt-openapi-docs-module',
@@ -40,6 +41,30 @@ const config = {
       }
     ]
   ],
+
+  i18n: {
+    locales: [
+      {
+        code: 'zh',
+        iso: 'zh-CN',
+        name: '中文'
+      },
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English'
+      }
+    ],
+    defaultLocale: 'en',
+    strategy: 'no_prefix',
+    vueI18n: './i18n.config.ts',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root' as const,
+      fallbackLocale: 'en' as const
+    }
+  },
 
   devtools: {
     enabled: true
