@@ -3,48 +3,48 @@ title: MemOS Configuration Guide
 desc: This document provides a comprehensive overview of all configuration fields and initialization methods across the different components in the MemOS system.
 ---
 
-1. [Configuration Overview](#configuration-overview)
-2. [MOS Configuration](#mos-configuration)
-3. [LLM Configuration](#llm-configuration)
-4. [MemReader Configuration](#memreader-configuration)
-5. [MemCube Configuration](#memcube-configuration)
-6. [Memory Configuration](#memory-configuration)
-7. [Embedder Configuration](#embedder-configuration)
-8. [Vector Database Configuration](#vector-database-configuration)
-9. [Graph Database Configuration](#graph-database-configuration)
-10. [Scheduler Configuration](#scheduler-configuration)
-11. [Initialization Methods](#initialization-methods)
-12. [Configuration Examples](#configuration-examples)
+1. [配置概述](#configuration-overview)
+2. [MOS配置](#mos-configuration)
+3. [LLM配置](#llm-configuration)
+4. [MemReader配置](#memreader-configuration)
+5. [MemCube配置](#memcube-configuration)
+6. [记忆配置](#memory-configuration)
+7. [嵌入器配置](#embedder-configuration)
+8. [向量数据库配置](#vector-database-configuration)
+9. [图数据库配置](#graph-database-configuration)
+10. [调度器配置](#scheduler-configuration)
+11. [初始化方法](#initialization-methods)
+12. [配置样例](#configuration-examples)
 
-## Configuration Overview
+## 配置概述
 
-MemOS uses a hierarchical configuration system with factory patterns for different backends. Each component has:
-- A base configuration class
-- Backend-specific configuration classes
-- A factory class that creates the appropriate configuration based on the backend
+MemOS使用具有不同后端工厂模式的分层配置系统。每个组件都有:
+- 一个基本配置类
+- 特定于后端配置类
+- 一个基于后端创建适当配置的工厂类
 
-## MOS Configuration
+## MOS配置
 
-The main MOS configuration that orchestrates all components.
+编排所有组件的主要MOS配置
 
-### MOSConfig Fields
+### MOSConfig 字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `user_id` | str | "root" | User ID for the MOS this Config User ID will as default |
-| `session_id` | str | auto-generated UUID | Session ID for the MOS |
-| `chat_model` | LLMConfigFactory | required | LLM configuration for chat |
-| `mem_reader` | MemReaderConfigFactory | required | MemReader configuration |
-| `mem_scheduler` | SchedulerFactory | not required | Scheduler configuration |
-| `max_turns_window` | int | 15 | Maximum conversation turns to keep |
-| `top_k` | int | 5 | Maximum memories to retrieve per query |
-| `enable_textual_memory` | bool | True | Enable textual memory |
-| `enable_activation_memory` | bool | False | Enable activation memory |
-| `enable_parametric_memory` | bool | False | Enable parametric memory |
-| `enable_mem_scheduler` | bool | False | Enable scheduler memory |
+| `user_id` | str | "root" | MOS的用户ID，此配置用户ID将作为默认值 |
+| `session_id` | str | 自动生成UUID | MOS的会话ID |
+| `chat_model` | LLMConfigFactory | 必填 | LLM配置的聊天 |
+| `mem_reader` | MemReaderConfigFactory | 必填 | MemReader配置 |
+| `mem_scheduler` | SchedulerFactory | 非必填 | 调度器配置 |
+| `max_turns_window` | int | 15 | 最大对话次数保持 |
+| `top_k` | int | 5 | 每个查询要检索的最大记忆 |
+| `enable_textual_memory` | bool | True | 启用文本记忆 |
+| `enable_activation_memory` | bool | False | 启用激活记忆 |
+| `enable_parametric_memory` | bool | False | 启用参数记忆 |
+| `enable_mem_scheduler` | bool | False | 启用记忆调度 |
 
 
-### Example MOS Configuration
+### MOS配置样例
 
 ```json
 {
@@ -96,41 +96,41 @@ The main MOS configuration that orchestrates all components.
 }
 ```
 
-## LLM Configuration
+## LLM配置
 
-Configuration for different Large Language Model backends.
+不同LLM后端的配置。
 
-### Base LLM Fields
+### 基本的LLM字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `model_name_or_path` | str | required | Model name or path |
-| `temperature` | float | 0.8 | Temperature for sampling |
-| `max_tokens` | int | 1024 | Maximum tokens to generate |
-| `top_p` | float | 0.9 | Top-p sampling parameter |
-| `top_k` | int | 50 | Top-k sampling parameter |
-| `remove_think_prefix` | bool | False | Remove think tags from output |
+| `model_name_or_path` | str | 必填 | 模型名称或路径 |
+| `temperature` | float | 0.8 | 采样温度 |
+| `max_tokens` | int | 1024 | 生成最大token数 |
+| `top_p` | float | 0.9 | Top-p采样参数 |
+| `top_k` | int | 50 | Top-k 采样参数 |
+| `remove_think_prefix` | bool | False | 从输出中移除think标签 |
 
-### Backend-Specific Fields
+### 特定后端字段
 
 #### OpenAI LLM
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `api_key` | str | required | OpenAI API key |
+| `api_key` | str | 必填 | OpenAI API key |
 | `api_base` | str | "https://api.openai.com/v1" | OpenAI API base URL |
 
 #### Ollama LLM
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
 | `api_base` | str | "http://localhost:11434" | Ollama API base URL |
 
 #### HuggingFace LLM
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `do_sample` | bool | False | Use sampling vs greedy decoding |
-| `add_generation_prompt` | bool | True | Apply generation template |
+| `do_sample` | bool | False | 使用采样VS贪婪编码 |
+| `add_generation_prompt` | bool | True | 应用生成模板 |
 
-### Example LLM Configurations
+### LLM配置样例
 
 ```json
 // OpenAI
@@ -174,24 +174,24 @@ Configuration for different Large Language Model backends.
 }
 ```
 
-## MemReader Configuration
+## MemReader配置
 
-Configuration for memory reading components.
+记忆读取组件的配置
 
-### Base MemReader Fields
+### 基本MemReader字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `created_at` | datetime | auto-generated | Creation timestamp |
-| `llm` | LLMConfigFactory | required | LLM configuration |
-| `embedder` | EmbedderConfigFactory | required | Embedder configuration |
-| `chunker` | chunkerConfigFactory | required | chunker configuration |
+| `created_at` | datetime | 自动生成 | 创建时间戳 |
+| `llm` | LLMConfigFactory | 必填 | LLM配置 |
+| `embedder` | EmbedderConfigFactory | 必填 | 嵌入器配置 |
+| `chunker` | chunkerConfigFactory | 必填 | 块配置 |
 
-### Backend Types
+### 后端类型
 
-- `simple_struct`: Structured memory reader
+- `simple_struct`: 结构化记忆阅读器
 
-### Example MemReader Configuration
+### MemReader配置样例
 
 ```json
 {
@@ -225,27 +225,27 @@ Configuration for memory reading components.
 }
 ```
 
-## MemCube Configuration
+## MemCube配置
 
-Configuration for memory cube components.
+记忆立方体组件配置.
 
-### GeneralMemCubeConfig Fields
+### GeneralMemCubeConfig字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `user_id` | str | "default_user" | User ID for the MemCube |
-| `cube_id` | str | auto-generated UUID | Cube ID for the MemCube |
-| `text_mem` | MemoryConfigFactory | required | Textual memory configuration |
-| `act_mem` | MemoryConfigFactory | required | Activation memory configuration |
-| `para_mem` | MemoryConfigFactory | required | Parametric memory configuration |
+| `user_id` | str | "default_user" | 用户IDMemCube |
+| `cube_id` | str | 自动生成UUID | MemCube的立方体ID |
+| `text_mem` | MemoryConfigFactory | 必填 | 文本记忆配置 |
+| `act_mem` | MemoryConfigFactory | 必填 | 激活记忆配置 |
+| `para_mem` | MemoryConfigFactory | 必填 | 参数记忆配置 |
 
-### Allowed Backends
+### 允许的后端
 
-- **Text Memory**: `naive_text`, `general_text`, `tree_text`, `uninitialized`
-- **Activation Memory**: `kv_cache`, `uninitialized`
-- **Parametric Memory**: `lora`, `uninitialized`
+- **文本记忆**: `naive_text`, `general_text`, `tree_text`, `uninitialized`
+- **激活记忆**: `kv_cache`, `uninitialized`
+- **参数记忆**: `lora`, `uninitialized`
 
-### Example MemCube Configuration
+### MemCube配置样例
 
 ```json
 {
@@ -291,68 +291,68 @@ Configuration for memory cube components.
 }
 ```
 
-## Memory Configuration
+## 记忆配置
 
-Configuration for different types of memory systems.
+配置不同类型的记忆系统.
 
-### Base Memory Fields
+### 基本记忆字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `cube_id` | str | None | Unique MemCube identifier is can be cube_name or path as default|
+| `cube_id` | str | None | 唯一的MemCube标识符可以是cube_name或path作为默认值|
 
-### Textual Memory Configurations
+### 文本记忆配置
 
-#### Base Text Memory
-| Field | Type | Default | Description |
+#### 基本文本记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `memory_filename` | str | "textual_memory.json" | Filename for storing memories |
+| `memory_filename` | str | "textual_memory.json" |  存储记忆的文件名 |
 
-#### Naive Text Memory
-| Field | Type | Default | Description |
+#### 原生文本记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `extractor_llm` | LLMConfigFactory | required | LLM for memory extraction |
+| `extractor_llm` | LLMConfigFactory | 必填 | LLM用于记忆提取 |
 
-#### General Text Memory
-| Field | Type | Default | Description |
+#### 通用文本记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `extractor_llm` | LLMConfigFactory | required | LLM for memory extraction |
-| `vector_db` | VectorDBConfigFactory | required | Vector database configuration |
-| `embedder` | EmbedderConfigFactory | required | Embedder configuration |
+| `extractor_llm` | LLMConfigFactory | 必填 | LLM用于记忆提取 |
+| `vector_db` | VectorDBConfigFactory | 必填 | 向量数据库配置 |
+| `embedder` | EmbedderConfigFactory | 必填 | 嵌入器配置 |
 
-#### Tree Text Memory
-| Field | Type | Default | Description |
+#### 树形文本记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `extractor_llm` | LLMConfigFactory | required | LLM for memory extraction |
-| `dispatcher_llm` | LLMConfigFactory | required | LLM for memory dispatching |
-| `embedder` | EmbedderConfigFactory | required | Embedder configuration |
-| `graph_db` | GraphDBConfigFactory | required | Graph database configuration |
+| `extractor_llm` | LLMConfigFactory | 必填 | LLM用于记忆提取 |
+| `dispatcher_llm` | LLMConfigFactory | 必填 | LLM用于记忆调度 |
+| `embedder` | EmbedderConfigFactory | 必填 | 嵌入器配置 |
+| `graph_db` | GraphDBConfigFactory | 必填 | 图数据库配置 |
 
-### Activation Memory Configurations
+### 激活记忆配置
 
-#### Base Activation Memory
-| Field | Type | Default | Description |
+#### 基本激活记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `memory_filename` | str | "activation_memory.pickle" | Filename for storing memories |
+| `memory_filename` | str | "activation_memory.pickle" | 存储记忆的文件名 |
 
-#### KV Cache Memory
-| Field | Type | Default | Description |
+#### KV Cache记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `extractor_llm` | LLMConfigFactory | required | LLM for memory extraction (must be huggingface) |
+| `extractor_llm` | LLMConfigFactory | 必填 | LLM用于记忆提取 (must be huggingface) |
 
-### Parametric Memory Configurations
+### 参数记忆配置
 
 #### Base Parametric Memory
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `memory_filename` | str | "parametric_memory.adapter" | Filename for storing memories |
+| `memory_filename` | str | "parametric_memory.adapter" | 存储记忆的文件名 |
 
-#### LoRA Memory
-| Field | Type | Default | Description |
+#### LoRA记忆
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `extractor_llm` | LLMConfigFactory | required | LLM for memory extraction (must be huggingface) |
+| `extractor_llm` | LLMConfigFactory | 必填 | LLM用于记忆提取 (must be huggingface) |
 
-### Example Memory Configurations
+### 记忆配置样例
 
 ```json
 // Tree Text Memory
@@ -399,28 +399,28 @@ Configuration for different types of memory systems.
 }
 ```
 
-## Embedder Configuration
+## 嵌入器配置
 
-Configuration for embedding models.
+嵌入模型配置
 
-### Base Embedder Fields
+### 基本嵌入器字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `model_name_or_path` | str | required | Model name or path |
-| `embedding_dims` | int | None | Number of embedding dimensions |
+| `model_name_or_path` | str | 必填 | 模型名称或路径 |
+| `embedding_dims` | int | None | 嵌入维度数量 |
 
-### Backend-Specific Fields
+### 后端特定字段
 
-#### Ollama Embedder
-| Field | Type | Default | Description |
+#### Ollama嵌入器
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
 | `api_base` | str | "http://localhost:11434" | Ollama API base URL |
 
-#### Sentence Transformer Embedder
-No additional fields beyond base configuration.
+#### 句子Transformer嵌入
+除了基本配置之外没有其他字段。
 
-### Example Embedder Configurations
+### 嵌入器配置样例
 
 ```json
 // Ollama Embedder
@@ -442,27 +442,27 @@ No additional fields beyond base configuration.
 }
 ```
 
-## Vector Database Configuration
+## 向量数据库配置
 
-Configuration for vector databases.
+配置向量数据库
 
-### Base Vector DB Fields
+### 基本向量数据库字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `collection_name` | str | required | Name of the collection |
-| `vector_dimension` | int | None | Dimension of the vectors |
-| `distance_metric` | str | None | Distance metric (cosine, euclidean, dot) |
+| `collection_name` | str | 必填 | 集合名称 |
+| `vector_dimension` | int | None | 向量维度 |
+| `distance_metric` | str | None | 距离测量 (cosine, euclidean, dot) |
 
-### Qdrant Vector DB Fields
+### Qdrant向量数据库字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `host` | str | None | Qdrant host |
-| `port` | int | None | Qdrant port |
-| `path` | str | None | Qdrant local path |
+| `host` | str | None | Qdrant主机 |
+| `port` | int | None | Qdrant端口 |
+| `path` | str | None | Qdrant本地路径 |
 
-### Example Vector DB Configuration
+### 向量数据库配置示例
 
 ```json
 {
@@ -476,27 +476,27 @@ Configuration for vector databases.
 }
 ```
 
-## Graph Database Configuration
+## 图数据库配置
 
-Configuration for graph databases.
+配置图数据库.
 
-### Base Graph DB Fields
+### 基本图数据库字段
 
-| Field | Type | Default | Description |
+| Field | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `uri` | str | required | Database URI |
-| `user` | str | required | Database username |
-| `password` | str | required | Database password |
+| `uri` | str | 必填 | 数据库URI |
+| `user` | str | 必填 | 数据库用户名 |
+| `password` | str | 必填 | 数据库密码 |
 
-### Neo4j Graph DB Fields
+### Neo4j图数据库字段
 
-| Field | Type | Default | Description |
+| Field | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `db_name` | str | required | Target database name |
-| `auto_create` | bool | False | Create DB if it doesn't exist |
-| `embedding_dimension` | int | 768 | Vector embedding dimension |
+| `db_name` | str | 必填 | 目标数据库名称 |
+| `auto_create` | bool | False | 如果不存在，创建数据库 |
+| `embedding_dimension` | int | 768 | 向量嵌入维度 |
 
-### Example Graph DB Configuration
+### 图数据库配置示例
 
 ```json
 {
@@ -512,34 +512,34 @@ Configuration for graph databases.
 }
 ```
 
-## Scheduler Configuration
+## 调度器配置
 
-Configuration for memory scheduling systems that manage memory retrieval and activation.
+用于管理记忆检索和激活的记忆调度系统的配置。
 
-### Base Scheduler Fields
+### 基本调度器字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `top_k` | int | 10 | Number of top candidates to consider in initial retrieval |
-| `top_n` | int | 5 | Number of final results to return after processing |
-| `enable_parallel_dispatch` | bool | True | Whether to enable parallel message processing using thread pool |
-| `thread_pool_max_workers` | int | 5 | Maximum worker threads in pool (1-20) |
-| `consume_interval_seconds` | int | 3 | Interval for consuming messages from queue in seconds (0-60) |
+| `top_k` | int | 10 | 在初始检索中要考虑的顶级候选数 |
+| `top_n` | int | 5 | 处理后返回的最终结果数 |
+| `enable_parallel_dispatch` | bool | True | 是否使用线程池启用并行消息处理 |
+| `thread_pool_max_workers` | int | 5 | 线程池中的最大线程数(1-20) |
+| `consume_interval_seconds` | int | 3 | 从队列中消费消息的间隔（以秒为单位）(0-60) |
 
-### General Scheduler Fields
+### 通用调度器字段
 
-| Field | Type | Default | Description |
+| 字段 | 类型 | 默认值 | 描述 |
 |-------|------|---------|-------------|
-| `act_mem_update_interval` | int | 300 | Interval in seconds for updating activation memory |
-| `context_window_size` | int | 5 | Size of the context window for conversation history |
-| `activation_mem_size` | int | 5 | Maximum size of the activation memory |
-| `act_mem_dump_path` | str | auto-generated | File path for dumping activation memory |
+| `act_mem_update_interval` | int | 300 | 更新激活记忆的时间间隔（秒） |
+| `context_window_size` | int | 5 | 对话历史记录的上下文窗口的大小 |
+| `activation_mem_size` | int | 5 | 激活记忆的最大尺寸 |
+| `act_mem_dump_path` | str | 自动生成 | 转储激活记忆的文件路径 |
 
-### Backend Types
+### 后端类型
 
-- `general_scheduler`: Advanced scheduler with activation memory management
+- `general_scheduler`: 具有激活记忆管理的高级调度程序
 
-### Example Scheduler Configuration
+### 调度器配置示例
 
 ```json
 {
@@ -557,9 +557,9 @@ Configuration for memory scheduling systems that manage memory retrieval and act
 }
 ```
 
-## Initialization Methods
+## 初始化方法
 
-### From JSON File
+### 来自JSON文件
 
 ```python
 from memos.configs.mem_os import MOSConfig
@@ -568,7 +568,7 @@ from memos.configs.mem_os import MOSConfig
 mos_config = MOSConfig.from_json_file("path/to/config.json")
 ```
 
-### From Dictionary
+### 来自字典
 
 ```python
 from memos.configs.mem_os import MOSConfig
@@ -589,7 +589,7 @@ config_dict = {
 mos_config = MOSConfig(**config_dict)
 ```
 
-### Factory Pattern Usage
+### 工厂模式用法
 
 ```python
 from memos.configs.llm import LLMConfigFactory
@@ -604,9 +604,9 @@ llm_config = LLMConfigFactory(
 )
 ```
 
-## Configuration Examples
+## 配置样例
 
-### Complete MOS Setup
+### 创建完整MOS
 
 ```python
 from memos.configs.mem_os import MOSConfig
@@ -627,7 +627,7 @@ mos.register_mem_cube("path/to/mem_cube", user_id=user_id)
 response = mos.chat("Hello, how are you?", user_id=user_id)
 ```
 
-### Tree Memory Configuration
+### 树形记忆配置
 
 ```python
 from memos.configs.memory import MemoryConfigFactory
@@ -674,7 +674,7 @@ tree_memory_config = MemoryConfigFactory(
 )
 ```
 
-### Multi-Backend LLM Configuration
+### 多后端LLM配置
 
 ```python
 from memos.configs.llm import LLMConfigFactory
@@ -716,4 +716,4 @@ hf_config = LLMConfigFactory(
 )
 ```
 
-This comprehensive configuration system allows for flexible and extensible setup of the MemOS system with different backends and components.
+这个全面的配置系统允许灵活和可扩展的MemOS系统设置不同的后端和组件

@@ -3,45 +3,45 @@ title: MOS API for MemOS
 desc: The **MOS** (Memory Operating System) is a core component of MemOS that acts as an orchestration layer, managing multiple memory modules (MemCubes) and providing a unified interface for memory-augmented applications.
 ---
 
-## API Summary (`MOS`)
+## API概括 (`MOS`)
 
-### Initialization
+### 初始化
 ```python
 from memos import MOS
 mos = MOS(config: MOSConfig)
 ```
 
-### Core Methods
+### 核心方法
 
-| Method | Description |
+| 方法 | 描述 |
 |--------|-------------|
-| `register_mem_cube(mem_cube_name_or_path, mem_cube_id=None, user_id=None)` | Register a new memory cube from a directory or remote repo for a user. |
-| `unregister_mem_cube(mem_cube_id, user_id=None)` | Unregister (remove) a memory cube by its ID. |
-| `add(messages=None, memory_content=None, doc_path=None, mem_cube_id=None, user_id=None)` | Add new memory (from messages, string, or document) to a cube. |
-| `search(query, user_id=None, install_cube_ids=None)` | Search memories across cubes for a query, optionally filtered by cube IDs. |
-| `chat(query, user_id=None)` | Chat with the LLM, enhanced by memory retrieval for specified user. |
-| `get(mem_cube_id, memory_id, user_id=None)` | Get a specific memory by cube and memory ID for a user. |
-| `get_all(mem_cube_id=None, user_id=None)` | Get all memories from a cube (or all cubes for user). |
-| `update(mem_cube_id, memory_id, text_memory_item, user_id=None)` | Update a memory in a cube by ID for a user. |
-| `delete(mem_cube_id, memory_id, user_id=None)` | Delete a memory from a cube by ID for a user. |
-| `delete_all(mem_cube_id=None, user_id=None)` | Delete all memories from a cube for a user. |
-| `clear_messages(user_id=None)` | Clear the chat history for the specified user session. |
+| `register_mem_cube(mem_cube_name_or_path, mem_cube_id=None, user_id=None)` | 从目录或远程仓库为用户注册一个新的记忆立方体 |
+| `unregister_mem_cube(mem_cube_id, user_id=None)` | 根据ID取消注册(移除)一个记忆立方体. |
+| `add(messages=None, memory_content=None, doc_path=None, mem_cube_id=None, user_id=None)` | 将新记忆（来自消息、字符串或文档）添加到立方体. |
+| `search(query, user_id=None, install_cube_ids=None)` | 通过立方体IDs搜索记忆，跨多个立方体，过滤可选项. |
+| `chat(query, user_id=None)` | 与LLM聊天，通过指定用户的记忆检索增强. |
+| `get(mem_cube_id, memory_id, user_id=None)` | 为用户通过立方体和记忆ID获取特定记忆 |
+| `get_all(mem_cube_id=None, user_id=None)` | 从一个立方体得到所有记忆 |
+| `update(mem_cube_id, memory_id, text_memory_item, user_id=None)` | 通过ID在立方体中为用户更新记忆 |
+| `delete(mem_cube_id, memory_id, user_id=None)` | 通过ID为用户从立方体中删除一个记忆 |
+| `delete_all(mem_cube_id=None, user_id=None)` | 为一个用户从立方体中删除所有记忆 |
+| `clear_messages(user_id=None)` | 清除指定用户会话的聊天记录. |
 
-### User Management Methods
+### 用户管理方法
 
-| Method | Description |
+| 方法 | 描述 |
 |--------|-------------|
-| `create_user(user_id, role=UserRole.USER, user_name=None)` | Create a new user with specified role and optional name. |
-| `list_users()` | List all active users with their information. |
-| `create_cube_for_user(cube_name, owner_id, cube_path=None, cube_id=None)` | Create a new cube for a specific user as owner. |
-| `get_user_info()` | Get current user information including accessible cubes. |
-| `share_cube_with_user(cube_id, target_user_id)` | Share a cube with another user. |
+| `create_user(user_id, role=UserRole.USER, user_name=None)` | 使用指定的角色和可选的名称创建新用户 |
+| `list_users()` | 列出所有活跃用户及其信息. |
+| `create_cube_for_user(cube_name, owner_id, cube_path=None, cube_id=None)` | 为特定用户创建一个新的立方体 |
+| `get_user_info()` | 获得当前用户的信息 |
+| `share_cube_with_user(cube_id, target_user_id)` | 和其他用户共享立方体 |
 
-## Class Overview
+## 类别概述
 
-`MOS` manages multiple `MemCube` objects, each representing a user's or session's memory. It provides a unified API for memory operations (add, search, update, delete) and integrates with LLMs to enhance chat with contextual memory retrieval. MOS supports multi-user, multi-session scenarios and is extensible to new memory types and backends.
+`MOS` 管理多个 `MemCube` 对象, 每个代表一个用户或会话的记忆. 它为记忆操作（添加、搜索、更新、删除）提供了统一的API，并与llm集成，通过上下文记忆检索增强聊天功能. MOS支持多用户、多会话场景，并可扩展到新的记忆类型和后端.
 
-## Example Usage
+## 使用样例
 
 ```python
 import uuid
@@ -75,24 +75,24 @@ retrieved_memories = memory.search(query="What do you like?", user_id=user_id)
 print(f"text_memories: {retrieved_memories['text_mem']}")
 ```
 
-## Core Operations Overview
+## 核心操作概述
 
-MOS exposes several main operations for interacting with memories:
+MOS提供了几个与记忆交互的主要操作:
 
-* **Adding Memories** - Store new information from conversations, documents, or direct content
-* **Searching Memories** - Retrieve relevant memories based on semantic queries
-* **Chat with Memory** - Enhanced conversations with contextual memory retrieval
-* **Memory Management** - Update, delete, and organize existing memories
-* **Dumping Memories** - Export memory cubes to persistent storage
+* **添加记忆** - 存储来自对话、文档或直接内容的新信息
+* **搜索记忆** - 基于语义查询检索相关记忆
+* **与记忆对话** - 增强对话与上下文记忆检索
+* **记忆管理** - 更新、删除和组织现有记忆
+* **记忆转储** - 将记忆立方体导出到持久存储
 
-## 1. Adding Memories
+## 1. 添加记忆
 
-### Overview
+### 概述
 
-The add operation processes and stores new information through several steps
+添加操作通过几个步骤处理和存储新信息
 
 
-#### Adding from Conversation Messages
+#### 从对话消息添加
 
 ```python
 import uuid
@@ -125,7 +125,7 @@ memory.add(
 print("Memory added successfully from conversation")
 ```
 
-#### Adding Direct Memory Content
+#### 直接添加记忆内容
 
 ```python
 # Add specific memory content directly
@@ -150,7 +150,7 @@ for item in memory_items:
     )
 ```
 
-#### Adding from Documents
+#### 从文档添加
 
 ```python
 
@@ -163,14 +163,14 @@ memory.add(
 )
 ```
 
-## 2. Searching Memories
+## 2. 搜索记忆
 
-### Overview
+### 概述
 
-The search operation retrieves memories through search api:
+搜索操作通过搜索API检索记忆:
 
 
-#### Basic Memory Search
+#### 基本记忆搜索
 
 ```python
 # Search for relevant memories
@@ -189,7 +189,7 @@ for memory in text_memories:
     print(memory)
 ```
 
-#### Search Across Specific Cubes
+#### 特定立方体交叉搜索
 
 ```python
 # Search only in specific cubes
@@ -206,19 +206,19 @@ for cube_memories in results['text_mem']:
         print(f"- {memory}")
 ```
 
-## 3. Chat with Memory Enhancement
+## 3. 聊天增强记忆
 
-### Overview
+### 概述
 
-The chat operation provides memory-enhanced conversations by:
+聊天操作通过以下方式提供记忆增强的对话:
 
-1. **Memory Retrieval** - Searches for relevant memories based on the query
-2. **Context Building** - Incorporates retrieved memories into the conversation context
-3. **Response Generation** - LLM generates responses with memory context
+1. **记忆检索** - 根据查询搜索相关记忆
+2. **语境构建** - 将检索到的记忆整合到会话上下文中
+3. **生成响应** - LLM使用记忆上下文生成响应
 
 
 
-#### Basic Chat
+#### 基本对话
 
 ```python
 # Simple chat with memory enhancement
@@ -229,11 +229,11 @@ response = memory.chat(
 print(f"Assistant: {response}")
 ```
 
-## 4. Memory Retrieval and Management
+## 4. 记忆检索和管理
 
-### Getting Specific Memory
+### 生成指定记忆
 
-#### Code Example
+#### 示例代码
 
 ```python
 # Get a specific memory by ID
@@ -249,11 +249,11 @@ print(f"Created: {memory_item.created_at}")
 print(f"Metadata: {memory_item.metadata}")
 ```
 
-### Getting All Memories
+### 获取所有记忆
 
 
 
-#### Code Example
+#### 样例代码
 
 ```python
 # Get all memories from a specific cube
@@ -276,13 +276,13 @@ for cube_memories in all_memories['text_mem']:
         print(f"  Created: {memory.created_at}")
 ```
 
-## 5. Memory Updates and Deletion
+## 5. 记忆更新和删除
 
-### Updating Memories
+### 更新记忆
 
 
 
-#### Code Example
+#### 样例代码
 
 ```python
 from memos.memories.textual.item import TextualMemoryItem
@@ -307,7 +307,7 @@ memory.update(
 print("Memory updated successfully")
 ```
 
-### Deleting Memories
+### 删除记忆
 
 
 ```python
@@ -328,18 +328,18 @@ memory.delete_all(
 memory.delete_all(user_id=user_id)
 ```
 
-## 6. Dumping Memories
+## 6. 记忆转储
 
-### Overview
+### 概述
 
-The dump operation exports memory cubes to persistent storage, allowing you to:
+转储操作将记忆立方体导出到持久存储，允许您这样做:
 
-* **Backup Memories** - Create persistent copies of memory cubes
-* **Transfer Memories** - Move memory cubes between systems
-* **Archive Memories** - Store memory cubes for long-term preservation
-* **Share Memories** - Export memory cubes for sharing with other users
+* **记忆备份** - 为记忆立方体创建持久副本
+* **记忆迁移** - 在系统中移除记忆立方体
+* **记忆归档** - 存储记忆立方体以进行长期保存
+* **记忆共享** - 导出记忆立方体与其他用户共享
 
-#### Basic Memory Dump
+#### 基本记忆转储
 
 ```python
 # Dump a specific memory cube to a directory
@@ -352,7 +352,7 @@ memory.dump(
 print("Memory cube dumped successfully")
 ```
 
-#### Dump Default Cube
+#### 转储默认立方体
 
 ```python
 # Dump the default cube for the user (first accessible cube)
@@ -364,7 +364,7 @@ memory.dump(
 print("Default memory cube dumped successfully")
 ```
 
-#### Dump All User Cubes
+#### 转储所有用户立方体
 
 ```python
 # Get user info to see all accessible cubes
@@ -381,7 +381,7 @@ for cube_info in user_info['accessible_cubes']:
         print(f"Dumped cube: {cube_info['cube_name']}")
 ```
 
-#### Dump with Custom Directory Structure
+#### 转储自定义目录结构
 
 ```python
 import os
@@ -404,9 +404,9 @@ memory.dump(
 print(f"Memory cube dumped to: {backup_dir}")
 ```
 
-## 7. Session Management
+## 7. 会话管理
 
-### Clearing Chat History
+### 清除对话历史
 
 
 ```python
@@ -418,10 +418,10 @@ user_info = memory.get_user_info()
 print(f"Chat history cleared for user: {user_info['user_name']}")
 ```
 
-## When to Use MOS
+## 何时使用MOS
 
-Use MOS when you need to:
+当你需要使用MOS时:
 
-- Build LLM applications with persistent, user-specific memory.
-- Support multi-user, multi-session memory management.
-- Integrate memory-augmented retrieval and reasoning into chatbots or agents.
+- 使用持久的、特定于用户的记忆构建LLM应用程序.
+- 支持多用户、多会话记忆管理.
+- 将记忆增强检索和推理集成到聊天机器人或代理中.
