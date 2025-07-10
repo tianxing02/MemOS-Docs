@@ -85,7 +85,7 @@ provide('navigation', contentNavigation)
       </ClientOnly>
     </template>
 
-    <AppFooter v-if="!route.path.startsWith('/docs/api')"/>
+    <AppFooter v-if="route.path === '/'"/>
 
     <ClientOnly>
       <LazyUContentSearch
