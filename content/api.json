@@ -887,10 +887,10 @@
             "default": "5cc9f7d7-74c3-4bb3-9b4f-11adf416530b"
           },
           "chat_model": {
-            "$ref": "#/components/schemas/LLMConfigFactory",
+            "$ref": "#/components/schemas/LLMConfigFactory"
           },
           "mem_reader": {
-            "$ref": "#/components/schemas/MemReaderConfigFactory",
+            "$ref": "#/components/schemas/MemReaderConfigFactory"
           },
           "mem_scheduler": {
             "anyOf": [

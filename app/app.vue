@@ -71,6 +71,8 @@ provide('navigation', contentNavigation)
             <NuxtPage />
           </UPage>
         </UContainer>
+
+        <AppFooter />
       </UMain>
     </template>
 
