@@ -50,9 +50,9 @@ ScheduleMessageItem:
 |---------------|----------------------|-----------------------------------------------|
 | `item_id`     | `str`                | UUID (自动生成) 用于唯一标识 |
 | `user_id`     | `str`                | 关联用户的标识符            |
-| `mem_cube_id` | `str`                | 记忆立方体的标识符                |
+| `mem_cube_id` | `str`                | mem cube 的标识符                |
 | `label`       | `str`                | 消息标签 (例如，`QUERY_LABEL`、`ANSWER_LABEL`) |
-| `mem_cube`    | `GeneralMemCube | str` | 记忆立方体对象或引用               |
+| `mem_cube`    | `GeneralMemCube | str` | mem cube 对象或引用               |
 | `content`     | `str`                | 消息内容                               |
 | `timestamp`   | `datetime`           | 消息提交时间           |
 
@@ -65,7 +65,7 @@ ScheduleLogForWebItem:
 |------------------------|--------------------|-----------------------------------------------------------------------------|----------------------------------------|
 | `item_id`              | `str`              | 唯一日志条目标识符 (UUIDv4)                                        | 自动生成 (`uuid4()`)             |
 | `user_id`              | `str`              | 关联用户标识符                                                  | (必需)                             |
-| `mem_cube_id`          | `str`              | 链接的记忆立方体 ID                                                       | (必需)                             |
+| `mem_cube_id`          | `str`              | 链接的 mem cube ID                                                       | (必需)                             |
 | `label`                | `str`              | 日志类别标识符                                                     | (必需)                             |
 | `from_memory_type`     | `str`              | 源记忆分区<br>可能的值：<br>- `"LongTermMemory"`<br>- `"UserMemory"`<br>- `"WorkingMemory"` | (必需)                             |
 | `to_memory_type`       | `str`              | 目标记忆分区                                                | (必需)                             |
@@ -106,14 +106,14 @@ def init_task():
 
 def run_with_automatic_scheduler_init():
     # 自动初始化：从 YAML 文件加载配置
-    # 创建用户和记忆立方体
+    # 创建用户和 mem cube
     # 将对话添加到记忆
     # 处理用户查询并显示答案
     # 显示网络日志
 
 def run_with_manual_scheduler_init():
     # 手动初始化：显式创建和配置调度器组件
-    # 初始化 MemOS、用户和记忆立方体
+    # 初始化 MemOS、用户和 mem cube
     # 手动向调度器提交消息
     # 处理用户查询并显示答案
     # 显示网络日志
