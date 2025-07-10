@@ -1,12 +1,12 @@
 ---
-title: Memory Structure Design Best Practices
+title: 记忆结构设计最佳实践
 ---
 
-## Memory Type Selection
+## 记忆类型选择
 
-### TreeTextMemory
+### 树状文本记忆
 
-**Best for**: Knowledge management, research assistants, hierarchical data
+**最适用于**：知识管理、研究助理、层级结构数据  
 ```python
 tree_config = {
     "backend": "tree_text",
@@ -26,11 +26,12 @@ tree_config = {
         }
     }
 }
-```
+````
 
-### GeneralTextMemory
+### 通用文本记忆
 
-**Best for**: Conversational AI, personal assistants, FAQ systems
+**最适用于**：对话式 AI、个人助理、问答系统
+
 ```python
 general_config = {
     "backend": "general_text",
@@ -57,9 +58,10 @@ general_config = {
 }
 ```
 
-### NaiveTextMemory
+### 纯文本记忆
 
-**Best for**: Simple applications, prototyping
+**最适用于**：简单应用、原型开发
+
 ```python
 naive_config = {
     "backend": "naive_text",
@@ -74,16 +76,16 @@ naive_config = {
 }
 ```
 
-## Capacity Planning
+## 容量规划
 
-If you enable the scheduler, you can set memory capacities to control resource usage:
+如果你启用了调度器，可以设置记忆容量来控制资源使用情况：
 
 ```python
 scheduler_config = {
     "memory_capacities": {
-        "working_memory_capacity": 20,        # Active conversation
-        "user_memory_capacity": 500,          # User knowledge
-        "long_term_memory_capacity": 2000     # Domain knowledge
+        "working_memory_capacity": 20,        # 活跃对话记忆
+        "user_memory_capacity": 500,          # 用户知识记忆
+        "long_term_memory_capacity": 2000     # 领域知识记忆
     }
 }
 ```

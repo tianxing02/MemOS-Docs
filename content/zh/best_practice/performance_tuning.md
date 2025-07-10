@@ -1,8 +1,8 @@
 ---
-title: Performance Tuning
+title: 性能调优
 ---
 
-## Embedding Optimization
+## 向量嵌入优化
 
 ```python
 fast_embedder = {
@@ -18,38 +18,38 @@ slow_embedder = {
         "model_name_or_path": "nomic-ai/nomic-embed-text-v1.5"
     }
 }
-```
+````
 
-## Inference Speed
+## 推理速度优化
 
 ```python
 generation_config = {
-    "max_new_tokens": 256,  # Limit response length
+    "max_new_tokens": 256,  # 限制响应长度
     "temperature": 0.7,
     "do_sample": True
 }
 ```
 
-## System Resource Optimization
+## 系统资源优化
 
-### Memory Capacity Limits
+### 内存容量限制
 
 ```python
 scheduler_config = {
     "memory_capacities": {
-        "working_memory_capacity": 20,         # Active context
-        "user_memory_capacity": 500,           # User storage
-        "long_term_memory_capacity": 2000,     # Domain knowledge
-        "transformed_act_memory_capacity": 50  # KV cache items
+        "working_memory_capacity": 20,         # 活跃上下文
+        "user_memory_capacity": 500,           # 用户存储
+        "long_term_memory_capacity": 2000,     # 领域知识
+        "transformed_act_memory_capacity": 50  # KV 缓存条目
     }
 }
 ```
 
-### Batch Processing
+### 批处理操作
 
 ```python
 def batch_memory_operations(operations, batch_size=10):
     for i in range(0, len(operations), batch_size):
         batch = operations[i:i + batch_size]
-        yield batch  # Process in batches
+        yield batch  # 批量处理
 ```
