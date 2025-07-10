@@ -1,10 +1,28 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
+interface MenuItem {
+  to: string
+  label: string
+  target?: string
+}
+
+const { t, setLocale, locale } = useI18n()
+const { header } = useAppConfig()
+
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const { header } = useAppConfig()
-console.log('header:', header)
+const localizedMenus = computed<MenuItem[]>(() => {
+  return (header.memus as MenuItem[]).map(menu => ({
+    ...menu,
+    label: t(`${menu.label}`)
+  }))
+})
+
+function handleLocaleSwitch() {
+  const newLocale = locale.value === 'en' ? 'zh' : 'en'
+  setLocale(newLocale)
+}
 </script>
 
 <template>
@@ -19,7 +37,7 @@ console.log('header:', header)
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="header.memus" class="justify-center">
+    <UNavigationMenu :items="localizedMenus" class="justify-center">
       <template #item="{ item }">
         <div>{{ item.label }}</div>
       </template>
@@ -28,17 +46,20 @@ console.log('header:', header)
     <template #right>
       <UContentSearchButton
         v-if="header?.search"
+        class="cursor-pointer"
       />
 
       <UButton
         color="neutral"
         variant="ghost"
+        class="cursor-pointer"
+        @click="handleLocaleSwitch"
       >
         <LocaleSwitch class="w-[20px] h-[20px]" />
       </UButton>
 
       <UModal>
-        <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" />
+        <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" class="cursor-pointer"/>
         <template #content>
           <img
             src="https://statics.memtensor.com.cn/memos/contact-ui.png"

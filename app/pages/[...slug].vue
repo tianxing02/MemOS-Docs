@@ -4,16 +4,18 @@ import type { ContentNavigationItem } from '@nuxt/content'
 const route = useRoute()
 const { toc } = useAppConfig()
 const navigation = inject<ContentNavigationItem[]>('navigation')
+const { t, locale } = useI18n()
 
 // Remove trailing slash to match content path
 const normalizedPath = route.path.replace(/\/$/, '') || '/'
 
 const { data: page } = await useAsyncData(normalizedPath, () => {
-  queryCollection('docs').all().then((res) => {
-    console.log('queryCollection all:', res);
-  })
+  return queryCollection('docs').path(`/${locale.value}${normalizedPath}`).first()
+})
 
-  return queryCollection('docs').path(normalizedPath).first()
+// Watch locale changes and refresh content
+watch(locale, async (_newLocale) => {
+  await refreshNuxtData(normalizedPath)
 })
 
 if (!page.value) {
@@ -38,13 +40,18 @@ const links = computed(() => {
   if (toc?.bottom?.edit) {
     links.push({
       icon: 'i-lucide-external-link',
-      label: 'Edit this page',
+      label: 'community.edit',
       to: `${toc.bottom.edit}/${page?.value?.stem}.${page?.value?.extension}`,
       target: '_blank'
     })
   }
 
-  return [...links, ...(toc?.bottom?.links || [])].filter(Boolean)
+  return [...links, ...(toc?.bottom?.links || [])].filter(Boolean).map((item) => {
+    return {
+      ...item,
+      label: t(`${item.label}`)
+    }
+  })
 })
 
 useHead({
@@ -113,7 +120,7 @@ useHead({
               />
 
               <UPageLinks
-                :title="toc.bottom.title"
+                :title="t(`${toc.bottom.title}`)"
                 :links="links"
               />
             </div>
