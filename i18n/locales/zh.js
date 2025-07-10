@@ -1,7 +1,7 @@
 export default {
   header: {
     home: '首页',
-    research: '论文'
+    research: '研究论文'
   },
   community: {
     title: '社区',
