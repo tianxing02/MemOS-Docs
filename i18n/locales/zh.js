@@ -5,7 +5,7 @@ export default {
   },
   community: {
     title: '社区',
-    stars: 'Star MemOS-Docs',
+    stars: '在 GitHub 上点赞',
     edit: '编辑文档'
   },
   footer: {
