@@ -44,7 +44,6 @@ provide('navigation', contentNavigation)
 
     <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api')">
       <UMain>
-        <ClientOnly>
           <UContainer>
             <UPage>
               <!-- Document navigation -->
@@ -88,7 +87,6 @@ provide('navigation', contentNavigation)
           </UContainer>
 
           <AppFooter />
-        </ClientOnly>
       </UMain>
     </template>
 

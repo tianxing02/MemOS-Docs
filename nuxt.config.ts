@@ -68,12 +68,7 @@ const config = {
     defaultLocale: 'en',
     strategy: 'no_prefix',
     vueI18n: './i18n.config.ts',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root' as const,
-      fallbackLocale: 'en' as const
-    }
+    detectBrowserLanguage: false,
   },
 
   devtools: {
