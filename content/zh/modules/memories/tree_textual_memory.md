@@ -1,5 +1,5 @@
 ---
-title: "TreeTextMemory: Structured Hierarchical Textual Memory"
+标题: "TreeTextMemory: 结构化分层文本记忆"
 ---
 
 让我们在MemOS中构建你的第一个**基于图的、树状结构的记忆**！

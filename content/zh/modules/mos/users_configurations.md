@@ -1,6 +1,6 @@
 ---
-title: MemOS Configuration Guide
-desc: This document provides a comprehensive overview of all configuration fields and initialization methods across the different components in the MemOS system.
+标题: MemOS配置指南
+描述: 本文档全面概述了MemOS系统中不同组件的所有配置字段和初始化方法.
 ---
 
 1. [配置概述](#configuration-overview)
