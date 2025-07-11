@@ -2,48 +2,47 @@
 title: Parametric Memory (Coming Soon)
 ---
 
-::note
-**Coming Soon**
-This feature is still under active development. Stay tuned for updates!
+::注释
+**正在开发中**
+该功能仍在积极开发中。敬请期待更新！
 ::
 
-`Parametric Memory` is the core **long-term knowledge and capability store** inside MemOS.
-Unlike plaintext or activation memories, parametric memory is embedded directly within a model’s weights — encoding deep representations of language structure, world knowledge, and general reasoning abilities.
+`参数化记忆(Parametric Memory)` 是MemOS内部的核心**长期的知识和能力储存**。与明文记忆或激活记忆不同，参数记忆直接嵌入在模型的权重中——对语言结构、世界知识和一般推理能力的深度表示进行编码。
 
-In the MemOS architecture, parametric memory does not just refer to static pre-trained weights. It also includes modular weight components such as **LoRA adapters** and plug-in expert modules. These allow you to incrementally expand or specialize your LLM’s capabilities without retraining the entire model.
+在MemOS架构中，参数记忆不仅仅指静态预训练权重。它还包括模块化权重组件，如**LoRA适配器**和插件专家模块.这些允许您逐步扩展或专业化您的LLM的能力，而无需重新训练整个模型。
 
-For example, you could distill structured or stable knowledge into parametric form, save it as a **capability block**, and dynamically load or unload it during inference. This makes it easy to create “expert sub-models” for tasks like legal reasoning, financial analysis, or domain-specific summarization — all managed by MemOS.
+例如，您可以将结构化或稳定的知识提取为参数形式，将其保存为**能力块**，并在推理过程中动态加载或卸载它。这使得为法律推理、财务分析或特定领域的摘要等任务创建“专家子模型”变得容易——所有这些都由MemOS管理。
 
 
-## Design Goals
+## 设计目标
 
-::list
--  **Controllability** — Generate, load, swap, or compose parametric modules
+::列表
+-  **可控制性** — 生成、加载、交换或组合参数模块
    on demand.
--  **Plasticity** — Evolve alongside plaintext and activation memories; support knowledge distillation and rollback.
--  **Traceability** *(Coming Soon)* — Versioning and governance for parametric blocks.
+-  **可塑性** — 与明文和激活记忆一起进化；支持知识蒸馏和回滚。
+-  **可追溯性** *(开发中)* — 参数块的版本控制和管理。
 ::
 
-## Current Status
+## 当前状态
 
-`Parametric Memory` is currently under design and prototyping.
-APIs for generating, compressing, and hot-swapping parametric modules will be released in future versions — supporting multi-task, multi-role, and multi-agent architectures.
+`参数化记忆(Parametric Memory)` 当前在设计和原型阶段.
+用于生成、压缩和热插拔参数模块的API将在未来的版本中发布——支持多任务、多角色和多代理架构。
 
-Stay tuned!
+请继续关注!
 
 
-## Related Modules
+## 相关模块
 
-While parametric memory is under development, try out these today:
-- **[GeneralTextMemory](/modules/memories/general_textual_memory)**: Flexible vector-based semantic storage.
-- **[TreeTextMemory](/modules/memories/tree_textual_memory)**: Structured, hierarchical knowledge graphs.
-- **[Activation Memory](/modules/memories/kv_cache_memory)**: Efficient runtime state caching.
+虽然参数记忆正在开发中，但今天就可以尝试这些:
+- **[GeneralTextMemory](/modules/memories/general_textual_memory)**: 基于向量的灵活语义存储。
+- **[TreeTextMemory](/modules/memories/tree_textual_memory)**: 结构化、层次化和知识图谱.
+- **[Activation Memory](/modules/memories/kv_cache_memory)**: 高效的运行时状态缓存。
 
-## Developer Note
+## 开发者注意事项
 
-Parametric Memory will complete MemOS’s vision of a unified **Memory³** architecture:
-- **Parametric**: Embedded knowledge
-- **Activation**: Ephemeral runtime states
-- **Plaintext**: Structured, traceable external memories
+参数化记忆将完成MemOS关于统一**Memory³**架构的设想：
+- **参数化记忆**: 嵌入知识
+- **激活记忆**: 短暂的运行状态
+- **明文记忆**: 结构化的、可追溯的外部记忆
 
-Bringing all three together enables adaptable, evolvable, and explainable intelligent systems.
+将这三者结合在一起，可以实现适应性强、可进化和可解释的智能系统。
