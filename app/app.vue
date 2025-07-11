@@ -2,8 +2,20 @@
 const route = useRoute()
 
 const contentNavigation = useContentNavigation()
+const { locale } = useI18n()
+
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false
+})
+
+// Process files to remove language prefix
+const processedFiles = computed(() => {
+  if (!files.value) return []
+
+  return files.value.filter(file => file.id.startsWith(`/${locale.value}`)).map(file => ({
+    ...file,
+    id: file.id.replace(`/${locale.value}`, '')
+  }))
 })
 
 useHead({
@@ -30,49 +42,51 @@ provide('navigation', contentNavigation)
 
     <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api')">
       <UMain>
-        <UContainer>
-          <UPage>
-            <!-- Document navigation -->
-            <template #left>
-              <UPageAside class="overflow-auto scrollbar-hide">
-                <!-- Use keep-alive to maintain menu state -->
-                <keep-alive>
-                  <UContentNavigation
-                    :navigation="contentNavigation"
-                    highlight
-                    :ui="{
-                      linkTrailingBadge: 'font-semibold uppercase',
-                      linkLeadingIcon: 'hidden'
-                    }"
-                  >
-                    <template #link-title="{ link }">
-                      <UTooltip :text="link.title" :delay-duration="100" class="w-full min-w-0">
-                        <span class="inline-flex items-center gap-2 w-full min-w-0 max-w-full">
-                          <UIcon
-                            v-if="link.icon && typeof link.icon === 'string'"
-                            :name="link.icon as string"
-                            class="w-4 h-4 flex-shrink-0"
-                          />
-                          <span class="truncate flex-1 min-w-0">{{ link.title }}</span>
-                          <UIcon
-                            v-if="link.target === '_blank'"
-                            name="i-ri-external-link-line"
-                            class="w-3 h-3 flex-shrink-0 text-gray-400"
-                          />
-                        </span>
-                      </UTooltip>
-                    </template>
-                  </UContentNavigation>
-                </keep-alive>
-              </UPageAside>
-            </template>
+        <ClientOnly>
+          <UContainer>
+            <UPage>
+              <!-- Document navigation -->
+              <template #left>
+                <UPageAside class="overflow-auto scrollbar-hide">
+                  <!-- Use keep-alive to maintain menu state -->
+                  <keep-alive>
+                    <UContentNavigation
+                      :navigation="contentNavigation"
+                      highlight
+                      :ui="{
+                        linkTrailingBadge: 'font-semibold uppercase',
+                        linkLeadingIcon: 'hidden'
+                      }"
+                    >
+                      <template #link-title="{ link }">
+                        <UTooltip :text="link.title" :delay-duration="100" class="w-full min-w-0">
+                          <span class="inline-flex items-center gap-2 w-full min-w-0 max-w-full">
+                            <UIcon
+                              v-if="link.icon && typeof link.icon === 'string'"
+                              :name="link.icon as string"
+                              class="w-4 h-4 flex-shrink-0"
+                            />
+                            <span class="truncate flex-1 min-w-0">{{ link.title }}</span>
+                            <UIcon
+                              v-if="link.target === '_blank'"
+                              name="i-ri-external-link-line"
+                              class="w-3 h-3 flex-shrink-0 text-gray-400"
+                            />
+                          </span>
+                        </UTooltip>
+                      </template>
+                    </UContentNavigation>
+                  </keep-alive>
+                </UPageAside>
+              </template>
 
-            <!-- Document content -->
-            <NuxtPage />
-          </UPage>
-        </UContainer>
+              <!-- Document content -->
+              <NuxtPage />
+            </UPage>
+          </UContainer>
 
-        <AppFooter />
+          <AppFooter />
+        </ClientOnly>
       </UMain>
     </template>
 
@@ -89,7 +103,7 @@ provide('navigation', contentNavigation)
 
     <ClientOnly>
       <LazyUContentSearch
-        :files="files"
+        :files="processedFiles"
         :navigation="contentNavigation"
       />
     </ClientOnly>

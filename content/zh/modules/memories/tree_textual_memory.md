@@ -2,122 +2,121 @@
 title: "TreeTextMemory: Structured Hierarchical Textual Memory"
 ---
 
-Let’s build your first **graph-based, tree-structured memory** in MemOS!
+让我们在MemOS中构建你的第一个**基于图的、树状结构的记忆**！
 
-**TreeTextMemory** helps you organize, link, and retrieve memories with rich context and explainability.
+**TreeTextMemory** 帮助你用丰富的上下文和可解释性来组织、链接和检索记忆
 
-[Neo4j](/modules/memories/neo4j_graph_db) is the current backend, with support for additional graph stores planned in the future.
+[Neo4j](/modules/memories/neo4j_graph_db) 当前的后端存储，计划在未来支持更多的图存储。
 
 
-## What You’ll Learn
+## 你将学习到:
 
-By the end of this guide, you will:
-- Extract structured memories from raw text or conversations.
-- Store them as **nodes** in a graph database.
-- Link memories into **hierarchies** and semantic graphs.
-- Search them using **vector similarity + graph traversal**.
+在本指南的最后，你会:
+- 从原始文本或对话中提取结构化记忆.
+- 在图数据库中存储他们作为**节点**.
+- 将记忆链接成**层次结构**和语义图.
+- 使用**向量相似度+图遍历**进行搜索.
 
-## How It Works
+## 如何工作
 
-### Memory Structure
+### 记忆结构
 
-Every node in your `TreeTextMemory` is a `TextualMemoryItem`:
-- `id`: Unique memory ID (auto-generated if omitted).
-- `memory`: the main text.
-- `metadata`: includes hierarchy info, embeddings, tags, entities, source, and status.
+每个节点在`TreeTextMemory` 是一个 `TextualMemoryItem`:
+- `id`: 唯一记忆ID（如果省略则自动生成）.
+- `memory`: 主要文本.
+- `metadata`: 包括层次结构信息、嵌入、标签、实体、源和状态.
 
-### Metadata Fields (`TreeNodeTextualMemoryMetadata`)
+### 元数据字段 (`TreeNodeTextualMemoryMetadata`)
 
-| Field           | Type                                                  | Description                                |
+| 字段           | 类型                                                  | 描述                                |
 | --------------- |-------------------------------------------------------| ------------------------------------------ |
-| `memory_type`   | `"WorkingMemory"`, `"LongTermMemory"`, `"UserMemory"` | Lifecycle category                         |
-| `status`        | `"activated"`, `"archived"`, `"deleted"`              | Node status                                |
-| `visibility`    | `"private"`, `"public"`, `"session"`                  | Access scope                               |
-| `sources`       | `list[str]`                                           | List of sources (e.g. files, URLs)        |
-| `source`        | `"conversation"`, `"retrieved"`, `"web"`, `"file"`    | Original source type                       |
-| `confidence`    | `float (0-100)`                                       | Certainty score                            |
-| `entities`      | `list[str]`                                           | Mentioned entities or concepts             |
-| `tags`          | `list[str]`                                           | Thematic tags                              |
-| `embedding`     | `list[float]`                                         | Vector embedding for similarity search     |
-| `created_at`    | `str`                                                 | Creation timestamp (ISO 8601)              |
-| `updated_at`    | `str`                                                 | Last update timestamp (ISO 8601)           |
-| `usage`         | `list[str]`                                           | Usage history                              |
-| `background`    | `str`                                                 | Additional context                         |
+| `memory_type`   | `"WorkingMemory"`, `"LongTermMemory"`, `"UserMemory"` | 生命周期分类                         |
+| `status`        | `"activated"`, `"archived"`, `"deleted"`              | 节点状态                                |
+| `visibility`    | `"private"`, `"public"`, `"session"`                  | 访问范围                               |
+| `sources`       | `list[str]`                                           | 来源列表 (例如: 文件, URLs)        |
+| `source`        | `"conversation"`, `"retrieved"`, `"web"`, `"file"`    | 原始来源类型                       |
+| `confidence`    | `float (0-100)`                                       | 确定性得分                           |
+| `entities`      | `list[str]`                                           | 提及的实体或概念             |
+| `tags`          | `list[str]`                                           | 主题标签                              |
+| `embedding`     | `list[float]`                                         | 基于向量嵌入的相似性搜索     |
+| `created_at`    | `str`                                                 | 创建时间戳(ISO 8601)              |
+| `updated_at`    | `str`                                                 | 最近更新时间戳(ISO 8601)           |
+| `usage`         | `list[str]`                                           | 使用历史                           |
+| `background`    | `str`                                                 | 附加上下文                        |
 
 
-::note
-**Best Practice**<br>
-  Use meaningful tags and background — they help organize your graph for
-multi-hop reasoning.
+::注意
+**最佳实践**<br>
+  使用有意义的标签和背景——它们有助于组织你的图进行多跳推理。
 ::
 
-### Core Steps
+### 核心步骤
 
-When you run this example, your workflow will:
+当您运行此示例时，您的工作流将:
 
-1. **Extract:** Use an LLM to pull structured memories from raw text.
-
-
-2. **Embed:** Generate vector embeddings for similarity search.
+1. **抽取:** 使用LLM从原始文本中提取结构化记忆.
 
 
-3. **Store & Link:** Add nodes to your graph database (Neo4j) with relationships.
+2. **嵌入:** 为相似性搜索生成向量嵌入.
 
 
-4. **Search:** Query by vector similarity, then expand results by graph hops.
+3. **存储和链接:** 将具有关系的节点添加到图数据库（Neo4j）中.
 
 
-::note
-**Hint**<br>Graph links help retrieve context that pure vector search might miss!
+4. **搜索:** 通过向量相似度查询，然后通过图跳数展开结果.
+
+
+::注意
+**提示**<br>图形链接有助于检索纯向量搜索可能遗漏的上下文!
 ::
 
-## API Summary (`TreeTextMemory`)
+## API总结(`TreeTextMemory`)
 
-### Initialization
+### 初始化
 
 ```python
 TreeTextMemory(config: TreeTextMemoryConfig)
 ```
 
-### Core Methods
+### 核心方法
 
-| Method                      | Description                                           |
+| 方法                      | 描述                                           |
 | --------------------------- | ----------------------------------------------------- |
-| `add(memories)`             | Add one or more memories (items or dicts)             |
-| `replace_working_memory()`  | Replace all WorkingMemory nodes                       |
-| `get_working_memory()`      | Get all WorkingMemory nodes                           |
-| `search(query, top_k)`      | Retrieve top-k memories using vector + graph search   |
-| `get(memory_id)`            | Fetch single memory by ID                             |
-| `get_by_ids(ids)`           | Fetch multiple memories by IDs                        |
-| `get_all()`                 | Export the full memory graph as dictionary            |
-| `update(memory_id, new)`    | Update a memory by ID                                 |
-| `delete(ids)`               | Delete memories by IDs                                |
-| `delete_all()`              | Delete all memories and relationships                 |
-| `dump(dir)`                 | Serialize the graph to JSON in directory              |
-| `load(dir)`                 | Load graph from saved JSON file                       |
-| `drop(keep_last_n)`         | Backup graph & drop database, keeping N backups       |
+| `add(memories)`             | 添加一个或多个记忆（项目或字典）             |
+| `replace_working_memory()`  | 更换所有的WorkingMemory节点                      |
+| `get_working_memory()`      | 得到所有的WorkingMemory节点                          |
+| `search(query, top_k)`      | 使用向量+图搜索检索top-k个记忆   |
+| `get(memory_id)`            | 通过ID获取单个记忆                             |
+| `get_by_ids(ids)`           | 通过IDs获取多个记忆                        |
+| `get_all()`                 | 将整个记忆图导出为字典            |
+| `update(memory_id, new)`    | 通过ID更新记忆                                 |
+| `delete(ids)`               | 通过IDs删除记忆                                |
+| `delete_all()`              | 删除所有的记忆和关系                 |
+| `dump(dir)`                 | 在目录中将图序列化为JSON              |
+| `load(dir)`                 | 从保存的JSON文件加载图                     |
+| `drop(keep_last_n)`         | 备份图和删除数据库，保留N个备份       |
 
-## File Storage
+## 文件存储
 
-When calling `dump(dir)`, the system writes to:
+当调用 `dump(dir)`, 系统写到:
 
 ```
 <dir>/<config.memory_filename>
 ```
 
-This file contains a JSON structure with `nodes` and `edges`. It can be reloaded using `load(dir)`.
+这个文件包含一个JSON结构，有 `nodes` and `edges`. 它可以使用 `load(dir)`重新加载.
 
 ---
 
-## Your First TreeTextMemory — Step by Step
+## 您的第一个TreeTextMemory - 一步一步进行
 
 ::steps{}
 
-### Create TreeTextMemory Config
-Define:
-- your embedder (to create vectors),
-- your graph DB backend (Neo4j),
-- and your extractor LLM (optional).
+### 创建 TreeTextMemory 配置
+定义:
+- 你的嵌入（创建向量）,
+- 你的图数据库后端(Neo4j),
+- 提取器LLM（可选）.
 
 ```python
 from memos.configs.memory import TreeTextMemoryConfig
@@ -126,7 +125,7 @@ config = TreeTextMemoryConfig.from_json_file("examples/data/config/tree_config.j
 ```
 
 
-### Initialize TreeTextMemory
+### 初始化 TreeTextMemory
 
 ```python
 from memos.memories.textual.tree import TreeTextMemory
@@ -134,9 +133,9 @@ from memos.memories.textual.tree import TreeTextMemory
 tree_memory = TreeTextMemory(config)
 ```
 
-### Extract Structured Memories
+### 抽取结构化记忆
 
-Use your extractor to parse conversations, files, or docs into `TextualMemoryItem`s.
+使用提取器将对话、文件或文档解析为多个`TextualMemoryItem`.
 
 ```python
 from memos.mem_reader.simple_struct import SimpleStructMemReader
@@ -153,18 +152,18 @@ for m_list in memories:
     tree_memory.add(m_list)
 ```
 
-### Search Memories
+### 搜索记忆
 
-Try a vector + graph search:
+尝试向量搜索+图搜索:
 ```python
 results = tree_memory.search("Talk about the garden", top_k=5)
 for i, node in enumerate(results):
     print(f"{i}: {node.memory}")
 ```
 
-### Replace Working Memory
+### 替换工作记忆
 
-Replace your current `WorkingMemory` nodes with new ones:
+用一个新的节点替换你当前的 `WorkingMemory`:
 ```python
 tree_memory.replace_working_memory(
     [{
@@ -174,8 +173,8 @@ tree_memory.replace_working_memory(
 )
 ```
 
-### Backup & Restore
-Dump your entire tree structure to disk and reload anytime:
+### 备份与恢复
+将整个树结构转储到磁盘并随时重新加载:
 ```python
 tree_memory.dump("tmp/tree_memories")
 tree_memory.load("tmp/tree_memories")
@@ -184,9 +183,9 @@ tree_memory.load("tmp/tree_memories")
 ::
 
 
-### Whole Code
+### 完整代码
 
-This combines all the steps above into one end-to-end example — copy & run!
+这将上面的所有步骤合并到一个端到端示例中——复制并运行！
 
 ```python
 from memos.configs.embedder import EmbedderConfigFactory
@@ -253,30 +252,22 @@ my_tree_textual_memory.dump("tmp/my_tree_textual_memory")
 my_tree_textual_memory.drop()
 ```
 
-## What Makes TreeTextMemory Different?
+## 是什么让TreeTextMemory不同?
 
-- **Structured Hierarchy:** Organize memories like a mind map — nodes can
-have parents, children, and cross-links.
-- **Graph-Style Linking:** Beyond pure hierarchy — build multi-hop reasoning
-  chains.
-- **Semantic Search + Graph Expansion:** Combine the best of vectors and
-  graphs.
-- **Explainability:** Trace how memories connect, merge, or evolve over time.
+- **结构层次:** 像思维导图一样组织记忆——节点可以有父母、孩子和交叉链接。
+- **图风格的链接:** 超越纯粹的层次结构-建立多跳推理链。
+- **语义搜索+图扩展:** 结合向量和图形的优点。
+- **可解释性:** 追踪记忆是如何连接、合并或随时间演变的.
 
-::note
-**Try This**<br>Add memory nodes from documents or web content. Link them
-manually or auto-merge similar nodes!
+::注意
+**尝试一下**<br>从文档或web内容中添加记忆节点。手动链接它们或自动合并类似的节点！
 ::
 
-## What’s Next?
+## 下一步是什么?
 
-- **Know more about [Neo4j](/modules/memories/neo4j_graph_db):** TreeTextMemory is powered by a graph database backend.
-  Understanding how Neo4j handles nodes, edges, and traversal will help you design more efficient memory hierarchies, multi-hop reasoning, and context linking strategies.
-- **Add [Activation Memory](/modules/memories/kv_cache_memory):**
-  Experiment with
-  runtime KV-cache for session
-  state.
-- **Explore Graph Reasoning:** Build workflows for multi-hop retrieval and answer synthesis.
-- **Go Deep:** Check the [API Reference](/docs/api/info) for advanced usage, or run more examples in `examples/`.
+- **了解更多[Neo4j](/modules/memories/neo4j_graph_db):** treeTextMemory由图数据库后端提供支持。了解Neo4j如何处理节点、边和遍历将帮助您设计更有效的记忆层次结构、多跳推理和上下文链接策略。
+- **添加 [Activation Memory](/modules/memories/kv_cache_memory):** 使用运行时KV-cache来测试会话状态。
+- **探索图推理:** 为多跳检索和答案合成构建工作流。
+- **更进一步:** 为高级应用检查 [API Reference](/docs/api/info), 或者在 `examples/`运行更多的示例.
 
-Now your agent remembers not just facts — but the connections between them!
+现在你的代理不仅能记住事实，还能记住它们之间的联系！

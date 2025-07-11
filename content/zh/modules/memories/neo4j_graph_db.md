@@ -3,24 +3,24 @@ title: Graph Memory Backend
 desc: "This module provides graph-based memory storage and querying for memory-augmented systems such as RAG, cognitive agents, or personal memory assistants. <br/>It defines a clean abstraction (`BaseGraphDB`) and includes a production-ready implementation using **Neo4j**."
 ---
 
-## Why Graph for Memory?
+## 为什么记忆需要图存储?
 
-Unlike flat vector stores, a graph database allows:
+与向量存储不同，一个图数据库允许:
 
-- Structuring memory into **chains, hierarchies, and causal links**
-- Performing **multi-hop reasoning** and **subgraph traversal**
-- Supporting memory **deduplication, conflict detection, and scheduling**
-- Dynamically evolving a memory graph over time
+- 将记忆组织成**链、层次和因果关系**
+- 执行**多跳推理**和**子图遍历**
+- 支持记忆**重复数据删除、冲突检测和调度**
+- 随时间动态地演化图记忆
 
-This forms the backbone of long-term, explainable, and compositional memory reasoning.
+这构成了长期的、可解释的和组成性记忆推理的主干。
 
-## Features
+## 特色
 
-- Unified interface across different graph databases
-- Built-in support for Neo4j
-- Support for vector-enhanced retrieval (`search_by_embedding`)
-- Modular, pluggable, and testable
-## Directory Structure
+- 跨不同图数据库的统一接口
+- 内置对Neo4j的支持
+- 支持向量增强检索(`search_by_embedding`)
+- 模块化、可插拔和可测试
+## 目录结构
 
 ```
 
@@ -31,7 +31,7 @@ src/memos/graph_dbs/
 
 ````
 
-## How to Use
+## 如何使用
 
 ```python
 from memos.graph_dbs.factory import GraphStoreFactory
@@ -61,11 +61,11 @@ graph.add_node(
 )
 ````
 
-## Pluggable Design
+## 可插拔的设计
 
-### Interface: `BaseGraphDB`
+### 接口: `BaseGraphDB`
 
-All implementations must implement:
+所有的实现必须包括:
 
 * `add_node`, `update_node`, `delete_node`
 * `add_edge`, `delete_edge`, `edge_exists`
@@ -74,23 +74,23 @@ All implementations must implement:
 * `deduplicate_nodes`, `detect_conflicts`, `merge_nodes`
 * `clear`, `export_graph`, `import_graph`
 
-See src/memos/graph_dbs/base.py for full method docs.
+参见src/memos/graph_dbs/base.py获取完整的方法文档。
 
-### Current Backend:
+### 当前的后端:
 
-| Backend | Status | File       |
+| 后端 | 状态 | 文件       |
 | ------- | ------ | ---------- |
 | Neo4j   | Stable | `neo4j.py` |
 
-## Extending
+## 扩展
 
-You can add support for any other graph engine (e.g., **TigerGraph**, **DGraph**, **Weaviate hybrid**) by:
+你可以添加任何其他图形引擎的支持（例如，**TigerGraph**, **DGraph**, **Weaviate hybrid**）:
 
-1. Subclassing `BaseGraphDB`
-2. Creating a config dataclass (e.g., `DgraphConfig`)
-3. Registering it in:
+1. 子类 `BaseGraphDB`
+2. 创建配置数据类(例如, `DgraphConfig`)
+3. 将它注册到:
 
    * `GraphDBConfigFactory.backend_to_class`
    * `GraphStoreFactory.backend_to_class`
 
-See `src/memos/graph_dbs/neo4j.py` as a reference implementation.
+参见 `src/memos/graph_dbs/neo4j.py` 作为参考实现。

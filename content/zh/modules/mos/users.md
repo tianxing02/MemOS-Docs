@@ -3,32 +3,32 @@ title: User Management
 desc: The **MOS** provides comprehensive user management capabilities to support multi-user, multi-session memory operations. This document details the user management methods available in the MOS.
 ---
 
-## User Roles
+## 用户角色
 
-MOS supports four user roles with different permission levels:
+MOS支持4种不同权限级别的用户角色:
 
-| Role | Description | Permissions |
+| 角色 | 描述 | 权限 |
 |------|-------------|-------------|
-| `ROOT` | System administrator | Full access to all cubes and users, cannot be deleted |
-| `ADMIN` | Administrative user | Can manage users and cubes, access to all cubes |
-| `USER` | Standard user | Can create and manage own cubes, access shared cubes |
-| `GUEST` | Limited user | Read-only access to shared cubes, cannot create cubes |
+| `ROOT` | 系统管理员 | 访问所有的立方体和用户,但是不同删除 |
+| `ADMIN` | 管理员用户 | 可以管理用户和立方体，访问所有立方体 |
+| `USER` | 常规用户 | 可以创建和管理自己的立方体，访问共享的立方体 |
+| `GUEST` | 受限用户 | 仅仅可以访问共享的立方体，不能创建立方体 |
 
-## User Management Methods
+## 用户管理方法
 
 ### 1. `create_user`
 
-Creates a new user in the MOS system.
+在MOS系统中创建一个新的用户.
 
-**Parameters:**
-- `user_id` (str): Unique identifier for the user
-- `role` (UserRole, optional): User role. Defaults to `UserRole.USER`
-- `user_name` (str, optional): Display name for the user. If not provided, uses `user_id`
+**参数:**
+- `user_id` (str): 用户的唯一标识符
+- `role` (UserRole, optional): 用户角色. 默认是 `UserRole.USER`
+- `user_name` (str, optional): 展示用户的用户名. 如果不提供, 使用 `user_id`
 
-**Returns:**
-- `str`: The created user ID
+**返回值:**
+- `str`: 创建的用户ID
 
-**Example:**
+**示例:**
 ```python
 import uuid
 from memos.mem_user.user_manager import UserRole
@@ -46,27 +46,27 @@ guest_id = str(uuid.uuid4())
 memory.create_user(user_id=guest_id, role=UserRole.GUEST, user_name="Guest User")
 ```
 
-**Notes:**
-- If a user with the same `user_name` already exists, the method returns the existing user's ID
-- The system automatically creates a root user during initialization
-- User IDs must be unique across the system
+**注意:**
+- 如果具有相同`user_name`的用户已经存在，则该方法返回现有用户的ID
+- 初始化过程中系统会自动创建一个root用户
+- 用户ID在整个系统中必须是唯一的
 
 ### 2. `list_users`
 
-Retrieves information about all active users in the system.
+检索系统中所有活动用户的信息
 
-**Parameters:**
-- None
+**参数:**
+- 无
 
-**Returns:**
-- `list`: List of dictionaries containing user information:
-  - `user_id` (str): Unique user identifier
-  - `user_name` (str): Display name of the user
-  - `role` (str): User role (root, admin, user, guest)
-  - `created_at` (str): ISO format timestamp of user creation
-  - `is_active` (bool): Whether the user account is active
+**返回值:**
+- `list`: 包含用户信息的字典列表:
+  - `user_id` (str): 唯一用户识别
+  - `user_name` (str): 展示用户的名称
+  - `role` (str): 用户角色 (根用户, 管理员, 普通用户, 访客)
+  - `created_at` (str): 创建用户的ISO格式时间戳
+  - `is_active` (bool): 用户帐号是否激活
 
-**Example:**
+**示例:**
 ```python
 # List all users
 users = memory.list_users()
@@ -78,7 +78,7 @@ for user in users:
     print("---")
 ```
 
-**Output Example:**
+**输出示例:**
 ```
 User: root (ID: root)
 Role: root
@@ -94,18 +94,18 @@ Created: 2024-01-15T11:00:00
 
 ### 3. `create_cube_for_user`
 
-Creates a new memory cube for a specific user as the owner.
+为特定用户作为所有者创建新的记忆立方体
 
-**Parameters:**
-- `cube_name` (str): Name of the cube
-- `owner_id` (str): User ID of the cube owner
-- `cube_path` (str, optional): Local file path or remote repository URL for the cube
-- `cube_id` (str, optional): Custom cube identifier. If not provided, a UUID is generated
+**参数:**
+- `cube_name` (str): 立方体名称
+- `owner_id` (str): 立方体所有者的用户ID
+- `cube_path` (str, optional): 立方体的本地文件路径或远程存储库URL
+- `cube_id` (str, optional): 定制立方体标识符，如果没有提供，使用生成的UUID
 
-**Returns:**
-- `str`: The created cube ID
+**返回值:**
+- `str`: 创建的立方体ID
 
-**Example:**
+**示例:**
 ```python
 import uuid
 
@@ -124,33 +124,33 @@ cube_id = memory.create_cube_for_user(
 print(f"Created cube: {cube_id}")
 ```
 
-**Notes:**
-- The owner automatically gets full access to the created cube
-- The cube owner can share the cube with other users
-- If `cube_path` is provided, it can be a local directory path or a remote repository URL
-- Custom `cube_id` must be unique across the system
+**注意:**
+- 所有者自动访问创建的所有立方体
+- 立方体所有者可以和其他用户共享
+- 如果提供了 `cube_path` , 它可以是本地目录路径或远程存储库URL
+- 自定义`cube_id`必须在整个系统中唯一
 
 ### 4. `get_user_info`
 
-Retrieves detailed information about the current user and their accessible cubes.
+检索有关当前用户及其可访问立方体的详细信息。
 
-**Parameters:**
-- None
+**参数:**
+- 无
 
-**Returns:**
-- `dict`: Dictionary containing user information and accessible cubes:
-  - `user_id` (str): Current user's ID
-  - `user_name` (str): Current user's display name
-  - `role` (str): Current user's role
-  - `created_at` (str): ISO format timestamp of user creation
-  - `accessible_cubes` (list): List of dictionaries for each accessible cube:
-    - `cube_id` (str): Cube identifier
-    - `cube_name` (str): Cube display name
-    - `cube_path` (str): Cube file path or repository URL
-    - `owner_id` (str): ID of the cube owner
-    - `is_loaded` (bool): Whether the cube is currently loaded in memory
+**返回值:**
+- `dict`: 包含用户信息和可访问立方体的字典:
+  - `user_id` (str): 当前用户ID
+  - `user_name` (str): 当前用户名称
+  - `role` (str): 当前用户角色
+  - `created_at` (str): 创建用户的ISO格式时间戳
+  - `accessible_cubes` (list): 每个可访问立方体的字典列表:
+    - `cube_id` (str): 立方体标识符
+    - `cube_name` (str): 立方体名称
+    - `cube_path` (str): 立方体文件路径或仓库URL
+    - `owner_id` (str): 立方体所有者ID
+    - `is_loaded` (bool): 立方体当前是否加载在记忆中
 
-**Example:**
+**示例:**
 ```python
 # Get current user information
 user_info = memory.get_user_info()
@@ -166,7 +166,7 @@ for cube in user_info['accessible_cubes']:
     print(f"  Path: {cube['cube_path']}")
 ```
 
-**Output Example:**
+**输出示例:**
 ```
 Current User: Alice (550e8400-e29b-41d4-a716-446655440000)
 Role: user
@@ -185,16 +185,16 @@ Accessible Cubes:
 
 ### 5. `share_cube_with_user`
 
-Shares a memory cube with another user, granting them access to the cube's contents.
+和其他用户共享一个记忆立方体，授予他们访问立方体内容的权限。
 
-**Parameters:**
-- `cube_id` (str): ID of the cube to share
-- `target_user_id` (str): ID of the user to share the cube with
+**参数:**
+- `cube_id` (str): 共享立方体ID
+- `target_user_id` (str): 共享立方体的用户ID
 
-**Returns:**
-- `bool`: `True` if sharing was successful, `False` otherwise
+**返回值:**
+- `bool`: 如果共享，返回`True`, 否则，返回`False`
 
-**Example:**
+**示例:**
 ```python
 # Share a cube with another user
 success = memory.share_cube_with_user(
@@ -208,16 +208,16 @@ else:
     print("Failed to share cube")
 ```
 
-**Notes:**
-- The current user must have access to the cube being shared
-- The target user must exist and be active
-- Sharing a cube grants the target user read and write access to the cube
-- Cube owners can always share their cubes
-- Users with access to a cube can share it with other users (if they have appropriate permissions)
+**注意:**
+- 当前用户必须有权访问正在共享的立方体
+- 目标用户必须存在且活跃
+- 共享一个立方体授予目标用户对该立方体的读写访问权限
+- 立方体所有者总是共享他的立方体
+- 具有立方体访问权限的用户可以与其他用户共享立方体（如果他们具有适当的权限）。
 
-## Complete User Management Workflow
+## 完整的用户管理工作流
 
-Here's a complete example demonstrating user management operations:
+下面是演示用户管理操作的完整示例:
 
 ```python
 import uuid
@@ -281,26 +281,26 @@ retrieved = memory.search(
 print(f"Retrieved memories: {retrieved['text_mem']}")
 ```
 
-## Error Handling
+## 错误处理
 
-The user management methods include comprehensive error handling:
+用户管理方法包括全面的错误处理:
 
-- **User Validation**: Methods validate that users exist and are active before operations
-- **Cube Access Validation**: Ensures users have appropriate access to cubes before operations
-- **Duplicate Prevention**: Handles duplicate user names and cube IDs gracefully
-- **Permission Checks**: Validates user roles and permissions for sensitive operations
+- **用户验证**: 方法在操作之前验证用户是否存在并处于活动状态
+- **立方体访问验证**: 确保用户在操作前对立方体具有适当的访问权限
+- **防止重复**: 优雅地处理重复的用户名和立方体ID
+- **权限检查**: 验证敏感操作的用户角色和权限
 
-## Database Persistence
+## 数据库持久性
 
-User management data is persisted in a SQLite database:
-- **Location**: Defaults to `~/.memos/memos_users.db`
-- **Tables**: `users`, `cubes`, `user_cube_association`
-- **Relationships**: Many-to-many relationship between users and cubes
-- **Soft Deletes**: Users and cubes are soft-deleted (marked as inactive) rather than permanently removed
+用户管理数据持久化在SQLite数据库中:
+- **位置**: 默认 `~/.memos/memos_users.db`
+- **表**: `users`, `cubes`, `user_cube_association`
+- **关系**: 用户和立方体之间是多对多关系
+- **软删除**: 用户和立方体被软删除（标记为非活动），而不是永久删除
 
-## Security Considerations
+## 安全注意事项
 
-- **Role-based Access Control**: Different user roles have different permissions
-- **Cube Ownership**: Cube owners have full control over their cubes
-- **Access Validation**: All operations validate user access before execution
-- **Root User Protection**: Root user cannot be deleted and has full system access
+- **基于角色的访问控制**: 不同的用户角色具有不同的权限
+- **立方体所有权**: 立方体所有者可以完全控制他们的立方体
+- **访问验证**: 所有操作在执行前都要验证用户访问权限
+- **根用户保护**: 根用户不可删除，具有系统完全访问权限
