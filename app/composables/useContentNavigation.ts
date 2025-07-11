@@ -84,8 +84,7 @@ const parseNavigation = (navItems: RawNav[]): ContentNavigationItem[] => {
   return navItems.map(toContentNav).filter(Boolean) as ContentNavigationItem[]
 }
 
-export const useContentNavigation = () => {
-  const { locale } = useI18n()
+export const useContentNavigation = (locale: Ref<string>) => {
   const navigation = computed(() => {
     try {
       const settings = locale.value === 'zh' ? zhSettings : enSettings

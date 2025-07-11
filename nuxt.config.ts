@@ -37,6 +37,16 @@ const config = {
           return {
             'api.json': 'API Proxy'
           }
+        },
+        locales: {
+          en: {
+            name: 'English',
+            path: '/'
+          },
+          zh: {
+            name: '中文',
+            path: '/'
+          }
         }
       }
     ]

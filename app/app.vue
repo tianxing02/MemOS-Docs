@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 const route = useRoute()
 
-const contentNavigation = useContentNavigation()
 const { locale } = useI18n()
+const contentNavigation = useContentNavigation(locale)
 
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
   server: false

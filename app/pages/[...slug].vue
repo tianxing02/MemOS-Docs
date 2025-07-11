@@ -14,7 +14,7 @@ const { data: page } = await useAsyncData(normalizedPath, () => {
 })
 
 // Watch locale changes and refresh content
-watch(locale, async (_newLocale) => {
+watch(locale, async (_newLocale: string) => {
   await refreshNuxtData(normalizedPath)
 })
 
