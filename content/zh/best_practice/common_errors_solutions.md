@@ -7,7 +7,7 @@ title: 常见错误与解决方案
 ### 缺失必要字段
 
 ```python
-# ✅ 始终包含必填字段
+# ✅ 始终需要包含必填字段
 llm_config = {
     "backend": "openai",
     "config": {
@@ -17,7 +17,7 @@ llm_config = {
 }
 ````
 
-### 后端类型不匹配
+### 后端不匹配
 
 ```python
 # ✅ KVCache 需要使用 HuggingFace 后端
@@ -42,9 +42,8 @@ docker run -p 6333:6333 qdrant/qdrant
 ollama serve
 ```
 
-## 内存问题
 
-### 加载失败
+### 记忆加载失败
 
 ```python
 try:

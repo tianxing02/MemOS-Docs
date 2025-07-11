@@ -8,10 +8,10 @@ desc: "恭喜你——你已经掌握了快速入门并构建了第一个可用�
   :::card
   ---
   icon: ri:play-line
-  title: 最简管道
+  title: 最简Pipeline 
   to: /getting_started/examples#example-1-minimal-pipeline
   ---
-  最小的可用管道 — 添加、搜索、更新并导出纯文本记忆。
+  最小的可用Pipeline  — 添加、搜索、更新并导出明文记忆。
   :::
 
   :::card
@@ -29,7 +29,7 @@ desc: "恭喜你——你已经掌握了快速入门并构建了第一个可用�
   title: 仅 KVCacheMemory
   to: /getting_started/examples#example-3-kvcachememory-only
   ---
-  使用短期 KV 缓存加速会话，实现快速上下文注入。
+  使用短期 KV cache加速会话，实现快速上下文注入。
   :::
 
   :::card
@@ -38,7 +38,7 @@ desc: "恭喜你——你已经掌握了快速入门并构建了第一个可用�
   title: 混合 TreeText + KVCache
   to: /getting_started/examples#example-4-hybrid
   ---
-  在单一 MemCube 中结合可解释的图形记忆和快速 KV 缓存。
+  在单一 MemCube 中结合可解释的基于图的明文记忆和快速 KV cache。
   :::
 
   :::card
@@ -47,22 +47,22 @@ desc: "恭喜你——你已经掌握了快速入门并构建了第一个可用�
   title: 多记忆调度
   to: /getting_started/examples#example-5-multi-memory-scheduling
   ---
-  为多用户、多会话智能体运行动态记忆编排。
+  为多用户、多会话智能体运行动态记忆调用。
   :::
 
 ::
 
-## 示例 1：最简管道
+## 示例 1：最简Pipeline 
 
 ### 何时使用：
 - 你想要最小的可用示例。
-- 你只需要将简单的纯文本记忆存储到向量数据库中。
-- 适合入门或测试你的嵌入与向量管道。
+- 你只需要将简单的明文记忆存储到向量数据库中。
+- 适合入门或测试你的嵌入与向量Pipeline 。
 
 ### 关键点：
-- 仅使用 GeneralTextMemory（无图谱，无 KV 缓存）。
+- 仅使用 GeneralTextMemory（无图谱，无 KV cache）。
 - 支持添加、搜索、更新和导出记忆。
-- 集成基础的 MOS 管道。
+- 集成基础的 MOS Pipeline 。
 
 ### 完整示例代码
 ```python
@@ -102,7 +102,7 @@ mos.load("tmp/my_mem_cube")
 
 ### 何时使用：
 
-- 你需要带有可解释关系的层级图形记忆。
+- 你需要带有可解释关系的层级基于图的明文记忆。
 - 你想存储结构化知识并追踪连接关系。
 - 适用于知识图谱、概念树和多跳推理。
 
@@ -170,9 +170,9 @@ my_tree_textual_memory.drop()
 
 ### 关键点：
 
-- 使用 KVCacheMemory，不含显式文本记忆。
+- 使用 KVCacheMemory，不含显式明文记忆。
 - 演示提取 → 添加 → 合并 → 获取 → 删除。
-- 展示如何导出/加载 KV 缓存。
+- 展示如何导出/加载 KV cache。
 
 ### 完整示例代码
 
@@ -181,7 +181,7 @@ my_tree_textual_memory.drop()
 from memos.configs.memory import MemoryConfigFactory
 from memos.memories.factory import MemoryFactory
 
-# Create config for KVCacheMemory (HuggingFace backend)
+# 为 KVCacheMemory（HuggingFace 后端）创建配置
 config = MemoryConfigFactory(
     backend="kv_cache",
     config={
@@ -197,10 +197,10 @@ config = MemoryConfigFactory(
     },
 )
 
-# Instantiate KVCacheMemory
+# 实例化 KVCacheMemory
 kv_mem = MemoryFactory.from_config(config)
 
-# Extract a KVCacheItem (DynamicCache)
+# 提取一个 KVCacheItem（DynamicCache）
 prompt = [
     {"role": "user", "content": "What is MemOS?"},
     {"role": "assistant", "content": "MemOS is a memory operating system for LLMs."},
@@ -209,25 +209,25 @@ print("===== Extract KVCacheItem =====")
 cache_item = kv_mem.extract(prompt)
 print(cache_item)
 
-# Add the cache to memory
+# 将缓存添加到内存中
 kv_mem.add([cache_item])
 print("All caches:", kv_mem.get_all())
 
-# Get by ID
+# 通过 ID 获取
 retrieved = kv_mem.get(cache_item.id)
 print("Retrieved:", retrieved)
 
-# Merge caches (simulate multi-turn)
+# 合并缓存（模拟多轮对话）
 item2 = kv_mem.extract([{"role": "user", "content": "Tell me a joke."}])
 kv_mem.add([item2])
 merged = kv_mem.get_cache([cache_item.id, item2.id])
 print("Merged cache:", merged)
 
-# Delete one
+# 删除其中一个
 kv_mem.delete([cache_item.id])
 print("After delete:", kv_mem.get_all())
 
-# Dump & load caches
+# 导出和加载缓存
 kv_mem.dump("tmp/kv_mem")
 print("Dumped to tmp/kv_mem")
 kv_mem.delete_all()
@@ -244,9 +244,9 @@ print("Loaded caches:", kv_mem.get_all())
 
 ### 工作原理：
 
-- **TreeTextMemory** 将你的长期知识存储在图数据库（Neo4j）中。
+- **TreeTextMemory** 将你的长时记忆存储在图数据库（Neo4j）中。
 - **KVCacheMemory** 将最近或稳定的上下文作为激活缓存保存。
-- 二者在一个 **MemCube** 中协同工作，由你的 `MOS` 管道统一管理。
+- 二者在一个 **MemCube** 中协同工作，由你的 `MOS` Pipeline 统一管理。
 
 
 ### 完整示例代码
@@ -402,7 +402,7 @@ while True:
 
 务必确保你的向量数据库维度与你的嵌入器匹配。
 
-如使用图形记忆功能，你需要安装 Neo4j Desktop（社区版支持即将到来）。
+如使用基于图的明文记忆功能，你需要安装 Neo4j Desktop（社区版支持即将到来）。
 ::
 
 ## 下一步

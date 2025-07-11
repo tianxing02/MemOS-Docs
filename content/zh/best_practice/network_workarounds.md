@@ -103,7 +103,7 @@ priority = "primary"
 注意 `poetry lock` 会修改 `pyproject.toml` 和 `poetry.lock` 文件。为避免提交不必要的更改：
 
 - 方案一：成功执行 `poetry install` 后，使用 `git reset --hard HEAD` 还原到 Git HEAD 节点。
--方案二：执行 `git add` 时，排除 `pyproject.toml` 和 `poetry.lock` 文件，仅添加其他文件。
+- 方案二：执行 `git add` 时，排除 `pyproject.toml` 和 `poetry.lock` 文件，仅添加其他文件。
 
 以后在添加或移除依赖包时，可以使用如下命令：
 

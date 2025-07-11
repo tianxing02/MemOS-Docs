@@ -101,7 +101,7 @@ pip install MemoryOS
 ```python
 from memos.configs.mem_os import MOSConfig
 
-# init MOSConfig
+# 初始化 MOSConfig
 mos_config = MOSConfig.from_json_file("examples/data/config/simple_memos_config.json")
 ```
 
@@ -184,7 +184,7 @@ class: "[&>div]:*:my-0"
     icon: i-lucide-circle-help
     label: MemOS 如何提升大语言模型应用的效果？
     ---
-    MemOS 通过提供结构化的、持久化的记忆功能、智能调度机制、长期知识保留能力，以及用于快速推理的 KV 缓存，增强了大语言模型的应用效果。它支持精细化的访问控制与用户隔离，保障在多用户环境中的记忆安全。其模块化架构使得新记忆类型、LLM 及存储后端可以无缝集成，适用于各种智能应用场景。
+    MemOS 通过提供结构化的、持久化的记忆功能、智能调度机制、长期知识保留能力，以及用于快速推理的 KV cache，增强了大语言模型的应用效果。它支持精细化的访问控制与用户隔离，保障在多用户环境中的记忆安全。其模块化架构使得新记忆类型、LLM 及存储后端可以无缝集成，适用于各种智能应用场景。
     ::::
   
     ::::accordion-item{icon="i-lucide-circle-help" label="MemOS 的定价是多少？"}
@@ -202,7 +202,7 @@ class: "[&>div]:*:my-0"
 :::
 
 :::accordion-item{label="MemOS 如何提升大语言模型应用的效果？" icon="i-lucide-circle-help"}
-MemOS 通过提供结构化、持久化的记忆，配合智能调度、长期知识保留机制以及用于快速推理的 KV 缓存，有效增强了大语言模型的应用能力。它支持细粒度的访问控制与用户隔离机制，确保在多用户环境中的记忆安全。其模块化架构支持无缝集成新的记忆类型、LLM 和存储后端，能够适配多种智能应用场景。
+MemOS 通过提供结构化、持久化的记忆，配合智能调度、长期知识保留机制以及用于快速推理的 KV cache，有效增强了大语言模型的应用能力。它支持细粒度的访问控制与用户隔离机制，确保在多用户环境中的记忆安全。其模块化架构支持无缝集成新的记忆类型、LLM 和存储后端，能够适配多种智能应用场景。
 :::
 
 :::accordion-item{label="MemOS 的定价是多少？" icon="i-lucide-circle-help"}
@@ -355,10 +355,10 @@ target: _blank
     ::::card
     ---
     icon: ri:play-line
-    title: 最简流水线
+    title: 最简Pipeline 
     to: /getting_started/examples#example-1-minimal-pipeline
     ---
-    最小可用流水线 — 添加、搜索、更新和导出纯文本记忆。
+    最小可用Pipeline  — 添加、搜索、更新和导出明文记忆。
     ::::
     
     ::::card
@@ -376,7 +376,7 @@ target: _blank
     title: 仅 KVCacheMemory
     to: /getting_started/examples#example-3-kvcachememory-only
     ---
-    通过短期 KV 缓存加速会话，实现快速上下文注入。
+    通过短期 KV cache加速会话，实现快速上下文注入。
     ::::
     
     ::::card
@@ -385,7 +385,7 @@ target: _blank
     title: 混合 TreeText + KVCache
     to: /getting_started/examples#example-4-hybrid
     ---
-    在单一 MemCube 中结合可解释的图记忆与快速 KV 缓存。
+    在单一 MemCube 中结合可解释的图记忆与快速 KV cache。
     ::::
   :::
 
@@ -396,10 +396,10 @@ target: _blank
 :::card
 ---
 icon: ri:play-line
-title: 最简管道示例
+title: 最简Pipeline 示例
 to: /getting_started/examples#example-1-minimal-pipeline
 ---
-最小可运行的管道示例——添加、搜索、更新及导出纯文本记忆。
+最小可运行的Pipeline 示例——添加、搜索、更新及导出明文记忆。
 :::
 
 :::card
@@ -417,7 +417,7 @@ icon: ri:database-2-line
 title: 仅使用 KVCacheMemory
 to: /getting_started/examples#example-3-kvcachememory-only
 ---
-通过短期键值缓存加速会话，实现快速上下文注入。
+通过短期KV cache加速会话，实现快速上下文注入。
 :::
 
 :::card
@@ -426,7 +426,7 @@ icon: hugeicons:share-07
 title: 混合使用 TreeText 和 KVCache
 to: /getting_started/examples#example-4-hybrid
 ---
-在单一 MemCube 中结合可解释的图记忆与高速键值缓存。
+在单一 MemCube 中结合可解释的图记忆与高速KV cache。
 :::
 
 ::

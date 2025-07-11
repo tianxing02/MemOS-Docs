@@ -4,9 +4,9 @@ title: 记忆结构设计最佳实践
 
 ## 记忆类型选择
 
-### 树状文本记忆
+### 树形明文记忆
 
-**最适用于**：知识管理、研究助理、层级结构数据  
+**最适用于**：知识管理、研究助手、层级结构数据  
 ```python
 tree_config = {
     "backend": "tree_text",
@@ -28,9 +28,9 @@ tree_config = {
 }
 ````
 
-### 通用文本记忆
+### 通用明文记忆（带向量索引）
 
-**最适用于**：对话式 AI、个人助理、问答系统
+**适用于**：对话式 AI、私人助理、问答系统
 
 ```python
 general_config = {
@@ -58,7 +58,7 @@ general_config = {
 }
 ```
 
-### 纯文本记忆
+### 纯明文记忆（仅文本）
 
 **最适用于**：简单应用、原型开发
 
@@ -83,9 +83,9 @@ naive_config = {
 ```python
 scheduler_config = {
     "memory_capacities": {
-        "working_memory_capacity": 20,        # 活跃对话记忆
-        "user_memory_capacity": 500,          # 用户知识记忆
-        "long_term_memory_capacity": 2000     # 领域知识记忆
+        "working_memory_capacity": 20,        # 工作记忆
+        "user_memory_capacity": 500,          # 用户记忆
+        "long_term_memory_capacity": 2000     # 长时记忆
     }
 }
 ```

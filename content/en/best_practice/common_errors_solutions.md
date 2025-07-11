@@ -42,9 +42,8 @@ docker run -p 6333:6333 qdrant/qdrant
 ollama serve
 ```
 
-## Memory Issues
 
-### Loading Failures
+### Memory Loading Failures
 
 ```python
 try:

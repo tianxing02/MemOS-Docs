@@ -37,10 +37,10 @@ generation_config = {
 ```python
 scheduler_config = {
     "memory_capacities": {
-        "working_memory_capacity": 20,         # 活跃上下文
-        "user_memory_capacity": 500,           # 用户存储
-        "long_term_memory_capacity": 2000,     # 领域知识
-        "transformed_act_memory_capacity": 50  # KV 缓存条目
+        "working_memory_capacity": 20,         # 工作记忆
+        "user_memory_capacity": 500,           # 用户记忆
+        "long_term_memory_capacity": 2000,     # 长时记忆
+        "transformed_act_memory_capacity": 50  # KV cache（激活记忆）
     }
 }
 ```
