@@ -1,6 +1,6 @@
 ---
-title: "KVCacheMemory: Key-Value Cache for Activation Memory"
-desc: "`KVCacheMemory` is a specialized memory module in MemOS for storing and managing key-value (KV) caches, primarily used to accelerate large language model (LLM) inference and support efficient context reuse. It is especially useful for activation memory in conversational and generative AI systems."
+标题: "KVCacheMemory: 激活记忆的KV缓存记忆"
+描述: "`KVCacheMemory` 是MemOS中用于存储和管理KV缓存的专用记忆模块，主要用于加速大语言模型（LLM）推理并支持有效的上下文重用. 它对于会话式和生成式人工智能系统中的激活记忆特别有用."
 ---
 
 ## KV-cache记忆使用案例

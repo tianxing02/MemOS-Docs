@@ -1,5 +1,5 @@
 ---
-title: Parametric Memory (Coming Soon)
+标题: 参数化记忆 (正在开发中)
 ---
 
 ::注释

@@ -1,6 +1,6 @@
 ---
-title: MOS API for MemOS
-desc: The **MOS** (Memory Operating System) is a core component of MemOS that acts as an orchestration layer, managing multiple memory modules (MemCubes) and providing a unified interface for memory-augmented applications.
+标题: MemOS的MOS API
+描述:**MOS**（记忆操作系统）是MemOS的核心组件，它作为一个编排层，管理多个记忆模块（MemCubes），并为记忆增强应用程序提供统一的接口.
 ---
 
 ## API概括 (`MOS`)

@@ -1,6 +1,6 @@
 ---
-title: User Management
-desc: The **MOS** provides comprehensive user management capabilities to support multi-user, multi-session memory operations. This document details the user management methods available in the MOS.
+标题: 用户管理
+描述:**MOS**提供全面的用户管理功能，以支持多用户、多会话记忆操作。本文档详细介绍了MOS的用户管理方法.
 ---
 
 ## 用户角色
