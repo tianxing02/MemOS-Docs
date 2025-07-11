@@ -23,10 +23,10 @@ nav:
     - "(ri:calendar-line) 记忆调度": modules/mem_scheduler.md
 
   - "(ri:brain-line) 记忆系统":
-    - "(ri:database-2-line) 键值缓存记忆": modules/memories/kv_cache_memory.md
+    - "(ri:database-2-line) KV cache 记忆": modules/memories/kv_cache_memory.md
     - "(ri:book-2-line) 明文记忆":
-      - "(ri:file-text-line) 通用文本记忆": modules/memories/general_textual_memory.md
-      - "(ri:tree-line) 树状文本记忆": modules/memories/tree_textual_memory.md
+      - "(ri:file-text-line) 通用明文记忆": modules/memories/general_textual_memory.md
+      - "(ri:tree-line) 树形明文记忆": modules/memories/tree_textual_memory.md
       - "(ri:database-line) Neo4j 图数据库": modules/memories/neo4j_graph_db.md
     - "(ri:cpu-line) 参数记忆": modules/memories/parametric_memory.md
 
