@@ -1,6 +1,6 @@
 ---
 title: 你的第一个记忆
-desc: 让我们在 MemOS 中构建你的第一个纯文本记忆！**GeneralTextMemory** 是提取、嵌入和搜索简单文本记忆的最简便方式。
+desc: 让我们在 MemOS 中构建你的第一个明文记忆！**GeneralTextMemory** 是提取、嵌入和搜索简单明文记忆的最简便方式。
 ---
 
 ## 你将学到什么
@@ -101,7 +101,7 @@ desc: 让我们在 MemOS 中构建你的第一个纯文本记忆！**GeneralText
 首先，创建你的最简 GeneralTextMemory 配置。
 它包含三个关键部分：
 
-* extractor\_llm：使用 LLM 从对话中提取纯文本记忆。
+* extractor\_llm：使用 LLM 从对话中提取明文记忆。
 * embedder：将每条记忆转换成向量。
 * vector\_db：存储向量并支持相似度搜索。
 
@@ -142,7 +142,7 @@ m = MemoryFactory.from_config(config)
 ```
 
 #### 从消息中提取记忆
-给你的 LLM 一个简单的对话，看看它如何提取结构化的纯文本记忆。
+给你的 LLM 一个简单的对话，看看它如何提取结构化的明文记忆。
 
 ```python
 memories = m.extract(
@@ -166,7 +166,7 @@ TextualMemoryItem(
 
 #### 将记忆添加到你的向量数据库
 
-将提取的记忆保存到向量数据库中，并演示如何手动添加一条自定义纯文本记忆（带自定义 ID）。
+将提取的记忆保存到向量数据库中，并演示如何手动添加一条自定义明文记忆（带自定义 ID）。
 
 ```python
 m.add(memories)
@@ -267,7 +267,7 @@ print("Memory dumped to tmp/mem")
 - **深入学习：** 查看 [API Reference](/docs/api/info) 和 [Examples](/getting_started/examples) 了解高级工作流程。
 
 ::note
-**试试图形文本记忆**
+**试试基于图的明文记忆**
 尝试切换到 <code>TreeTextMemory</code>，为你的记忆增加基于图的层级结构。
 非常适合需要可解释性和长期结构化知识的场景。
 ::

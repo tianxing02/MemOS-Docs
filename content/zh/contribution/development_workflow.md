@@ -19,15 +19,15 @@ git push origin dev     # 将合并后的代码推送到你自己的 fork
 
 #### 创建功能分支
 
-为你的新功能或修复创建一个新的分支：
+为你的新功能或修订创建一个新的分支：
 
 ```bash
 git checkout -b feat/descriptive-name
 ```
 
-#### 编写你的代码
+#### 添加你的功能或修订
 
-在相应文件中实现你的功能、修复或改进。
+在相应文件中实现你的功能、修订或改进。
 
 * 例如，你可以在 `src/memos/hello_world.py` 中添加一个函数，并在 `tests/test_hello_world.py` 中编写相应的测试用例。
 

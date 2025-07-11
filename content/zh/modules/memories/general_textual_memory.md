@@ -1,6 +1,6 @@
 ---
-title: "GeneralTextMemory: General-Purpose Textual Memory"
-desc: "`GeneralTextMemory` is a flexible, vector-based textual memory module in MemOS, designed for storing, searching, and managing unstructured knowledge. It is suitable for conversational agents, personal assistants, and any system requiring semantic memory retrieval."
+标题: "GeneralTextMemory: 通用文本的记忆"
+描述: "`GeneralTextMemory` 是MemOS中一个灵活的、基于向量的文本记忆模块，用于存储、搜索和管理非结构化知识.它适用于会话代理、个人助理和任何需要语义记忆检索的系统."
 ---
 
 ## 记忆结构

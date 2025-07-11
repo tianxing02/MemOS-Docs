@@ -1,6 +1,6 @@
 ---
-title: Graph Memory Backend
-desc: "This module provides graph-based memory storage and querying for memory-augmented systems such as RAG, cognitive agents, or personal memory assistants. <br/>It defines a clean abstraction (`BaseGraphDB`) and includes a production-ready implementation using **Neo4j**."
+标题: Graph Memory Backend图记忆后端
+描述: "该模块为记忆增强系统（如RAG、认知代理或个人内存助手）提供基于图结构的记忆存储和查询. <br/>它定义了一个干净的抽象类(`BaseGraphDB`)，并使用**Neo4j**实现了一个可用于生产环境的实现。"
 ---
 
 ## 为什么记忆需要图存储?
