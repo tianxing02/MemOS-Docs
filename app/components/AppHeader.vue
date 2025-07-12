@@ -23,9 +23,9 @@ const localizedMenus = computed<MenuItem[]>(() => {
 
 function handleLocaleSwitch() {
   if (locale.value === 'en') {
-    window.location.href = config.public.cnDomain
+    window.location.href = `${config.public.cnDomain}/${window.location.pathname}`
   } else {
-    window.location.href = config.public.enDomain
+    window.location.href = `${config.public.enDomain}/${window.location.pathname}`
   }
 }
 </script>
