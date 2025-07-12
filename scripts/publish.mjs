@@ -7,9 +7,22 @@ import { dirname, join } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-// Get environment parameters from npm config or use defaults
-const env = process.env.npm_config_env || 'prod'
-const locale = process.env.npm_config_locale || 'en'
+// Parse command line arguments
+const parseArgs = (args) => {
+  const result = {}
+  args.forEach(arg => {
+    if (arg.startsWith('--')) {
+      const [key, value] = arg.slice(2).split('=')
+      result[key] = value
+    }
+  })
+  return result
+}
+
+// Get environment parameters from npm config or command line arguments
+const args = parseArgs(process.argv.slice(2))
+const env = args.env || process.env.npm_config_env || 'prod'
+const locale = args.locale || process.env.npm_config_locale || 'en'
 
 console.log(`🚀 Starting build process... Environment: ${env}, Locale: ${locale}`)
 
