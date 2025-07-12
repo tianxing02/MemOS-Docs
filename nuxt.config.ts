@@ -1,11 +1,11 @@
 import yaml from '@rollup/plugin-yaml'
 import type { NuxtConfig } from '@nuxt/schema'
+import pkg from '../package.json'
 
 // Get locale from command line arguments or environment variable
 const env = process.env.NUXT_ENV_CONFIG || 'dev'
 const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
 
-console.log('config:', env, locale)
 const armsScript = process.env.NODE_ENV === 'production'
   ? [{ innerHTML: `var _czc = _czc || [];
         (function () {
@@ -16,6 +16,16 @@ const armsScript = process.env.NODE_ENV === 'production'
         })();`,
     type: 'text/javascript' }]
   : []
+
+const envConfig = await import(`./envConfig/config.${env}.ts`).then(m => m.default).catch(() => {
+  return {
+    env: 'prod',
+    cnDomain: 'https://memos-docs-cn.openmem.net',
+    enDomain: 'https://memos-docs.openmem.net'
+  }
+})
+
+console.log('envConfig:', envConfig, process.env.NUXT_UI_PRO_LICENSE)
 
 const config: NuxtConfig = {
   app: {
@@ -60,8 +70,8 @@ const config: NuxtConfig = {
 
   runtimeConfig: {
     public: {
-      env: process.env.NODE_ENV,
-      version: process.env.VERSION
+      ...envConfig,
+      version: pkg.version
     }
   },
 

@@ -7,7 +7,9 @@ interface MenuItem {
   target?: string
 }
 
-const { t, setLocale, locale } = useI18n()
+const config = useRuntimeConfig()
+
+const { t, locale } = useI18n()
 const { header } = useAppConfig()
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
@@ -20,8 +22,11 @@ const localizedMenus = computed<MenuItem[]>(() => {
 })
 
 function handleLocaleSwitch() {
-  const newLocale = locale.value === 'en' ? 'zh' : 'en'
-  setLocale(newLocale)
+  if (locale.value === 'en') {
+    window.location.href = config.public.cnDomain
+  } else {
+    window.location.href = config.public.enDomain
+  }
 }
 </script>
 
