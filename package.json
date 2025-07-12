@@ -6,7 +6,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "node scripts/fetch-api.mjs && nuxt generate",
+    "sync-api": "node scripts/fetch-api.mjs",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"

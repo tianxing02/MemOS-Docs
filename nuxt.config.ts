@@ -1,5 +1,12 @@
 import yaml from '@rollup/plugin-yaml'
+import type { NuxtConfig } from '@nuxt/schema'
 
+// Get locale from command line arguments or environment variable
+const args = process.argv.slice(2)
+const localeArg = args.find(arg => arg.startsWith('--locale='))
+const locale = localeArg ? localeArg.split('=')[1] : (process.env.NUXT_PUBLIC_LOCALE || 'en')
+
+console.log('locale:', locale)
 const armsScript = process.env.NODE_ENV === 'production'
   ? [{ innerHTML: `var _czc = _czc || [];
         (function () {
@@ -11,7 +18,7 @@ const armsScript = process.env.NODE_ENV === 'production'
     type: 'text/javascript' }]
   : []
 
-const config = {
+const config: NuxtConfig = {
   app: {
     head: {
       script: [
@@ -65,10 +72,10 @@ const config = {
         name: 'English'
       }
     ],
-    defaultLocale: 'en',
-    strategy: 'no_prefix',
+    defaultLocale: locale as 'en' | 'zh',
+    strategy: 'no_prefix' as const,
     vueI18n: './i18n.config.ts',
-    detectBrowserLanguage: false,
+    detectBrowserLanguage: false
   },
 
   devtools: {
@@ -129,7 +136,7 @@ const config = {
   },
 
   uiPro: {
-    licenseKey: process.env.NUXT_UI_PRO_LICENSE
+    license: process.env.NUXT_UI_PRO_LICENSE
   }
 }
 
