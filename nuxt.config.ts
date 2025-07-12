@@ -2,11 +2,10 @@ import yaml from '@rollup/plugin-yaml'
 import type { NuxtConfig } from '@nuxt/schema'
 
 // Get locale from command line arguments or environment variable
-const args = process.argv.slice(2)
-const localeArg = args.find(arg => arg.startsWith('--locale='))
-const locale = localeArg ? localeArg.split('=')[1] : (process.env.NUXT_PUBLIC_LOCALE || 'en')
+const env = process.env.NUXT_ENV_CONFIG || 'dev'
+const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
 
-console.log('locale:', locale)
+console.log('config:', env, locale)
 const armsScript = process.env.NODE_ENV === 'production'
   ? [{ innerHTML: `var _czc = _czc || [];
         (function () {
@@ -58,6 +57,13 @@ const config: NuxtConfig = {
       }
     ]
   ],
+
+  runtimeConfig: {
+    public: {
+      env: process.env.NODE_ENV,
+      version: process.env.VERSION
+    }
+  },
 
   i18n: {
     locales: [

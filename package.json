@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "sync-api": "node scripts/fetch-api.mjs",
-    "generate": "nuxt generate",
+    "generate": "sh scripts/generate.sh",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
