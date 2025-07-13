@@ -2,12 +2,6 @@
 title: "MemScheduler: 记忆组织调度器"
 desc: "`MemScheduler` 是一个与 MemOS 系统并行运行的并发记忆管理系统，它协调 AI 系统中工作记忆、长时记忆和激活记忆之间的记忆操作。它通过事件驱动调度处理记忆检索、更新和压缩。<br/> 该系统特别适合需要动态记忆管理的对话代理和推理系统。"
 ---
-# 记忆调度器概述
-
-![Memory Management](https://img.shields.io/badge/Component-Memory_Management-blue)
-![Event-Driven](https://img.shields.io/badge/Architecture-Event_Driven-green)
-
-`MemScheduler` 是一个与 MemOS 并行工作的并发记忆管理系统，协调 AI 系统中工作记忆、长时记忆和激活记忆之间的记忆操作。专为对话代理和推理系统设计，它通过事件驱动调度提供动态记忆管理。
 
 ## 主要特性
 
@@ -86,40 +80,3 @@ ScheduleLogForWebItem:
 2. **手动初始化**: 显式创建和配置调度器组件
 
 该脚本模拟用户和助手之间关于宠物的对话，演示记忆调度器如何管理对话历史并检索相关信息。
-
-### 核心代码结构
-
-```python
-def init_task():
-    # 初始化示例对话和问题
-    conversations = [
-        {"role": "user", "content": "I just adopted a golden retriever puppy yesterday."},
-        {"role": "assistant", "content": "Congratulations! What did you name your new puppy?"},
-        # 更多对话...
-    ]
-
-    questions = [
-        {"question": "What's my dog's name again?", "category": "Pet"},
-        # 更多问题...
-    ]
-    return conversations, questions
-
-def run_with_automatic_scheduler_init():
-    # 自动初始化：从 YAML 文件加载配置
-    # 创建用户和 mem cube
-    # 将对话添加到记忆
-    # 处理用户查询并显示答案
-    # 显示网络日志
-
-def run_with_manual_scheduler_init():
-    # 手动初始化：显式创建和配置调度器组件
-    # 初始化 MemOS、用户和 mem cube
-    # 手动向调度器提交消息
-    # 处理用户查询并显示答案
-    # 显示网络日志
-
-if __name__ == '__main__':
-    # 按顺序运行两种初始化方法
-    run_with_automatic_scheduler_init()
-    run_with_manual_scheduler_init()
-```
