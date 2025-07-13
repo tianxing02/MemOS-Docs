@@ -1,38 +1,16 @@
-import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import { defineCollection, defineContentConfig } from '@nuxt/content'
 
-const schema = z.object({
-  title: z.string(),
-  desc: z.string().optional(),
-  category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay']).optional(),
-  navigation: z.object({
-    title: z.string().optional()
-  }),
-  banner: z.string().optional(),
-  avatar: z.object({
-    src: z.string(),
-    alt: z.string()
-  }).optional(),
-  links: z.array(z.object({
-    label: z.string(),
-    icon: z.string(),
-    avatar: z.object({
-      src: z.string(),
-      alt: z.string()
-    }).optional(),
-    to: z.string(),
-    target: z.string().optional()
-  })).optional()
-})
+// Get locale from environment variable
+const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
+const isDev = process.env.NODE_ENV === 'development'
 
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
-      type: 'page',
       source: {
-        include: '**',
-        exclude: ['index.md']
+        include: isDev ? '**' : `${locale}/**/*`
       },
-      schema
+      type: 'page'
     })
   }
 })
