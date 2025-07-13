@@ -3,7 +3,7 @@ import type { NuxtConfig } from '@nuxt/schema'
 import pkg from './package.json'
 
 // Get locale from command line arguments or environment variable
-const env = process.env.NUXT_ENV_CONFIG || 'prod'
+const env = process.env.NUXT_ENV_CONFIG || 'dev'
 const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
 
 const armsScript = process.env.NODE_ENV === 'production'
@@ -24,6 +24,8 @@ const envConfig = await import(`./envConfig/config.${env}.ts`).then(m => m.defau
     enDomain: 'https://memos-docs.openmem.net'
   }
 })
+
+console.log('envConfig:', envConfig)
 
 const config: NuxtConfig = {
   app: {
