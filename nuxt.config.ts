@@ -115,7 +115,7 @@ const config: NuxtConfig = {
     build: {
       markdown: {
         highlight: {
-          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'python', 'py']
         }
       }
     }

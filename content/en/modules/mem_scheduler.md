@@ -2,13 +2,6 @@
 title: "MemScheduler: The Scheduler for Memory Organization"
 desc: "`MemScheduler` is a concurrent memory management system parallel running with the MemOS system, which coordinates memory operations between working memory, long-term memory, and activation memory in AI systems. It handles memory retrieval, updates, and compaction through event-driven scheduling. <br/> This system is particularly suited for conversational agents and reasoning systems requiring dynamic memory management."
 ---
-# Memory Scheduler Overview
-
-![Memory Management](https://img.shields.io/badge/Component-Memory_Management-blue)
-![Event-Driven](https://img.shields.io/badge/Architecture-Event_Driven-green)
-
-`MemScheduler` is a concurrent memory management system that works in parallel with MemOS, coordinating memory operations across working memory, long-term memory, and activation memory in AI systems. Designed for conversational agents and reasoning systems, it provides dynamic memory management through event-driven scheduling.
-
 ## Key Features
 
 - 🚀 **Concurrent operation** with MemOS system

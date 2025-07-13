@@ -22,8 +22,6 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-console.log('page:', page.value)
-
 const surround = await useSurroundWithDesc(normalizedPath, navigation || [])
 
 const description = computed(() => {
