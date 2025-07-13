@@ -56,11 +56,11 @@ Build the documentation site:
 
 ```bash
 # Build with default settings (en locale, dev environment)
-pnpm generate
+pnpm run publish
 
 # Build for specific locale and environment
-pnpm generate --locale=en --env=prod  # English, production
-pnpm generate --locale=zh --env=prod  # Chinese, production
+pnpm run publish --locale=en --env=prod  # English, production
+pnpm run publish --locale=zh --env=prod  # Chinese, production
 ```
 
 ## Environment Configuration
