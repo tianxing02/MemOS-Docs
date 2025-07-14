@@ -43,3 +43,5 @@ nav:
     - "(ri:git-commit-line) 提交规范": contribution/commit_guidelines.md
     - "(ri:article-line) 文档编写": contribution/writing_docs.md
     - "(ri:flask-line) 测试编写": contribution/writing_tests.md
+
+  - "(ri:file-code-line) API 参考文档": docs/api/info
