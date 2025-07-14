@@ -45,7 +45,7 @@ const config: NuxtConfig = {
         folder: './content',
         name: 'Api Docs',
         list: true,
-        prefix: '/docs/api',
+        prefix: '/api',
         files: function () {
           return {
             'api.json': 'API Proxy'
