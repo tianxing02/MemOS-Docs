@@ -43,5 +43,3 @@ nav:
     - "(ri:git-commit-line) Commit Guidelines": contribution/commit_guidelines.md
     - "(ri:article-line) Writing Docs": contribution/writing_docs.md
     - "(ri:flask-line) Writing Tests": contribution/writing_tests.md
-
-  - "(ri:file-code-line) API Reference": docs/api/info
