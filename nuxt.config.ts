@@ -38,7 +38,6 @@ const config: NuxtConfig = {
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui-pro',
-    '@nuxtjs/i18n',
     '@nuxt/content',
     [
       'nuxt-openapi-docs-module',
@@ -51,19 +50,10 @@ const config: NuxtConfig = {
           return {
             'api.json': 'API Proxy'
           }
-        },
-        locales: {
-          en: {
-            name: 'English',
-            path: '/'
-          },
-          zh: {
-            name: '中文',
-            path: '/'
-          }
         }
       }
-    ]
+    ],
+    '@nuxtjs/i18n'
   ],
 
   runtimeConfig: {
@@ -87,7 +77,8 @@ const config: NuxtConfig = {
       }
     ],
     defaultLocale: locale as 'en' | 'zh',
-    strategy: 'no_prefix' as const,
+    // locale prefix added for every locale except default
+    strategy: 'prefix_except_default' as const,
     vueI18n: './i18n.config.ts',
     detectBrowserLanguage: false
   },
