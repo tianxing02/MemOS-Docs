@@ -25,8 +25,6 @@ const envConfig = await import(`./envConfig/config.${env}.ts`).then(m => m.defau
   }
 })
 
-console.log('envConfig:', envConfig)
-
 const config: NuxtConfig = {
   app: {
     head: {
