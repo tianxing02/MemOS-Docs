@@ -77,11 +77,10 @@ const config: NuxtConfig = {
       }
     ],
     defaultLocale: locale as 'en' | 'zh',
+    // locale prefix added for every locale except default
     strategy: 'prefix_except_default' as const,
     vueI18n: './i18n.config.ts',
-    detectBrowserLanguage: false,
-    skipSettingLocaleOnNavigate: true,
-    trailingSlash: true
+    detectBrowserLanguage: false
   },
 
   devtools: {
