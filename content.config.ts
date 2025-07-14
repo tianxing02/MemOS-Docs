@@ -1,4 +1,8 @@
-import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+
+// Get locale from environment variable
+const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
+const isDev = process.env.NODE_ENV === 'development'
 
 const schema = z.object({
   title: z.string(),
@@ -27,11 +31,10 @@ const schema = z.object({
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
-      type: 'page',
       source: {
-        include: '**',
-        exclude: ['index.md']
+        include: isDev ? '**' : `${locale}/**/*`
       },
+      type: 'page',
       schema
     })
   }

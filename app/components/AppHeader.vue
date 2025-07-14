@@ -1,9 +1,41 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
+interface MenuItem {
+  to: string
+  label: string
+  target?: string
+}
+
+const config = useRuntimeConfig()
+
+const { t, locale, setLocale } = useI18n()
+const { header } = useAppConfig()
+
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
-const { header } = useAppConfig()
+const localizedMenus = computed<MenuItem[]>(() => {
+  return (header.memus as MenuItem[]).map(menu => ({
+    ...menu,
+    label: t(`${menu.label}`)
+  }))
+})
+
+function handleLocaleSwitch() {
+  // For development, switch locale directly
+  if (config.public.env === 'dev') {
+    setLocale(locale.value === 'en' ? 'zh' : 'en')
+
+    return
+  }
+
+  // For production, redirect to the corresponding domain
+  if (locale.value === 'en') {
+    window.location.href = `${config.public.cnDomain}/${window.location.pathname}`
+  } else {
+    window.location.href = `${config.public.enDomain}/${window.location.pathname}`
+  }
+}
 </script>
 
 <template>
@@ -18,7 +50,7 @@ const { header } = useAppConfig()
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="header.memu" class="justify-center">
+    <UNavigationMenu :items="localizedMenus" class="justify-center">
       <template #item="{ item }">
         <div>{{ item.label }}</div>
       </template>
@@ -27,12 +59,20 @@ const { header } = useAppConfig()
     <template #right>
       <UContentSearchButton
         v-if="header?.search"
+        class="cursor-pointer"
       />
 
+      <UButton
+        color="neutral"
+        variant="ghost"
+        class="cursor-pointer"
+        @click="handleLocaleSwitch"
+      >
+        <LocaleSwitch class="w-[20px] h-[20px]" />
+      </UButton>
+
       <UModal>
-        <UTooltip text="Contact Us" class="hidden lg:flex" :delay-duration="0">
-          <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" />
-        </UTooltip>
+        <UButton color="neutral" variant="ghost" icon="ri:wechat-fill" class="cursor-pointer"/>
         <template #content>
           <img
             src="https://statics.memtensor.com.cn/memos/contact-ui.png"

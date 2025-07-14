@@ -1,4 +1,10 @@
 import yaml from '@rollup/plugin-yaml'
+import type { NuxtConfig } from '@nuxt/schema'
+import pkg from './package.json'
+
+// Get locale from command line arguments or environment variable
+const env = process.env.NUXT_ENV_CONFIG || 'dev'
+const locale = process.env.NUXT_PUBLIC_LOCALE || 'en'
 
 const armsScript = process.env.NODE_ENV === 'production'
   ? [{ innerHTML: `var _czc = _czc || [];
@@ -11,7 +17,15 @@ const armsScript = process.env.NODE_ENV === 'production'
     type: 'text/javascript' }]
   : []
 
-const config = {
+const envConfig = await import(`./envConfig/config.${env}.ts`).then(m => m.default).catch(() => {
+  return {
+    env: 'prod',
+    cnDomain: 'https://memos-docs-cn.openmem.net',
+    enDomain: 'https://memos-docs.openmem.net'
+  }
+})
+
+const config: NuxtConfig = {
   app: {
     head: {
       script: [
@@ -24,6 +38,7 @@ const config = {
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui-pro',
+    '@nuxtjs/i18n',
     '@nuxt/content',
     [
       'nuxt-openapi-docs-module',
@@ -36,10 +51,46 @@ const config = {
           return {
             'api.json': 'API Proxy'
           }
+        },
+        locales: {
+          en: {
+            name: 'English',
+            path: '/'
+          },
+          zh: {
+            name: '中文',
+            path: '/'
+          }
         }
       }
     ]
   ],
+
+  runtimeConfig: {
+    public: {
+      ...envConfig,
+      version: pkg.version
+    }
+  },
+
+  i18n: {
+    locales: [
+      {
+        code: 'zh',
+        iso: 'zh-CN',
+        name: '中文'
+      },
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English'
+      }
+    ],
+    defaultLocale: locale as 'en' | 'zh',
+    strategy: 'no_prefix' as const,
+    vueI18n: './i18n.config.ts',
+    detectBrowserLanguage: false
+  },
 
   devtools: {
     enabled: true
@@ -64,7 +115,7 @@ const config = {
     build: {
       markdown: {
         highlight: {
-          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc']
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'python', 'py']
         }
       }
     }
@@ -99,7 +150,7 @@ const config = {
   },
 
   uiPro: {
-    licenseKey: process.env.NUXT_UI_PRO_LICENSE
+    license: process.env.NUXT_UI_PRO_LICENSE
   }
 }
 

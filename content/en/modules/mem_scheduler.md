@@ -2,13 +2,6 @@
 title: "MemScheduler: The Scheduler for Memory Organization"
 desc: "`MemScheduler` is a concurrent memory management system parallel running with the MemOS system, which coordinates memory operations between working memory, long-term memory, and activation memory in AI systems. It handles memory retrieval, updates, and compaction through event-driven scheduling. <br/> This system is particularly suited for conversational agents and reasoning systems requiring dynamic memory management."
 ---
-# Memory Scheduler Overview
-
-![Memory Management](https://img.shields.io/badge/Component-Memory_Management-blue)
-![Event-Driven](https://img.shields.io/badge/Architecture-Event_Driven-green)
-
-`MemScheduler` is a concurrent memory management system that works in parallel with MemOS, coordinating memory operations across working memory, long-term memory, and activation memory in AI systems. Designed for conversational agents and reasoning systems, it provides dynamic memory management through event-driven scheduling.
-
 ## Key Features
 
 - 🚀 **Concurrent operation** with MemOS system
@@ -52,7 +45,7 @@ ScheduleMessageItem:
 | `user_id`     | `str`                | Identifier for the associated user            |
 | `mem_cube_id` | `str`                | Identifier for the memory cube                |
 | `label`       | `str`                | Message label (e.g., `QUERY_LABEL`, `ANSWER_LABEL`) |
-| `mem_cube`    | `GeneralMemCube | str` | Memory cube object or reference               |
+| `mem_cube`    | `GeneralMemCube｜str` | Memory cube object or reference               |
 | `content`     | `str`                | Message content                               |
 | `timestamp`   | `datetime`           | Time when the message was submitted           |
 
@@ -86,40 +79,3 @@ This script demonstrates two methods for initializing and using the memory sched
 2. **Manual Initialization**: Explicitly creates and configures scheduler components
 
 The script simulates a pet-related conversation between a user and an assistant, demonstrating how memory scheduler manages conversation history and retrieves relevant information.
-
-### Core Code Structure
-
-```python
-def init_task():
-    # Initialize sample conversations and questions
-    conversations = [
-        {"role": "user", "content": "I just adopted a golden retriever puppy yesterday."},
-        {"role": "assistant", "content": "Congratulations! What did you name your new puppy?"},
-        # More conversations...
-    ]
-
-    questions = [
-        {"question": "What's my dog's name again?", "category": "Pet"},
-        # More questions...
-    ]
-    return conversations, questions
-
-def run_with_automatic_scheduler_init():
-    # Automatic initialization: Load configuration from YAML files
-    # Create user and memory cube
-    # Add conversations to memory
-    # Process user queries and display answers
-    # Show web logs
-
-def run_with_manual_scheduler_init():
-    # Manual initialization: Explicitly create and configure scheduler components
-    # Initialize MemOS, user, and memory cube
-    # Manually submit messages to the scheduler
-    # Process user queries and display answers
-    # Show web logs
-
-if __name__ == '__main__':
-    # Run both initialization methods sequentially
-    run_with_automatic_scheduler_init()
-    run_with_manual_scheduler_init()
-```

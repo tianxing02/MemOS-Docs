@@ -1,5 +1,6 @@
 import type { ContentNavigationItem } from '@nuxt/content'
-import settings from '../../content/settings.yml'
+import enSettings from '../../content/en/settings.yml'
+import zhSettings from '../../content/zh/settings.yml'
 
 interface ParsedTitle {
   icon?: string
@@ -56,7 +57,7 @@ const toContentNav = (node: RawNav): ContentNavigationItem | null => {
       ...(icon ? { icon } : {}),
       children: childrenOrPath.map(toContentNav).filter(Boolean) as ContentNavigationItem[],
       page: false,
-      class: [],
+      class: []
     }
   }
 
@@ -71,20 +72,54 @@ const toContentNav = (node: RawNav): ContentNavigationItem | null => {
     framework: null,
     module: null,
     class: [],
-    target: isApiReference ? '_blank' : undefined,
+    target: isApiReference ? '_blank' : undefined
   }
 }
 
-const parseNavigation = (navItems: RawNav[]): ContentNavigationItem[] =>
-  navItems.map(toContentNav).filter(Boolean) as ContentNavigationItem[]
+const parseNavigation = (navItems: RawNav[]): ContentNavigationItem[] => {
+  if (!Array.isArray(navItems)) {
+    console.warn('parseNavigation received non-array input:', navItems)
+    return []
+  }
+  return navItems.map(toContentNav).filter(Boolean) as ContentNavigationItem[]
+}
 
-export const useContentNavigation = () => {
-  return parseNavigation((settings as any).nav || [])
+export const useContentNavigation = (locale: Ref<string>) => {
+  const navigation = computed(() => {
+    try {
+      const settings = locale.value === 'zh' ? zhSettings : enSettings
+      if (!settings || typeof settings !== 'object') {
+        console.error('Invalid settings object:', settings)
+        return []
+      }
+
+      const navItems = (settings as { nav?: RawNav[] }).nav
+      if (!navItems) {
+        console.error('No nav items found in settings:', settings)
+        return []
+      }
+
+      return parseNavigation(navItems)
+    } catch (error) {
+      console.error('Error in useContentNavigation:', error)
+      return []
+    }
+  })
+
+  return navigation
 }
 
 // Flatten navigation tree into a linear list (pages only)
-export const flattenNavigation = (items: ContentNavigationItem[] = []): ContentNavigationItem[] =>
-  items.flatMap(item => [item, ...(item.children ? flattenNavigation(item.children) : [])])
+export const flattenNavigation = (items: ContentNavigationItem[] = []): ContentNavigationItem[] => {
+  if (!Array.isArray(items)) {
+    console.warn('flattenNavigation received non-array input:', items)
+    return []
+  }
+  return items.flatMap((item) => {
+    if (!item) return []
+    return [item, ...(item.children ? flattenNavigation(item.children) : [])]
+  })
+}
 
 // Get previous and next items (surround) for a given path
 export const getSurround = (

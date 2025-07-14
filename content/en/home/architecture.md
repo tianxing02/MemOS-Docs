@@ -53,7 +53,7 @@ Includes chunkers, embedders, LLM connectors, parsers, and interfaces for vector
 
 ## Code Structure
 
-Your MemOS project is organized for clarity and plug-and-play:
+MemOS project is organized for clarity and plug-and-play:
 
 ```
 src/memos/

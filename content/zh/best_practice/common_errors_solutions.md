@@ -1,13 +1,13 @@
 ---
-title: Common Errors and Solutions
+title: 常见错误与解决方案
 ---
 
-## Configuration Errors
+## 配置错误
 
-### Missing Required Fields
+### 缺失必要字段
 
 ```python
-# ✅ Always include required fields
+# ✅ 始终需要包含必填字段
 llm_config = {
     "backend": "openai",
     "config": {
@@ -15,12 +15,12 @@ llm_config = {
         "model_name_or_path": "gpt-4"
     }
 }
-```
+````
 
-### Backend Mismatch
+### 后端不匹配
 
 ```python
-# ✅ KVCache requires HuggingFace backend
+# ✅ KVCache 需要使用 HuggingFace 后端
 kv_config = {
     "backend": "kv_cache",
     "config": {
@@ -34,17 +34,16 @@ kv_config = {
 }
 ```
 
-## Service Connection Issues
+## 服务连接问题
 
 ```bash
-# Start required services as needed
+# 启动所需服务
 docker run -p 6333:6333 qdrant/qdrant
 ollama serve
 ```
 
-## Memory Issues
 
-### Loading Failures
+### 记忆加载失败
 
 ```python
 try:
@@ -54,21 +53,21 @@ except Exception:
     mem_cube.dump("memory_dir")
 ```
 
-### GPU Memory
+### GPU 显存不足
 
 ```python
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-# Use smaller models if GPU memory is limited: Qwen/Qwen3-0.6B
+# 若 GPU 显存不足，可使用较小的模型，例如：Qwen/Qwen3-0.6B
 ```
 
-## User Management
+## 用户管理
 
 ```python
-# Register user first
+# 先注册用户
 mos.register_mem_cube(cube_path="path", user_id="user_id", cube_id="cube_id")
 
-# Check if user exists
+# 检查用户是否已存在
 try:
     user_id = mos.create_user(user_name="john", role=UserRole.USER)
 except ValueError:
