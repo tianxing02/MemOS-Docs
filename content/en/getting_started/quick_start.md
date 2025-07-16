@@ -13,12 +13,38 @@ By the end, you'll be able to **store, retrieve, and update simple memories** fo
 
 ### Install MemOS
 
+::note
+**Platform Compatibility Warning**<br>MemOS is compatible with Linux, Windows, and macOS. However, if you're using macOS, please note that there may be dependency issues that are difficult to resolve. For example, compatibility with macOS 13 Ventura is currently challenging.
+::
+
+#### Install via pip
+
 ```bash
 pip install MemoryOS
 ```
 
+#### Development Install
+
+To contribute to MemOS, clone the repository and install it in editable mode:
+
+```bash
+git clone https://github.com/MemTensor/MemOS.git
+cd MemOS
+make install
+```
+
+#### Optional Dependencies
+
 ::note
-**Optional**<br>If you want to use local transformer models, make sure you have PyTorch installed.
+**Ollama Support**<br>To use MemOS with [Ollama](https://ollama.com/), first install the Ollama CLI:<br>`curl -fsSL https://ollama.com/install.sh | sh`
+::
+
+::note
+**Transformers Support**<br>To use functionalities based on the `transformers` library, ensure you have [PyTorch](https://pytorch.org/get-started/locally/) installed (CUDA version recommended for GPU acceleration).
+::
+
+::note
+**Download Examples**<br>To download example code, data and configurations, run the following command:<br>`memos download_examples`
 ::
 
 ::note
