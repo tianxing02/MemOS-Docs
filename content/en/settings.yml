@@ -8,6 +8,7 @@ nav:
     - "(ri:information-line) What Is MemOS?": home/memos_intro.md
     - "(ri:lightbulb-line) Core Concepts": home/core_concepts.md
     - "(ri:building-2-line) Architecture": home/architecture.md
+    - "(ri:history-line) Changelog": changeLog/
 
   - "(ri:rocket-line) Getting Started":
     - "(ri:play-line) Quick Start": getting_started/quick_start.md
