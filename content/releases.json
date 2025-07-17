@@ -1,0 +1,164 @@
+{
+  "versions": [
+    {
+      "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.2.0",
+      "title": "v0.2.0",
+      "date": "2025-07-11",
+      "changedInfo": [
+        {
+          "type": "refactor",
+          "description": "update feature request template",
+          "author": "Ki-Seki",
+          "pr": 50,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/50"
+        },
+        {
+          "type": "docs",
+          "description": "update documentation links and images",
+          "author": "Ki-Seki",
+          "pr": 55,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/55"
+        },
+        {
+          "type": "feat",
+          "description": "add structure reorganizer and conflict resolver",
+          "author": "CaralHsi",
+          "pr": 14,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/14"
+        },
+        {
+          "type": "feat(eval)",
+          "description": "add openai memory on locomo - eval guide",
+          "author": "Duguce",
+          "pr": 54,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/54"
+        },
+        {
+          "type": "feature",
+          "description": "mem reader update and some bug fixs",
+          "author": "Nyakult",
+          "pr": 43,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/43"
+        },
+        {
+          "type": "chore",
+          "description": "bump version number to v0.2.0",
+          "author": "fridayL",
+          "pr": 66,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/66"
+        }
+      ]
+    },
+    {
+      "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.1.13",
+      "title": "v0.1.13",
+      "date": "2025-07-09",
+      "changedInfo": [
+        {
+          "type": "ci",
+          "description": "add issue templates and update pull request template",
+          "author": "Ki-Seki",
+          "pr": 17,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/17"
+        },
+        {
+          "type": "add",
+          "description": "long version of MemOS paper",
+          "author": "Ki-Seki",
+          "pr": 20,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/20"
+        },
+        {
+          "type": "docs",
+          "description": "update citations",
+          "author": "Ki-Seki",
+          "pr": 25,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/25"
+        },
+        {
+          "type": "feat(eval)",
+          "description": "add eval configs example",
+          "author": "Duguce",
+          "pr": 19,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/19"
+        },
+        {
+          "type": "feat(eval)",
+          "description": "add run locomo eval script",
+          "author": "Duguce",
+          "pr": 28,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/28"
+        },
+        {
+          "type": "fix(example)",
+          "description": "correct ParsedTaskGoal usage and add unrelated memory for testing",
+          "author": "Wujiaxuan007",
+          "pr": 23,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/23"
+        },
+        {
+          "type": "style",
+          "description": "fix format",
+          "author": "Ki-Seki",
+          "pr": 36,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/36"
+        },
+        {
+          "type": "ci",
+          "description": "Include macOS and Windows in CI pipeline",
+          "author": "Ki-Seki",
+          "pr": 22,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/22"
+        },
+        {
+          "type": "docs",
+          "description": "move all docs to https://github.com/MemTensor/MemOS-Docs",
+          "author": "Ki-Seki",
+          "pr": 34,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/34"
+        },
+        {
+          "type": "fix(eval)",
+          "description": "delete about memos redundant search branches",
+          "author": "Duguce",
+          "pr": 35,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/35"
+        },
+        {
+          "type": "feat",
+          "description": "add internet retrieval and CoT functionality to MemOS",
+          "author": "fridayL",
+          "pr": 16,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/16"
+        },
+        {
+          "type": "docs",
+          "description": "update pull request template for clarity and completeness",
+          "author": "Ki-Seki",
+          "pr": 45,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/45"
+        },
+        {
+          "type": "chore",
+          "description": "bump version to v0.1.13",
+          "author": "fridayL",
+          "pr": 47,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/47"
+        },
+        {
+          "type": "chore",
+          "description": "bump version to v0.1.13",
+          "author": "fridayL",
+          "pr": 48,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/48"
+        }
+      ]
+    },
+    {
+      "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.1.12",
+      "title": "v0.1.12",
+      "date": "2025-07-08",
+      "changedInfo": []
+    }
+  ]
+}

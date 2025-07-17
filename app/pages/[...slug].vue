@@ -5,11 +5,16 @@ const route = useRoute()
 const { toc } = useAppConfig()
 const navigation = inject<ContentNavigationItem[]>('navigation')
 const { t, locale } = useI18n()
+const config = useRuntimeConfig()
 
 // Remove trailing slash to match content path
 const normalizedPath = route.path.replace(/\/$/, '') || '/'
 
 const { data: page } = await useAsyncData(normalizedPath, () => {
+  if (config.public.env === 'dev' && normalizedPath.startsWith('/zh')) {
+    return queryCollection('docs').path(`${normalizedPath}`).first()
+  }
+
   return queryCollection('docs').path(`/${locale.value}${normalizedPath}`).first()
 })
 

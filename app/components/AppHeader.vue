@@ -92,6 +92,14 @@ function handleLocaleSwitch() {
     </template>
 
     <template #body>
+      <UNavigationMenu orientation="vertical" :items="localizedMenus" class="justify-center">
+        <template #item="{ item }">
+          <div>{{ item.label }}</div>
+        </template>
+      </UNavigationMenu>
+
+      <USeparator type="dashed" class="mt-4 mb-6" />
+
       <UContentNavigation
         highlight
         :navigation="navigation"

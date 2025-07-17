@@ -1,7 +1,8 @@
 export default {
   header: {
     home: 'Home',
-    research: 'Research'
+    research: 'Research',
+    changelog: 'Changelog'
   },
   community: {
     title: 'Community',
@@ -10,5 +11,10 @@ export default {
   },
   footer: {
     copyright: '© 2025 MemOS. All rights reserved.'
+  },
+  changelog: {
+    title: 'Changelog',
+    description: 'All notable changes to MemOS will be documented here',
+    releaseNotes: 'Release Notes'
   }
 }

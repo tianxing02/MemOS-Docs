@@ -36,6 +36,9 @@ export default defineAppConfig({
       label: 'header.research',
       target: '_blank',
       to: 'https://memos.openmem.net/paper_memos_v2'
+    }, {
+      label: 'header.changelog',
+      to: '/changelog'
     }]
   },
   footer: {

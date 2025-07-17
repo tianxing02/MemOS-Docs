@@ -1,0 +1,57 @@
+versions:
+  - name: v0.2.0
+    date: 2025-07-11
+    changedInfo:
+      New Features:
+        - type: MemCube
+          changedInfo:
+            - 新增 明文记忆 + KV Cache，含推理解码性能报告
+            - 发布首批 MemCube：1 个知识型 Cube + 1 个趣味型 Cube，并完成评分
+        - type: MemOS & Agent
+          changedInfo:
+            - 发布 MemOS Neo 轻量版本（纯 API，快速接入）
+            - 完成 MCP 能力支持调研
+            - 搭建嵌入 Agent 流 Pipeline，支持 Coze 框架
+        - type: 部署 & 多模型
+          changedInfo:
+            - 支持 Docker 一键部署
+            - API 层打通多模型调用（OpenAI / Qwen / DeepSeek 等）
+            - 完成 Embedding / Reranker 模块评估
+            - 新增对 Neo4j 社区版 支持 + 单库多租户能力
+      Improvements:
+        - type: 记忆评估
+          changedInfo:
+            - 增加对 mem0 本地部署 的分数评估
+            - WAIC 前 3-4 个评估集上线，每周持续更新
+            - 跟进适配 memos API，更新评估代码
+        - type: 文档 & 官网
+          changedInfo:
+            - 启动 Cookbook 内容整理与上线
+      Bug Fixes:
+        - type: 算子小模型
+          changedInfo:
+            - 发布 记忆组织小模型
+  - name: v0.2.2
+    date: 2025-07-11
+    changedInfo:
+      New Features:
+        - type: MemCube2
+          changedInfo:
+            - 新增 明文记忆 + KV Cache，含推理解码性能报告
+            - 发布首批 MemCube：1 个知识型 Cube + 1 个趣味型 Cube，并完成评分
+        - type: 部署 & 多模型2
+          changedInfo:
+            - 支持 Docker 一键部署
+            - API 层打通多模型调用（OpenAI / Qwen / DeepSeek 等）
+            - 完成 Embedding / Reranker 模块评估
+            - 新增对 Neo4j 社区版 支持 + 单库多租户能力
+      Improvements:
+        - type: 记忆评估
+          changedInfo:
+            - 增加对 mem0 本地部署 的分数评估
+            - WAIC 前 3-4 个评估集上线，每周持续更新
+            - 跟进适配 memos API，更新评估代码
+      Bug Fixes:
+        - type: 算子小模型
+          changedInfo:
+            - 发布 记忆组织小模型 
