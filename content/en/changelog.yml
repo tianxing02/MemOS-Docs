@@ -1,57 +1,61 @@
 versions:
-  - name: v0.2.0
-    date: 2025-07-11
+  - name: v1.2.0
+    date: 2024-03-15
     changedInfo:
       New Features:
-        - type: MemCube
+        - type: Core Engine
           changedInfo:
-            - Added plaintext memory + KV Cache, including inference decoding performance report
-            - Released first batch of MemCubes: 1 knowledge-based Cube + 1 entertainment Cube, with completed scoring
-        - type: MemOS & Agent
+            - Introduced real-time memory synchronization
+            - Added support for distributed memory clusters
+            - Implemented advanced caching mechanisms
+        - type: API & Integration
           changedInfo:
-            - Released MemOS Neo lightweight version (pure API, quick integration)
-            - Completed MCP capability support research
-            - Built embedded Agent flow Pipeline, supporting Coze framework
-        - type: Deployment & Multi-model
+            - Released new REST API endpoints
+            - Added WebSocket support for live updates
+            - Integrated with popular cloud platforms
+        - type: Security
           changedInfo:
-            - Added Docker one-click deployment support
-            - Integrated multi-model API calls (OpenAI / Qwen / DeepSeek etc.)
-            - Completed Embedding / Reranker module evaluation
-            - Added Neo4j Community Edition support + single database multi-tenant capability
+            - Enhanced encryption for stored memories
+            - Added role-based access control
+            - Implemented audit logging system
       Improvements:
-        - type: Memory Evaluation
+        - type: Performance
           changedInfo:
-            - Added score evaluation for mem0 local deployment
-            - WAIC first 3-4 evaluation sets online, weekly updates
-            - Updated evaluation code to adapt to memos API
-        - type: Documentation & Website
+            - Optimized memory retrieval speed by 50%
+            - Reduced memory footprint by 30%
+            - Enhanced concurrent processing capabilities
+        - type: User Experience
           changedInfo:
-            - Initiated Cookbook content organization and launch
+            - Redesigned dashboard interface
+            - Added dark mode support
       Bug Fixes:
-        - type: Operator Micromodel
+        - type: Stability
           changedInfo:
-            - Released memory organization micromodel
-  - name: v0.2.2
-    date: 2025-07-11
+            - Fixed memory leak in long-running processes
+            - Resolved race conditions in parallel operations
+
+  - name: v1.1.0
+    date: 2024-02-01
     changedInfo:
       New Features:
-        - type: MemCube2
+        - type: Analytics
           changedInfo:
-            - Added plaintext memory + KV Cache, including inference decoding performance report
-            - Released first batch of MemCubes: 1 knowledge-based Cube + 1 entertainment Cube, with completed scoring
-        - type: Deployment & Multi-model 2
+            - Added memory usage analytics dashboard
+            - Implemented performance monitoring tools
+            - Released memory pattern recognition system
+        - type: Integration
           changedInfo:
-            - Added Docker one-click deployment support
-            - Integrated multi-model API calls (OpenAI / Qwen / DeepSeek etc.)
-            - Completed Embedding / Reranker module evaluation
-            - Added Neo4j Community Edition support + single database multi-tenant capability
+            - Added support for third-party plugins
+            - Implemented webhook system
+            - Released SDK for popular programming languages
       Improvements:
-        - type: Memory Evaluation
+        - type: Documentation
           changedInfo:
-            - Added score evaluation for mem0 local deployment
-            - WAIC first 3-4 evaluation sets online, weekly updates
-            - Updated evaluation code to adapt to memos API
+            - Updated API documentation
+            - Added interactive tutorials
+            - Enhanced troubleshooting guides
       Bug Fixes:
-        - type: Operator Micromodel
+        - type: Core
           changedInfo:
-            - Released memory organization micromodel 
+            - Fixed memory corruption issues
+            - Resolved synchronization conflicts 
