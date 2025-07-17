@@ -7,7 +7,7 @@ const props = defineProps<{
 
 // Immediately redirect to /home/overview if it's a 404 error
 if (props.error?.statusCode === 404) {
-  //navigateTo('/home/overview')
+  navigateTo('/home/overview')
 }
 
 useHead({

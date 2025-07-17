@@ -14,6 +14,7 @@ export default {
   },
   changelog: {
     title: '更新日志',
-    description: '所有值得注意的更新和改进都将记录在这里'
+    description: '所有值得注意的更新和改进都将记录在这里',
+    releaseNotes: '发版说明'
   }
 }

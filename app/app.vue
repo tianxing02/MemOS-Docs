@@ -42,7 +42,7 @@ provide('navigation', contentNavigation)
 
     <AppHeader v-if="!route.path.startsWith('/docs/api/')"/>
 
-    <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api')">
+    <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api') && !route.path.endsWith('changelog')">
       <UMain>
         <UContainer>
           <UPage>
@@ -88,6 +88,10 @@ provide('navigation', contentNavigation)
 
         <AppFooter />
       </UMain>
+    </template>
+
+    <template v-if="route.path === '/changelog'">
+      <NuxtPage />
     </template>
 
     <!-- Document home page -->

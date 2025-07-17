@@ -1,0 +1,57 @@
+versions:
+  - name: v0.2.0
+    date: 2025-07-11
+    changedInfo:
+      New Features:
+        - type: MemCube
+          changedInfo:
+            - Added plaintext memory + KV Cache, including inference decoding performance report
+            - Released first batch of MemCubes: 1 knowledge-based Cube + 1 entertainment Cube, with completed scoring
+        - type: MemOS & Agent
+          changedInfo:
+            - Released MemOS Neo lightweight version (pure API, quick integration)
+            - Completed MCP capability support research
+            - Built embedded Agent flow Pipeline, supporting Coze framework
+        - type: Deployment & Multi-model
+          changedInfo:
+            - Added Docker one-click deployment support
+            - Integrated multi-model API calls (OpenAI / Qwen / DeepSeek etc.)
+            - Completed Embedding / Reranker module evaluation
+            - Added Neo4j Community Edition support + single database multi-tenant capability
+      Improvements:
+        - type: Memory Evaluation
+          changedInfo:
+            - Added score evaluation for mem0 local deployment
+            - WAIC first 3-4 evaluation sets online, weekly updates
+            - Updated evaluation code to adapt to memos API
+        - type: Documentation & Website
+          changedInfo:
+            - Initiated Cookbook content organization and launch
+      Bug Fixes:
+        - type: Operator Micromodel
+          changedInfo:
+            - Released memory organization micromodel
+  - name: v0.2.2
+    date: 2025-07-11
+    changedInfo:
+      New Features:
+        - type: MemCube2
+          changedInfo:
+            - Added plaintext memory + KV Cache, including inference decoding performance report
+            - Released first batch of MemCubes: 1 knowledge-based Cube + 1 entertainment Cube, with completed scoring
+        - type: Deployment & Multi-model 2
+          changedInfo:
+            - Added Docker one-click deployment support
+            - Integrated multi-model API calls (OpenAI / Qwen / DeepSeek etc.)
+            - Completed Embedding / Reranker module evaluation
+            - Added Neo4j Community Edition support + single database multi-tenant capability
+      Improvements:
+        - type: Memory Evaluation
+          changedInfo:
+            - Added score evaluation for mem0 local deployment
+            - WAIC first 3-4 evaluation sets online, weekly updates
+            - Updated evaluation code to adapt to memos API
+      Bug Fixes:
+        - type: Operator Micromodel
+          changedInfo:
+            - Released memory organization micromodel 

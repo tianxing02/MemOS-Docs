@@ -14,6 +14,7 @@ export default {
   },
   changelog: {
     title: 'Changelog',
-    description: 'All notable changes to MemOS will be documented here'
+    description: 'All notable changes to MemOS will be documented here',
+    releaseNotes: 'Release Notes'
   }
 }
