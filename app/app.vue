@@ -33,6 +33,10 @@ useHead({
   }
 })
 
+function showContentNavigation() {
+  return route.path !== '/' && !route.path.startsWith('/docs/api') && route.path.includes('changelog')
+}
+
 provide('navigation', contentNavigation)
 </script>
 
@@ -42,7 +46,7 @@ provide('navigation', contentNavigation)
 
     <AppHeader v-if="!route.path.startsWith('/docs/api/')"/>
 
-    <template v-if="route.path !== '/' && !route.path.startsWith('/docs/api') && !route.path.endsWith('changelog')">
+    <template v-if="showContentNavigation()">
       <UMain>
         <UContainer>
           <UPage>
