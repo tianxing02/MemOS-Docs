@@ -34,7 +34,7 @@ useHead({
 })
 
 function showContentNavigation() {
-  return route.path !== '/' && !route.path.startsWith('/docs/api') && route.path.includes('changelog')
+  return route.path !== '/' && !route.path.startsWith('/docs/api') && !route.path.includes('changelog')
 }
 
 provide('navigation', contentNavigation)
