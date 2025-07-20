@@ -16,6 +16,8 @@ nav:
 
   - "(ri:cpu-line) MOS":
     - "(ri:eye-line) 概览": modules/mos/overview.md
+    - "(ri:book-open-line) 简化版本": modules/mos/memos_neo.md
+    - "(ri:tools-line) MCP服务": modules/mos/memos_mcp.md
     - "(ri:team-line) 用户管理": modules/mos/users.md
     - "(ri:settings-3-line) 用户配置": modules/mos/users_configurations.md
     - "(ri:checkbox-multiple-blank-line) 记忆立方": modules/mem_cube.md
