@@ -10,7 +10,7 @@ versions:
         - type: MemOS系统
           changedInfo:
             - 发布MemOS Neo轻量级版本，简化架构仅保留核心API模块
-            - 新增MCP支持调研和准备工作，扩展MCP能力
+            - 新增MCP支持，扩展MCP能力
             - 构建嵌入Agent流的Pipeline文档，支持Coze框架集成
         - type: 部署与环境支持
           changedInfo:
