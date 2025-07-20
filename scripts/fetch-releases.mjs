@@ -38,9 +38,22 @@ function processReleases(data) {
       }
     }
 
+    if (release.tag_name === 'v0.1.12') {
+      return {
+        releaseUrl: release.html_url,
+        name: `${release.tag_name}(Pre-release)`,
+        date: release.published_at.split('T')[0],
+        changedInfo: [{
+          type: 'Full Changelog',
+          description: 'https://github.com/MemTensor/MemOS/commits/v0.1.12',
+          author: 'MemTensor'
+        }]
+      }
+    }
+
     return {
       releaseUrl: release.html_url,
-      title: release.tag_name,
+      name: release.tag_name,
       date: release.published_at.split('T')[0],
       changedInfo: whatsChanged
     }

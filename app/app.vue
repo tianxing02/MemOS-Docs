@@ -44,8 +44,9 @@ provide('navigation', contentNavigation)
   <UApp>
     <NuxtLoadingIndicator />
 
-    <AppHeader v-if="!route.path.startsWith('/docs/api/')"/>
+    <AppHeader v-if="!route.path.startsWith('/docs/api/')" />
 
+    <!-- Document pages -->
     <template v-if="showContentNavigation()">
       <UMain>
         <UContainer>
@@ -89,17 +90,18 @@ provide('navigation', contentNavigation)
             <NuxtPage />
           </UPage>
         </UContainer>
-
-        <AppFooter />
       </UMain>
     </template>
 
+    <!-- Changelog page -->
     <template v-if="route.path === '/changelog'">
-      <NuxtPage />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
     </template>
 
     <!-- Document home page -->
-    <template v-else>
+    <template v-if="route.path === '/'">
       <ClientOnly>
         <NuxtLayout>
           <NuxtPage />
@@ -107,7 +109,7 @@ provide('navigation', contentNavigation)
       </ClientOnly>
     </template>
 
-    <AppFooter v-if="route.path === '/'"/>
+    <AppFooter v-if="!route.path.startsWith('/docs/api/')" />
 
     <ClientOnly>
       <LazyUContentSearch

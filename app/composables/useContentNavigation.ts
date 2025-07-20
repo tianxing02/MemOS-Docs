@@ -139,18 +139,22 @@ export type SurroundItem = ContentNavigationItem & { description?: string }
 // Enrich surround items with front-matter description field
 export const useSurroundWithDesc = async (
   path: string,
-  navItems: ContentNavigationItem[] = []
+  navItems: ContentNavigationItem[] = [],
+  locale: string = 'en',
+  env: string = 'prod'
 ): Promise<SurroundItem[]> => {
   const base = getSurround(path, navItems)
+
   if (base.length === 0) return []
 
   const docs = await Promise.all(
-    base.map(item =>
-      // Fetch only the description of the neighbour page
-      queryCollection('docs')
-        .path(item.path)
-        .first()
-    )
+    base.map((item) => {
+      if (env === 'dev' && item.path.startsWith('/zh')) {
+        return queryCollection('docs').path(`${item.path}`).first()
+      }
+
+      return queryCollection('docs').path(`/${locale}${item.path}`).first()
+    })
   )
 
   return base.map((item, i) => ({
