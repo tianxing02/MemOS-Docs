@@ -1,4 +1,32 @@
 versions:
+  - name: v0.2.1
+    date: 2025-07-20
+    changedInfo:
+      New Features:
+        - type: MemCube功能
+          changedInfo:
+            - 新增明文记忆 + KV Cache功能，提供推理解码性能报告
+            - 完成趣味性cube功能开发，已跑通完整流程，支持embedding模型切换
+        - type: MemOS系统
+          changedInfo:
+            - 发布MemOS Neo轻量级版本，简化架构仅保留核心API模块
+            - 新增MCP支持调研和准备工作，扩展MCP能力
+            - 构建嵌入Agent流的Pipeline文档，支持Coze框架集成
+        - type: 部署与环境支持
+          changedInfo:
+            - 新增Docker部署支持
+            - API层面支持多模型调用，兼容OpenAI/Qwen/DeepSeek等主流模型
+            - 完善embedding模型支持
+            - 新增neo4j社区版/Nebular数据库支持
+            - 新增单库多租户架构支持
+        - type: 评估与测试
+          changedInfo:
+            - 适配memos的API接口形式评估，更新评估代码
+        - type: 文档与示例
+          changedInfo:
+            - 新增Cookbook内容
+            - 新增Mud游戏示例
+
   - name: v1.2.0
     date: 2024-03-15
     changedInfo:
