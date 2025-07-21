@@ -1,6 +1,6 @@
 versions:
   - name: v0.2.1
-    date: 2025-07-20
+    date: 2025-07-21
     changedInfo:
       New Features:
         - type: MemCube功能
@@ -27,63 +27,28 @@ versions:
             - 新增Cookbook内容
             - 新增Mud游戏示例
 
-  - name: v1.2.0
-    date: 2024-03-15
+  - name: v0.2.0
+    date: 2025-07-11
     changedInfo:
       New Features:
-        - type: 核心引擎
+        - type: 官网易用性更新
           changedInfo:
-            - 引入实时内存同步功能
-            - 新增分布式内存集群支持
-            - 实现高级缓存机制
-        - type: API与集成
+            - 增加Doc文档搜索框功能
+            - 增加中英文Doc切换功能
+            - 增加页脚转换链接和编辑页面
+        - type: 算子模型
           changedInfo:
-            - 发布新的REST API接口
-            - 添加WebSocket实时更新支持
-            - 集成主流云平台
-        - type: 安全性
+            - 新增MemReader-4B小模型，专注记忆抽取操作
+            - 支持纯本地化部署，适用于受限网络环境
+            - 实现更低成本和更快速度的记忆操作，性能超越GPT-4o-mini
+            - 基于Qwen3-4b微调，结合人工和模型标注数据进行监督微调
+        - type: 框架跨平台适配
           changedInfo:
-            - 增强存储记忆的加密功能
-            - 添加基于角色的访问控制
-            - 实现审计日志系统
-      Improvements:
-        - type: 性能优化
+            - 新增Windows平台部署适配
+            - 新增Mac平台部署适配
+            - 完成Linux、Windows、macOS三大主流操作系统适配
+            - 通过Ubuntu 20.04+/CentOS、Windows 10+/11、macOS 14 Ventura+等平台测试
+            - 支持核心模块稳定运行（记忆生命周期管理、互操作协议MIP、记忆缓存调度等）
+        - type: Playground 进展
           changedInfo:
-            - 内存检索速度提升50%
-            - 内存占用减少30%
-            - 提升并发处理能力
-        - type: 用户体验
-          changedInfo:
-            - 重新设计仪表板界面
-            - 新增深色模式支持
-      Bug Fixes:
-        - type: 稳定性
-          changedInfo:
-            - 修复长时间运行时的内存泄漏
-            - 解决并行操作中的竞态条件
-
-  - name: v1.1.0
-    date: 2024-02-01
-    changedInfo:
-      New Features:
-        - type: 数据分析
-          changedInfo:
-            - 添加内存使用分析仪表板
-            - 实现性能监控工具
-            - 发布内存模式识别系统
-        - type: 系统集成
-          changedInfo:
-            - 新增第三方插件支持
-            - 实现webhook系统
-            - 发布主流编程语言SDK
-      Improvements:
-        - type: 文档完善
-          changedInfo:
-            - 更新API文档
-            - 添加交互式教程
-            - 增强故障排除指南
-      Bug Fixes:
-        - type: 核心功能
-          changedInfo:
-            - 修复内存损坏问题
-            - 解决同步冲突问题 
+            - 已完成工程、前端、算法端联调，进行bug修复和调优中
