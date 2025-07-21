@@ -1,4 +1,32 @@
 versions:
+  - name: v0.2.1
+    date: 2025-07-20
+    changedInfo:
+      New Features:
+        - type: MemCube Features
+          changedInfo:
+            - Added plaintext memory + KV Cache functionality with reasoning and decoding performance report
+            - Completed development of interactive cube feature with full workflow support and embedding model switching
+        - type: MemOS System
+          changedInfo:
+            - Released MemOS Neo lightweight version with simplified architecture and core API modules
+            - Added MCP support research and preparation work, expanding MCP capabilities
+            - Created embedded Agent flow Pipeline documentation with Coze framework integration
+        - type: Deployment & Environment
+          changedInfo:
+            - Added Docker deployment support
+            - Enhanced API layer with multi-model support, compatible with OpenAI/Qwen/DeepSeek and other mainstream models
+            - Improved embedding model support
+            - Added neo4j Community Edition/Nebular database support
+            - Implemented multi-tenant architecture support within single database
+        - type: Evaluation & Testing
+          changedInfo:
+            - Adapted and evaluated memos API interface format, updated evaluation code
+        - type: Documentation & Examples
+          changedInfo:
+            - Added new Cookbook content
+            - Included Mud game example
+
   - name: v1.2.0
     date: 2024-03-15
     changedInfo:
