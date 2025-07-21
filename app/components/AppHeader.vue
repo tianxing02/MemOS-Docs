@@ -31,9 +31,9 @@ function handleLocaleSwitch() {
 
   // For production, redirect to the corresponding domain
   if (locale.value === 'en') {
-    window.location.href = `${config.public.cnDomain}/${window.location.pathname}`
+    window.location.href = `${config.public.cnDomain}${window.location.pathname}`
   } else {
-    window.location.href = `${config.public.enDomain}/${window.location.pathname}`
+    window.location.href = `${config.public.enDomain}${window.location.pathname}`
   }
 }
 </script>
