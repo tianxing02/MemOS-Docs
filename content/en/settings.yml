@@ -24,6 +24,7 @@ nav:
     - "(ri:checkbox-multiple-blank-line) MemCube": modules/mem_cube.md
     - "(ri:book-open-line) MemReader": modules/mem_reader.md
     - "(ri:calendar-line) MemScheduler": modules/mem_scheduler.md
+    - "(ri:robot-2-line) LLMs and Embeddings": modules/model_backend.md
 
   - "(ri:brain-line) Memories":
     - "(ri:database-2-line) KV Cache Memory": modules/memories/kv_cache_memory.md

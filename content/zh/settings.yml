@@ -24,6 +24,7 @@ nav:
     - "(ri:checkbox-multiple-blank-line) 记忆立方": modules/mem_cube.md
     - "(ri:book-open-line) 记忆读取": modules/mem_reader.md
     - "(ri:calendar-line) 记忆调度": modules/mem_scheduler.md
+    - "(ri:robot-2-line) 大模型与Embedding调用": modules/model_backend.md
 
   - "(ri:brain-line) 记忆系统":
     - "(ri:database-2-line) KV cache 记忆": modules/memories/kv_cache_memory.md
