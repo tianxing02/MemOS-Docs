@@ -1,6 +1,6 @@
 ---
-标题: "KVCacheMemory: KV cache记忆（激活记忆）"
-描述: "`KVCacheMemory` 是MemOS中用于存储和管理KV cache的专用记忆模块，主要用于加速大语言模型（LLMs）推理并支持有效的上下文复用。它作为激活记忆有助于对于会话式和生成式人工智能系统。"
+title: "KVCacheMemory: KV cache记忆（激活记忆）"
+desc: "`KVCacheMemory` 是MemOS中用于存储和管理KV cache的专用记忆模块，主要用于加速大语言模型（LLMs）推理并支持有效的上下文复用。它作为激活记忆有助于对于会话式和生成式人工智能系统。"
 ---
 
 ## KV Cache记忆使用案例
