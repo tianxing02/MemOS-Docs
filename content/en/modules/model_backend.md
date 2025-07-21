@@ -15,7 +15,6 @@ MemOS decouples **model logic** from **runtime config** via two Pydantic factori
 
 Both factories accept a `*_ConfigFactory(model_validate(...))` blob, so you can switch provider with a single `backend=` swap.
 
----
 
 ## LLM Module <a id="llm-module"></a>
 
@@ -68,10 +67,10 @@ for chunk in llm.generate_stream(messages):
     print(chunk, end="")
 ```
 
-:::note
+::note
 **Full code**  
 Find all scenarios in `examples/basic_modules/llm.py`.
-:::
+::
 
 ### Performance Tips <a id="llm-performance-tips"></a>
 - Use `qwen3:0.6b` for <2 GB footprint when prototyping locally.
