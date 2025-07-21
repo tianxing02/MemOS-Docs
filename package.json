@@ -9,7 +9,7 @@
     "sync-api": "node scripts/fetch-api.mjs",
     "sync-releases": "node scripts/fetch-releases.mjs",
     "generate": "nuxt generate",
-    "publish": "node scripts/publish.mjs",
+    "publish": "npm run sync-api && npm run sync-releases && node scripts/publish.mjs",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
