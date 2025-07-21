@@ -94,7 +94,7 @@ provide('navigation', contentNavigation)
     </template>
 
     <!-- Changelog page -->
-    <template v-if="!showContentNavigation()">
+    <template v-if="!showContentNavigation() && route.path !== '/'">
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

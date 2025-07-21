@@ -6,39 +6,7 @@ title: 使用 MemOS 构建智能小说分析系统
 
 在开始编码之前，让我们看看MemOS到底解决了什么问题：
 
-```mermaid
-graph TB
-    subgraph Traditional [传统方法 - 无记忆系统]
-        A1[用户问题] --> B1[AI直接处理]
-        B1 --> C1[每次重新分析全文]
-        C1 --> D1[上下文限制]
-        D1 --> E1[回答质量不稳定]
-    
-        style B1 fill:#ffebee
-        style C1 fill:#ffebee
-        style D1 fill:#ffebee
-        style E1 fill:#ffebee
-    end
-  
-    subgraph MemOS [MemOS方法 - 智能记忆系统]
-        A2[用户问题] --> B2[AI + MemOS]
-        B2 --> C2[智能记忆检索]
-        C2 --> D2[多层知识整合]
-        D2 --> E2[深度分析回答]
-    
-        C2 -.-> F2[原始文本层]
-        C2 -.-> G2[实体关系层]
-        C2 -.-> H2[语义群组层]
-    
-        style B2 fill:#e8f5e8
-        style C2 fill:#e8f5e8
-        style D2 fill:#e8f5e8
-        style E2 fill:#e8f5e8
-        style F2 fill:#f0f8ff
-        style G2 fill:#f0f8ff
-        style H2 fill:#f0f8ff
-    end
-```
+![Cookbook-Chapter3-Chart](https://statics.memtensor.com.cn/memos/cookbook-chapter3-chart.png)
 
 **实际效果对比举例：**
 
@@ -74,20 +42,7 @@ MemOS就像是专业的"调料品牌"，它已经为我们准备好了：
 
 **核心技术架构**：
 
-```mermaid
-graph TD
-    A["小说原始文本"] --> B["章节分割"]
-    B --> C["人物识别与别名映射"]
-    C --> D["结构化信息抽取"]
-    D --> E["MemCube构建"]
-    E --> F["Memory节点转换"]
-    F --> G["MemOS集成"]
-  
-    D --> D1["事件抽取"]
-    D --> D2["语录收集"]
-    D --> D3["性格分析"]
-    D --> D4["关系建模"]
-```
+![Cookbook-Chapter3-Core](https://statics.memtensor.com.cn/memos/cookbook-chapter3-core.png)
 
 **数据处理流水线**：
 
