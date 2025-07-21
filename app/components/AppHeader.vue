@@ -1,40 +1,35 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
-interface MenuItem {
-  to: string
-  label: string
-  target?: string
-}
-
-const config = useRuntimeConfig()
-
+const route = useRoute()
 const { t, locale, setLocale } = useI18n()
 const { header } = useAppConfig()
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-
-const localizedMenus = computed<MenuItem[]>(() => {
-  return (header.memus as MenuItem[]).map(menu => ({
-    ...menu,
-    label: t(`${menu.label}`)
-  }))
+const localizedMenus = computed(() => {
+  return [
+    {
+      to: 'https://memos.openmem.net',
+      label: t('header.home')
+    },
+    {
+      to: '/home/overview',
+      label: t('header.docs'),
+      active: !route.path.includes('/changelog')
+    },
+    {
+      label: t('header.research'),
+      target: '_blank',
+      to: 'https://memos.openmem.net/paper_memos_v2'
+    },
+    {
+      label: t('header.changelog'),
+      to: '/changelog',
+      active: route.path.includes('/changelog')
+    }
+  ]
 })
 
-function handleLocaleSwitch() {
-  // For development, switch locale directly
-  if (config.public.env === 'dev') {
-    setLocale(locale.value === 'en' ? 'zh' : 'en')
-
-    return
-  }
-
-  // For production, redirect to the corresponding domain
-  if (locale.value === 'en') {
-    window.location.href = `${config.public.cnDomain}${window.location.pathname}`
-  } else {
-    window.location.href = `${config.public.enDomain}${window.location.pathname}`
-  }
+const handleLocaleSwitch = () => {
+  const targetLocale = locale.value === 'zh' ? 'en' : 'zh'
+  setLocale(targetLocale)
 }
 </script>
 
