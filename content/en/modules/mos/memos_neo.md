@@ -25,8 +25,8 @@ from memos.mem_os.main import MOS
 # Auto-configured instance 
 memory = MOS.simple()
 ```
-::note**Warning:**<br>
-The `MOS.simple()` will use deafult embedding model and size text-embedding-3-large dim-size 3027 if you had use other version memos before, you need delete dir ~/.memos for new qdrant or drop neo4j db
+::note
+**Warning:**<br>The `MOS.simple()` will use deafult embedding model and size text-embedding-3-large dim-size 3027 if you had use other version memos before, you need delete dir ~/.memos for new qdrant or drop neo4j db
 ::
 
 ## Basic Usage
