@@ -38,6 +38,7 @@ nav:
     - "(ri:building-3-line) Memory Structure Design": best_practice/memory_structure_design.md
     - "(ri:wifi-line) Network Workarounds": best_practice/network_workarounds.md
     - "(ri:error-warning-line) Common Errors & Solutions": best_practice/common_errors_solutions.md
+    - "(ri:tools-line) MCP for Coze Space and Tools": best_practice/mcp_for_cozespace_and_tools.md
 
   - "(ri:heart-line) Contribution":
     - "(ri:eye-line) Overview": contribution/overview.md
