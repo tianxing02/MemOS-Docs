@@ -1,6 +1,5 @@
 ---
 title: LLMs and Embeddings
-
 desc: "A practical guide to configuring and using Large Language 
 Models (LLM) and Embedders in **MemOS**. "
 ---
