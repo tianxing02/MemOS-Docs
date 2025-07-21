@@ -1,5 +1,5 @@
 ---
-title: LLM & Embedding Modules — Quick‑Start Guide
+title: LLMs and Embeddings
 
 desc: "A practical guide to configuring and using Large Language 
 Models (LLM) and Embedders in **MemOS**. "

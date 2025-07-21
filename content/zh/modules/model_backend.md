@@ -1,5 +1,5 @@
 ---
-title: 大模型与Embedding调用快速上手指南
+title: 大模型与Embedding调用
 
 desc: "一份实用的用于配置和使用 MemOS 中的大语言模型和文本Embedding指南。"
 ---
