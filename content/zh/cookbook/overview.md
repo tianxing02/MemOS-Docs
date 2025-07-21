@@ -42,7 +42,7 @@ title: MemOS 场景案例
   - **配方 1.2**: 从文档构建简单的 MemCube (Ollama版)
   - **配方 1.3**: MemCube 基础操作 (Ollama版)
 
-### [第二章：结构化记忆：TreeNodeTextualMemoryMetadata](cookbook/chapter2/api)
+### [第二章：结构化记忆：TreeNodeTextualMemoryMetadata](/cookbook/chapter2/api)
 
 **核心技能**：结构化记忆、元数据管理、多源追踪
 
