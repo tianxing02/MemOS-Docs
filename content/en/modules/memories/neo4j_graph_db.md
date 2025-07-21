@@ -20,6 +20,12 @@ This forms the backbone of long-term, explainable, and compositional memory reas
 - Built-in support for Neo4j
 - Support for vector-enhanced retrieval (`search_by_embedding`)
 - Modular, pluggable, and testable
+- [v0.2.1 New! ] Supports **multi-tenant graph memory architecture** (shared 
+  DB, 
+  per-user 
+  logic)
+- [v0.2.1 New! ] Compatible with **Neo4j Community Edition** environments
+
 ## Directory Structure
 
 ```
@@ -81,6 +87,75 @@ See src/memos/graph_dbs/base.py for full method docs.
 | Backend | Status | File       |
 | ------- | ------ | ---------- |
 | Neo4j   | Stable | `neo4j.py` |
+
+## Shared DB, Multi-Tenant Support
+
+By specifying the `user_name` field, MemOS can isolate memory graphs for multiple users in a single Neo4j database. Ideal for collaborative systems or multi-agent applications:
+
+```python
+config = GraphDBConfigFactory(
+    backend="neo4j",
+    config={
+        "uri": "bolt://localhost:7687",
+        "user": "neo4j",
+        "password": "your_password",
+        "db_name": "shared-graph",
+        "user_name": "alice",
+        "use_multi_db": False,
+        "embedding_dimension": 768,
+    },
+)
+```
+
+User data is logically isolated via the `user_name` field. Filtering is handled automatically during reads, writes, and searches.
+
+:::note
+**Example? You bet.**<br>
+No blah blah, just go check the code:  
+`examples/basic_modules/neo4j_example.example_complex_shared_db(db_name="shared-traval-group-complex-new")`
+:::
+
+## Neo4j Community Edition Support
+
+New backend identifier: `neo4j-community`
+
+Usage is similar to standard Neo4j, but disables Enterprise-only features:
+
+- ❌ No support for `auto_create` databases
+- ❌ No native vector indexes (uses external engines like Qdrant)
+- ✅ Enforces `user_name` logic-based isolation
+
+Example configuration:
+
+```python
+config = GraphDBConfigFactory(
+    backend="neo4j-community",
+    config={
+        "uri": "bolt://localhost:7687",
+        "user": "neo4j",
+        "password": "12345678",
+        "db_name": "paper",
+        "user_name": "bob",
+        "auto_create": False,
+        "embedding_dimension": 768,
+        "vec_config": {
+            "backend": "qdrant",
+            "config": {
+                "host": "localhost",
+                "port": 6333,
+                "collection_name": "neo4j_vec_db",
+                "vector_dimension": 768
+            },
+        },
+    },
+)
+```
+
+:::note
+**Example? You bet.**<br>
+No blah blah, just go check the code:  
+`examples/basic_modules/neo4j_example.example_complex_shared_db(db_name="paper", community=True)`
+:::
 
 ## Extending
 

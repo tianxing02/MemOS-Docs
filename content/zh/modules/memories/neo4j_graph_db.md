@@ -20,6 +20,9 @@
 - 内置对Neo4j的支持
 - 支持向量增强检索(`search_by_embedding`)
 - 模块化、可插拔和可测试
+- [v0.2.1 新特性] 支持**多租户图存储架构**（单库多用户）
+- [v0.2.1 新特性] 兼容\*\*Neo4j 社区版（Community Edition）
+
 ## 目录结构
 
 ```
@@ -81,6 +84,74 @@ graph.add_node(
 | 后端 | 状态 | 文件       |
 | ------- | ------ | ---------- |
 | Neo4j   | Stable | `neo4j.py` |
+
+## 单库多租户（Shared DB, Multi-Tenant）
+
+通过配置 `user_name` 字段，MemOS 支持在单个 Neo4j 数据库中隔离多个用户的记忆图谱，适用于协同系统、多角色场景：
+
+```python
+config = GraphDBConfigFactory(
+    backend="neo4j",
+    config={
+        "uri": "bolt://localhost:7687",
+        "user": "neo4j",
+        "password": "your_password",
+        "db_name": "shared-graph",
+        "user_name": "alice",
+        "use_multi_db": False,
+        "embedding_dimension": 768,
+    },
+)
+```
+
+每个用户的数据通过 `user_name` 字段在读写、搜索、导出中逻辑隔离，系统自动完成过滤。
+
+::note
+**示例参考**<br>话不多说，都在代码里了`examples/basic_modules
+/neo4j_example.example_complex_shared_db(db_name="shared-traval-group-complex-new")`
+::
+
+## Neo4j 社区版（Community Edition）支持
+
+新增后端标识：`neo4j-community`
+
+使用方式与标准 Neo4j 类似，但自动关闭企业功能：
+
+- ❌ 不支持 `auto_create` 数据库
+- ❌ 不支持原生向量索引（使用外挂，如 Qdrant）
+- ✅ 强制启用 `user_name` 逻辑隔离
+
+示例配置：
+
+```python
+config = GraphDBConfigFactory(
+    backend="neo4j-community",
+    config={
+        "uri": "bolt://localhost:7687",
+        "user": "neo4j",
+        "password": "12345678",
+        "db_name": "paper",
+        "user_name": "bob",
+        "auto_create": False,
+        "embedding_dimension": 768,
+        "vec_config": {
+            "backend": "qdrant",
+            "config": {
+                "host": "localhost",
+                "port": 6333,
+                "collection_name": "neo4j_vec_db",
+                "vector_dimension": 768
+            },
+        },
+    },
+)
+```
+
+::note
+**示例参考**<br>话不多说，都在代码里了`examples/basic_modules
+/neo4j_example.example_complex_shared_db(db_name="paper", 
+community=True)`
+::
 
 ## 扩展
 

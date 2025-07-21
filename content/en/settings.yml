@@ -12,6 +12,7 @@ nav:
   - "(ri:rocket-line) Getting Started":
     - "(ri:play-line) Quick Start": getting_started/quick_start.md
     - "(ri:bookmark-line) Your First Memory": getting_started/your_first_memory.md
+    - "(ri:file-code-line) REST API Server": getting_started/rest_api_server.md
     - "(ri:code-line) Examples": getting_started/examples.md
 
   - "(ri:cpu-line) MOS":
