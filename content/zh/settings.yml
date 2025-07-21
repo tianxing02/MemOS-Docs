@@ -32,6 +32,16 @@ nav:
       - "(ri:database-line) Neo4j 图数据库": modules/memories/neo4j_graph_db.md
     - "(ri:cpu-line) 参数记忆": modules/memories/parametric_memory.md
 
+  - "(ri:history-line) 场景案例":
+    - "(ri:database-2-line) 概览": cookbook/overview.md
+    - "(ri:seedling-line) 第一章 你的第一个 MemCube":
+      - "(ri:cloud-line) API": cookbook/chapter1/api.md
+      - "(ri:node-tree) OLLAMA": cookbook/chapter1/ollama.md
+    - "(ri:database-2-line) 第二章 TreeNodeTextualMemoryMetadata": 
+      - "(ri:cloud-line) API": cookbook/chapter2/api.md
+      - "(ri:node-tree) OLLAMA": cookbook/chapter2/ollama.md
+    - "(ri:search-2-line) 第三章 智能小说分析系统": cookbook/chapter3/overview.md
+
   - "(ri:star-line) 最佳实践":
     - "(ri:speed-line) 性能调优": best_practice/performance_tuning.md
     - "(ri:building-3-line) 记忆结构设计": best_practice/memory_structure_design.md
