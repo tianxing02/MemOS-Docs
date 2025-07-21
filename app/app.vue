@@ -94,7 +94,7 @@ provide('navigation', contentNavigation)
     </template>
 
     <!-- Changelog page -->
-    <template v-if="route.path === '/changelog'">
+    <template v-if="route.path.startsWith('/changelog')">
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -109,6 +109,7 @@ provide('navigation', contentNavigation)
       </ClientOnly>
     </template>
 
+    <!-- Document footer -->
     <AppFooter v-if="!route.path.startsWith('/docs/api/')" />
 
     <ClientOnly>
