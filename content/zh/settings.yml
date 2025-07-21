@@ -24,6 +24,7 @@ nav:
     - "(ri:checkbox-multiple-blank-line) 记忆立方": modules/mem_cube.md
     - "(ri:book-open-line) 记忆读取": modules/mem_reader.md
     - "(ri:calendar-line) 记忆调度": modules/mem_scheduler.md
+    - "(ri:robot-2-line) 大模型与Embedding调用": modules/model_backend.md
 
   - "(ri:brain-line) 记忆系统":
     - "(ri:database-2-line) KV cache 记忆": modules/memories/kv_cache_memory.md
@@ -48,6 +49,7 @@ nav:
     - "(ri:building-3-line) 记忆结构设计": best_practice/memory_structure_design.md
     - "(ri:wifi-line) 网络环境适配": best_practice/network_workarounds.md
     - "(ri:error-warning-line) 常见错误与解决方案": best_practice/common_errors_solutions.md
+    - "(ri:tools-line) Coze空间配置Memos的MCP": best_practice/mcp_for_cozespace_and_tools.md
 
   - "(ri:heart-line) 贡献指南":
     - "(ri:eye-line) 总览": contribution/overview.md
