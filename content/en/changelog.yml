@@ -1,6 +1,6 @@
 versions:
   - name: v0.2.1
-    date: 2025-07-20
+    date: 2025-07-21
     changedInfo:
       New Features:
         - type: MemCube Features
@@ -27,63 +27,30 @@ versions:
             - Added new Cookbook content
             - Included Mud game example
 
-  - name: v1.2.0
-    date: 2024-03-15
+  - name: v0.2.0
+    date: 2025-07-11
     changedInfo:
       New Features:
-        - type: Core Engine
+        - type: Website Usability Updates
           changedInfo:
-            - Introduced real-time memory synchronization
-            - Added support for distributed memory clusters
-            - Implemented advanced caching mechanisms
-        - type: API & Integration
+            - Added documentation search functionality
+            - Implemented Chinese/English documentation switching
+            - Enhanced footer navigation links and page editing features
+        - type: Memory Operator Model
           changedInfo:
-            - Released new REST API endpoints
-            - Added WebSocket support for live updates
-            - Integrated with popular cloud platforms
-        - type: Security
+            - Introduced MemReader-4B small model for memory extraction operations
+            - Enabled fully local deployment for restricted network environments
+            - Achieved lower cost and faster memory operations with performance exceeding GPT-4o-mini
+            - Fine-tuned based on Qwen3-4b with human and model annotation data using supervised fine-tuning
+        - type: Cross-Platform Framework Adaptation
           changedInfo:
-            - Enhanced encryption for stored memories
-            - Added role-based access control
-            - Implemented audit logging system
-      Improvements:
-        - type: Performance
+            - Added Windows platform deployment support
+            - Added Mac platform deployment support
+            - Completed adaptation for Linux, Windows, and macOS mainstream operating systems
+            - Passed testing on Ubuntu 20.04+/CentOS, Windows 10+/11, macOS 14 Ventura+ platforms
+            - Supports stable operation of core modules (memory lifecycle management, MIP protocol, memory cache scheduling)
+        - type: Playground Progress
           changedInfo:
-            - Optimized memory retrieval speed by 50%
-            - Reduced memory footprint by 30%
-            - Enhanced concurrent processing capabilities
-        - type: User Experience
-          changedInfo:
-            - Redesigned dashboard interface
-            - Added dark mode support
-      Bug Fixes:
-        - type: Stability
-          changedInfo:
-            - Fixed memory leak in long-running processes
-            - Resolved race conditions in parallel operations
+            - Completed engineering, front-end, and algorithm end-to-end connection, and bug fixing and optimization in progress
 
-  - name: v1.1.0
-    date: 2024-02-01
-    changedInfo:
-      New Features:
-        - type: Analytics
-          changedInfo:
-            - Added memory usage analytics dashboard
-            - Implemented performance monitoring tools
-            - Released memory pattern recognition system
-        - type: Integration
-          changedInfo:
-            - Added support for third-party plugins
-            - Implemented webhook system
-            - Released SDK for popular programming languages
-      Improvements:
-        - type: Documentation
-          changedInfo:
-            - Updated API documentation
-            - Added interactive tutorials
-            - Enhanced troubleshooting guides
-      Bug Fixes:
-        - type: Core
-          changedInfo:
-            - Fixed memory corruption issues
-            - Resolved synchronization conflicts 
+
