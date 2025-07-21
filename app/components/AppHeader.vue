@@ -2,7 +2,7 @@
 const route = useRoute()
 const { t, locale, setLocale } = useI18n()
 const { header } = useAppConfig()
-
+const config = useRuntimeConfig()
 const localizedMenus = computed(() => {
   return [
     {
@@ -27,9 +27,20 @@ const localizedMenus = computed(() => {
   ]
 })
 
-const handleLocaleSwitch = () => {
-  const targetLocale = locale.value === 'zh' ? 'en' : 'zh'
-  setLocale(targetLocale)
+function handleLocaleSwitch() {
+  // For development, switch locale directly
+  if (config.public.env === 'dev') {
+    setLocale(locale.value === 'en' ? 'zh' : 'en')
+
+    return
+  }
+
+  // For production, redirect to the corresponding domain
+  if (locale.value === 'en') {
+    window.location.href = `${config.public.cnDomain}/${window.location.pathname}`
+  } else {
+    window.location.href = `${config.public.enDomain}/${window.location.pathname}`
+  }
 }
 </script>
 
