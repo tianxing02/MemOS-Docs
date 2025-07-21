@@ -102,6 +102,74 @@ The following table shows results across three models (Qwen3-8B, Qwen3-32B, Qwen
 |             |        |        | medium | 302.7  | 0.16      | 0.15        | 0.27         | 43.2        |
 |             |        |        | short  | 167    | 0.16      | 0.10        | 0.25         | 60.5        |
 
+#### On vLLM
+
+MemOS now supports vLLM for managing activated memory. To evaluate its impact, we conducted an experiment measuring performance on a system with 8x H800 80GB GPUs (112 vCPUs, 1920 GiB Memory). The evaluation covered six models: Qwen2.5-0.5B, Qwen2.5-1.5B, Qwen2.5-7B, Qwen2.5-14B, Qwen2.5-32B, and Qwen2.5-72B.
+
+The benchmarks were run across a matrix of memory and context lengths to simulate various activation memory scenarios:
+- **Memory Text Lengths (tokens)**: 200, 2000, 4000
+- **Context Text Lengths (tokens)**: 200, 2000, 4000
+
+The following table summarizes the benchmark results.
+
+| Model | Memory Tokens | Context Tokens | TTFT (with KV Cache Prefill, ms) | TTFT (Without KV Cache , ms) | TTFT Speedup (%) |
+| --- | --- | --- | --- | --- | --- |
+| **Qwen2.5-0.5B** | 200 | 200 | 2.03 | 3.41 | **40.53** |
+|  | 200 | 2000 | 2.04 | 3.42 | **40.46** |
+|  | 200 | 4000 | 2.05 | 3.45 | **40.57** |
+|  | 2000 | 200 | 1.58 | 3.48 | **54.65** |
+|  | 2000 | 2000 | 1.78 | 3.91 | **54.48** |
+|  | 2000 | 4000 | 1.86 | 4.07 | **54.29** |
+|  | 4000 | 200 | 1.79 | 4.12 | **56.43** |
+|  | 4000 | 2000 | 2.42 | 4.95 | **51.13** |
+|  | 4000 | 4000 | 2.10 | 4.95 | **57.72** |
+| **Qwen2.5-1.5B** | 200 | 200 | 1.48 | 3.04 | **51.11** |
+|  | 200 | 2000 | 1.66 | 3.41 | **51.18** |
+|  | 200 | 4000 | 1.81 | 3.71 | **51.20** |
+|  | 2000 | 200 | 2.13 | 4.02 | **47.09** |
+|  | 2000 | 2000 | 1.90 | 4.39 | **56.68** |
+|  | 2000 | 4000 | 1.98 | 4.54 | **56.29** |
+|  | 4000 | 200 | 3.24 | 5.81 | **44.24** |
+|  | 4000 | 2000 | 2.05 | 5.78 | **64.59** |
+|  | 4000 | 4000 | 3.32 | 6.02 | **44.92** |
+| **Qwen2.5-7B** | 200 | 200 | 3.89 | 10.31 | **62.26** |
+|  | 200 | 2000 | 3.88 | 10.23 | **62.07** |
+|  | 200 | 4000 | 3.94 | 10.30 | **61.71** |
+|  | 2000 | 200 | 3.23 | 10.27 | **68.52** |
+|  | 2000 | 2000 | 3.76 | 11.02 | **65.89** |
+|  | 2000 | 4000 | 3.67 | 11.02 | **66.63** |
+|  | 4000 | 200 | 3.86 | 12.48 | **69.03** |
+|  | 4000 | 2000 | 5.48 | 12.54 | **56.29** |
+|  | 4000 | 4000 | 4.33 | 12.54 | **65.44** |
+| **Qwen2.5-14B** | 200 | 200 | 9.03 | 13.91 | **35.05** |
+|  | 200 | 2000 | 9.11 | 13.97 | **34.79** |
+|  | 200 | 4000 | 9.08 | 13.95 | **34.90** |
+|  | 2000 | 200 | 8.84 | 14.38 | **38.55** |
+|  | 2000 | 2000 | 9.41 | 14.32 | **34.30** |
+|  | 2000 | 4000 | 8.92 | 14.43 | **38.17** |
+|  | 4000 | 200 | 8.59 | 14.50 | **40.76** |
+|  | 4000 | 2000 | 9.25 | 14.72 | **37.16** |
+|  | 4000 | 4000 | 7.62 | 14.78 | **48.42** |
+| **Qwen2.5-32B** | 200 | 200 | 10.43 | 17.06 | **38.85** |
+|  | 200 | 2000 | 7.06 | 17.45 | **59.55** |
+|  | 200 | 4000 | 8.36 | 17.59 | **52.45** |
+|  | 2000 | 200 | 10.22 | 19.46 | **47.50** |
+|  | 2000 | 2000 | 7.62 | 19.59 | **61.11** |
+|  | 2000 | 4000 | 8.81 | 19.39 | **54.56** |
+|  | 4000 | 200 | 8.88 | 23.60 | **62.39** |
+|  | 4000 | 2000 | 13.21 | 23.75 | **44.36** |
+|  | 4000 | 4000 | 12.59 | 23.55 | **46.51** |
+| **Qwen2.5-72B** | 200 | 200 | 18.16 | 35.27 | **48.51** |
+|  | 200 | 2000 | 19.26 | 35.23 | **45.32** |
+|  | 200 | 4000 | 19.49 | 35.66 | **45.33** |
+|  | 2000 | 200 | 18.51 | 39.24 | **52.83** |
+|  | 2000 | 2000 | 18.21 | 39.92 | **54.38** |
+|  | 2000 | 4000 | 20.56 | 40.64 | **49.42** |
+|  | 4000 | 200 | 14.61 | 43.23 | **66.21** |
+|  | 4000 | 2000 | 14.33 | 43.22 | **66.84** |
+|  | 4000 | 4000 | 17.45 | 43.63 | **60.00** |
+
+The results clearly demonstrate that integrating vLLM's KV Cache reuse provides a transformative performance improvement for MemOS.
 
 ## KV-cache Memory Structure
 
@@ -137,6 +205,7 @@ KVCacheMemory(config: KVCacheMemoryConfig)
 | `dump(dir)`              | Serialize all caches to a pickle file in directory       |
 | `load(dir)`              | Load caches from a pickle file in directory              |
 | `from_textual_memory(mem)` | Convert a `TextualMemoryItem` to a `KVCacheItem`      |
+| `build_vllm_kv_cache( messages)` | Build a vLLM KV cache from a list of messages   |
 
 
 When calling `dump(dir)`, the system writes to:
