@@ -38,6 +38,7 @@ nav:
     - "(ri:building-3-line) 记忆结构设计": best_practice/memory_structure_design.md
     - "(ri:wifi-line) 网络环境适配": best_practice/network_workarounds.md
     - "(ri:error-warning-line) 常见错误与解决方案": best_practice/common_errors_solutions.md
+    - "(ri:tools-line) Coze空间配置Memos的MCP": best_practice/mcp_for_cozespace_and_tools.md
 
   - "(ri:heart-line) 贡献指南":
     - "(ri:eye-line) 总览": contribution/overview.md
