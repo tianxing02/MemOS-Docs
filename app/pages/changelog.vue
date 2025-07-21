@@ -67,7 +67,7 @@ const links = computed(() => {
       target: '_blank',
       variant: 'outline' as const,
       color: 'neutral' as const,
-      to: 'https://docs.dingtalk.com/i/nodes/Amq4vjg8903oeQA3TdQmNDRqJ3kdP0wQ'
+      to: 'https://alidocs.dingtalk.com/i/nodes/MyQA2dXW7ebBrQAbF6ReovdrJzlwrZgb'
     }
   ]
 })
