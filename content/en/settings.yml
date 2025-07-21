@@ -16,6 +16,8 @@ nav:
 
   - "(ri:cpu-line) MOS":
     - "(ri:eye-line) Overview": modules/mos/overview.md
+    - "(ri:book-open-line) MemOS NEO": modules/mos/memos_neo.md
+    - "(ri:tools-line) MemOS MCP": modules/mos/memos_mcp.md
     - "(ri:team-line) Users": modules/mos/users.md
     - "(ri:settings-3-line) Users Configurations": modules/mos/users_configurations.md
     - "(ri:checkbox-multiple-blank-line) MemCube": modules/mem_cube.md
