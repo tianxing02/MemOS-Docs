@@ -3,7 +3,7 @@ title: REST API 服务
 desc: MemOS 提供了一个使用 FastAPI 编写的 REST API 服务。用户可以通过 REST 接口执行所有操作。
 ---
 
-:Base64Image{src="https://statics.memtensor.com.cn/memos/openapi.png" alt="MemOS REST API 服务支持的 API"}
+![MemOS Architecture](https://statics.memtensor.com.cn/memos/openapi.png)
 <div style="text-align: center; margin-top: 10px">MemOS REST API 服务支持的 API</div>  
 
 ### 功能特点
@@ -14,7 +14,7 @@ desc: MemOS 提供了一个使用 FastAPI 编写的 REST API 服务。用户可�
 - 获取用户所有记忆：获取某个用户的所有记忆内容。
 - 添加新记忆：为指定用户创建一条新的记忆。
 - 搜索记忆：为指定用户搜索其记忆内容。
-- 与 MemOS 对话：与 MemOS 进行对话，针对某个用户，返回 SSE 流式响应。
+- 与 MemOS 对话：与 MemOS 进行对话，返回 SSE 流式响应。
 
 
 ## 本地运行
