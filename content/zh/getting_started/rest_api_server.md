@@ -3,7 +3,7 @@ title: REST API 服务
 desc: MemOS 提供了一个使用 FastAPI 编写的 REST API 服务。用户可以通过 REST 接口执行所有操作。
 ---
 
-:Base64Image{src="https://statics.memtensor.com.cn/memos/openapi.png" alt="MemOS REST API 服务支持的 API"}
+![MemOS Architecture](https://statics.memtensor.com.cn/memos/openapi.png)
 <div style="text-align: center; margin-top: 10px">MemOS REST API 服务支持的 API</div>  
 
 ### 功能特点
