@@ -18,7 +18,7 @@ desc: MemOS provides a REST API server (written using FastAPI). Users can perfor
 
 ### With Docker Compose
 ::steps{level="4"}
-The Development Docker Compose comes pre-configured with postgres pgvector, neo4j and a server/history/history.db volume for the history database.
+The Development Docker Compose comes pre-configured with qdrant, neo4j.
 
 The only required environment variable to run the server is OPENAI_API_KEY.
 

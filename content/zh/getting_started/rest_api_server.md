@@ -22,11 +22,11 @@ desc: MemOS 提供了一个使用 FastAPI 编写的 REST API 服务。用户可�
 
 ### 使用 Docker Compose
 ::steps{level="4"}
-开发环境的 Docker Compose 已预配置了 postgres pgvector、neo4j，以及用于历史数据库的 server/history/history.db 卷。
+开发环境的 Docker Compose 已预配置了 qdrant、neo4j。
 
-运行服务器所需的唯一环境变量是 `OPENAI_API_KEY`。
+运行服务器需要环境变量 `OPENAI_API_KEY`。
 
-#### 在 server/ 目录中创建一个 `.env` 文件并设置你的环境变量。例如：
+#### 在根目录中创建一个 `.env` 文件并设置你的环境变量。例如：
 
 ```bash
 OPENAI_API_KEY=your-openai-api-key  
@@ -46,7 +46,7 @@ docker compose up --build
 
 ### 使用 Docker
 ::steps{level="4"}
-#### 在当前目录创建一个 `.env` 文件并设置你的环境变量。例如：
+#### 在根目录中创建一个 `.env` 文件并设置你的环境变量。例如：
 
 ```bash
 OPENAI_API_KEY=your-openai-api-key  
@@ -70,7 +70,7 @@ docker run --env-file .env -p 8000:8000 memos-api-server
 
 ### 不使用 Docker
 ::steps{level="4"}
-#### 在当前目录创建一个 `.env` 文件并设置你的环境变量。例如：
+#### 在根目录中创建一个 `.env` 文件并设置你的环境变量。例如：
 
 ```bash
 OPENAI_API_KEY=your-openai-api-key  
