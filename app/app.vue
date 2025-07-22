@@ -10,6 +10,8 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
   server: false
 })
 
+console.log('test auto flow')
+
 // Process files to remove language prefix
 const processedFiles = computed(() => {
   if (!files.value) return []
