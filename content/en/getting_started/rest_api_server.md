@@ -3,6 +3,7 @@ title: REST API Server
 desc: MemOS provides a REST API server (written using FastAPI). Users can perform all operations through REST endpoints. 
 ---
 
+
 ![MemOS Architecture](https://statics.memtensor.com.cn/memos/openapi.png)
 <div style="text-align: center; margin-top: 10px">APIs supported by MemOS REST API Server</div>
 
