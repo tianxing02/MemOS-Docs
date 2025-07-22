@@ -2,7 +2,8 @@ export default {
   header: {
     home: 'Home',
     research: 'Research',
-    changelog: 'Changelog'
+    changelog: 'Changelog',
+    docs: 'Docs'
   },
   community: {
     title: 'Community',

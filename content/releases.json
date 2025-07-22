@@ -1,8 +1,190 @@
 {
   "versions": [
     {
+      "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.2.1",
+      "name": "v0.2.1",
+      "date": "2025-07-21",
+      "changedInfo": [
+        {
+          "type": "fix",
+          "description": "reorganizer bug",
+          "author": "CaralHsi",
+          "pr": 64,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/64"
+        },
+        {
+          "type": "feat",
+          "description": "add volcengine embedding support",
+          "author": "ioo0s",
+          "pr": 57,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/57"
+        },
+        {
+          "type": "feat",
+          "description": "add neo4j share-db example",
+          "author": "CaralHsi",
+          "pr": 59,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/59"
+        },
+        {
+          "type": "feat",
+          "description": "Add embedder consistency validation with warning and tests",
+          "author": "Dustyposa",
+          "pr": 69,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/69"
+        },
+        {
+          "type": "feat",
+          "description": "add demo api and scheduler vllm etc",
+          "author": "fridayL",
+          "pr": 83,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/83"
+        },
+        {
+          "type": "feat",
+          "description": "add download_examples command",
+          "author": "Ki-Seki",
+          "pr": 87,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/87"
+        },
+        {
+          "type": "feat",
+          "description": "add stale issue and PR management workflow",
+          "author": "Ki-Seki",
+          "pr": 89,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/89"
+        },
+        {
+          "type": "feat",
+          "description": "update issue and pr templates",
+          "author": "Ki-Seki",
+          "pr": 98,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/98"
+        },
+        {
+          "type": "add",
+          "description": "More backend",
+          "author": "Gaojianli",
+          "pr": 99,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/99"
+        },
+        {
+          "type": "feat",
+          "description": "add multi language",
+          "author": "CaralHsi",
+          "pr": 92,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/92"
+        },
+        {
+          "type": "feat(eval)",
+          "description": "add longmemeval evaluation pipeline",
+          "author": "Duguce",
+          "pr": 104,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/104"
+        },
+        {
+          "type": "support",
+          "description": "customized system prompt base",
+          "author": "newmeta-ben",
+          "pr": 102,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/102"
+        },
+        {
+          "type": "feat",
+          "description": "recursively cluster nodes to max_cluster_size",
+          "author": "Nyakult",
+          "pr": 105,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/105"
+        },
+        {
+          "type": "feat",
+          "description": "return ids when add memory",
+          "author": "CaralHsi",
+          "pr": 119,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/119"
+        },
+        {
+          "type": "feat",
+          "description": "add simple memos for user could easy start",
+          "author": "fridayL",
+          "pr": 118,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/118"
+        },
+        {
+          "type": "feat",
+          "description": "More Llm API",
+          "author": "CaralHsi",
+          "pr": 113,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/113"
+        },
+        {
+          "type": "feat",
+          "description": "update doc mem reader",
+          "author": "Nyakult",
+          "pr": 123,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/123"
+        },
+        {
+          "type": "build",
+          "description": "optimize dependencies management",
+          "author": "Ki-Seki",
+          "pr": 120,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/120"
+        },
+        {
+          "type": "fix",
+          "description": "None issue in reorganizer queue",
+          "author": "J1awei-Yang",
+          "pr": 125,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/125"
+        },
+        {
+          "type": "feat",
+          "description": "update PR template to include documentation issue/PR link",
+          "author": "Ki-Seki",
+          "pr": 126,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/126"
+        },
+        {
+          "type": "feat",
+          "description": "neo4j community",
+          "author": "CaralHsi",
+          "pr": 121,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/121"
+        },
+        {
+          "type": "feat(example)",
+          "description": "add MOSProduct multi-user locomo example with shared Neo4j database",
+          "author": "CaralHsi",
+          "pr": 109,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/109"
+        },
+        {
+          "type": "fix",
+          "description": "update Python version constraints in project files",
+          "author": "Ki-Seki",
+          "pr": 129,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/129"
+        },
+        {
+          "type": "feat",
+          "description": "one-click deployment with docker",
+          "author": "tianxing02",
+          "pr": 133,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/133"
+        },
+        {
+          "type": "chore",
+          "description": "bump version number to v0.2.1",
+          "author": "fridayL",
+          "pr": 131,
+          "prUrl": "https://github.com/MemTensor/MemOS/pull/131"
+        }
+      ]
+    },
+    {
       "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.2.0",
-      "title": "v0.2.0",
+      "name": "v0.2.0",
       "date": "2025-07-11",
       "changedInfo": [
         {
@@ -51,7 +233,7 @@
     },
     {
       "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.1.13",
-      "title": "v0.1.13",
+      "name": "v0.1.13",
       "date": "2025-07-09",
       "changedInfo": [
         {
@@ -156,9 +338,15 @@
     },
     {
       "releaseUrl": "https://github.com/MemTensor/MemOS/releases/tag/v0.1.12",
-      "title": "v0.1.12",
+      "name": "v0.1.12(Pre-release)",
       "date": "2025-07-08",
-      "changedInfo": []
+      "changedInfo": [
+        {
+          "type": "Full Changelog",
+          "description": "https://github.com/MemTensor/MemOS/commits/v0.1.12",
+          "author": "MemTensor"
+        }
+      ]
     }
   ]
 }

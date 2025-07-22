@@ -17,11 +17,14 @@ nav:
 
   - "(ri:cpu-line) MOS":
     - "(ri:eye-line) 概览": modules/mos/overview.md
+    - "(ri:book-open-line) 简化版本": modules/mos/memos_neo.md
+    - "(ri:tools-line) MCP服务": modules/mos/memos_mcp.md
     - "(ri:team-line) 用户管理": modules/mos/users.md
     - "(ri:settings-3-line) 用户配置": modules/mos/users_configurations.md
     - "(ri:checkbox-multiple-blank-line) 记忆立方": modules/mem_cube.md
     - "(ri:book-open-line) 记忆读取": modules/mem_reader.md
     - "(ri:calendar-line) 记忆调度": modules/mem_scheduler.md
+    - "(ri:robot-2-line) 大模型与Embedding调用": modules/model_backend.md
 
   - "(ri:brain-line) 记忆系统":
     - "(ri:database-2-line) KV cache 记忆": modules/memories/kv_cache_memory.md
@@ -31,11 +34,22 @@ nav:
       - "(ri:database-line) Neo4j 图数据库": modules/memories/neo4j_graph_db.md
     - "(ri:cpu-line) 参数记忆": modules/memories/parametric_memory.md
 
+  - "(ri:history-line) 场景案例":
+    - "(ri:database-2-line) 概览": cookbook/overview.md
+    - "(ri:seedling-line) 第一章 你的第一个 MemCube":
+      - "(ri:cloud-line) API": cookbook/chapter1/api.md
+      - "(ri:node-tree) OLLAMA": cookbook/chapter1/ollama.md
+    - "(ri:database-2-line) 第二章 TreeNodeTextualMemoryMetadata": 
+      - "(ri:cloud-line) API": cookbook/chapter2/api.md
+      - "(ri:node-tree) OLLAMA": cookbook/chapter2/ollama.md
+    - "(ri:search-2-line) 第三章 智能小说分析系统": cookbook/chapter3/overview.md
+
   - "(ri:star-line) 最佳实践":
     - "(ri:speed-line) 性能调优": best_practice/performance_tuning.md
     - "(ri:building-3-line) 记忆结构设计": best_practice/memory_structure_design.md
     - "(ri:wifi-line) 网络环境适配": best_practice/network_workarounds.md
     - "(ri:error-warning-line) 常见错误与解决方案": best_practice/common_errors_solutions.md
+    - "(ri:tools-line) Coze空间配置Memos的MCP": best_practice/mcp_for_cozespace_and_tools.md
 
   - "(ri:heart-line) 贡献指南":
     - "(ri:eye-line) 总览": contribution/overview.md

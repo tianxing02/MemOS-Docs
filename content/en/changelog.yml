@@ -1,61 +1,56 @@
 versions:
-  - name: v1.2.0
-    date: 2024-03-15
+  - name: v0.2.1
+    date: 2025-07-21
     changedInfo:
       New Features:
-        - type: Core Engine
+        - type: MemCube Features
           changedInfo:
-            - Introduced real-time memory synchronization
-            - Added support for distributed memory clusters
-            - Implemented advanced caching mechanisms
-        - type: API & Integration
+            - Added plaintext memory + KV Cache functionality with reasoning and decoding performance report
+            - Completed development of interactive cube feature with full workflow support and embedding model switching
+        - type: MemOS System
           changedInfo:
-            - Released new REST API endpoints
-            - Added WebSocket support for live updates
-            - Integrated with popular cloud platforms
-        - type: Security
+            - Released MemOS Neo lightweight version with simplified architecture and core API modules
+            - Added MCP support research and preparation work, expanding MCP capabilities
+            - Created embedded Agent flow Pipeline documentation with Coze framework integration
+        - type: Deployment & Environment
           changedInfo:
-            - Enhanced encryption for stored memories
-            - Added role-based access control
-            - Implemented audit logging system
-      Improvements:
-        - type: Performance
+            - Added Docker deployment support
+            - Enhanced API layer with multi-model support, compatible with OpenAI/Qwen/DeepSeek and other mainstream models
+            - Improved embedding model support
+            - Added neo4j Community Edition/Nebular database support
+            - Implemented multi-tenant architecture support within single database
+        - type: Evaluation & Testing
           changedInfo:
-            - Optimized memory retrieval speed by 50%
-            - Reduced memory footprint by 30%
-            - Enhanced concurrent processing capabilities
-        - type: User Experience
+            - Adapted and evaluated memos API interface format, updated evaluation code
+        - type: Documentation & Examples
           changedInfo:
-            - Redesigned dashboard interface
-            - Added dark mode support
-      Bug Fixes:
-        - type: Stability
-          changedInfo:
-            - Fixed memory leak in long-running processes
-            - Resolved race conditions in parallel operations
+            - Added new Cookbook content
+            - Included Mud game example
 
-  - name: v1.1.0
-    date: 2024-02-01
+  - name: v0.2.0
+    date: 2025-07-11
     changedInfo:
       New Features:
-        - type: Analytics
+        - type: Website Usability Updates
           changedInfo:
-            - Added memory usage analytics dashboard
-            - Implemented performance monitoring tools
-            - Released memory pattern recognition system
-        - type: Integration
+            - Added documentation search functionality
+            - Implemented Chinese/English documentation switching
+            - Enhanced footer navigation links and page editing features
+        - type: Memory Operator Model
           changedInfo:
-            - Added support for third-party plugins
-            - Implemented webhook system
-            - Released SDK for popular programming languages
-      Improvements:
-        - type: Documentation
+            - Introduced MemReader-4B small model for memory extraction operations
+            - Enabled fully local deployment for restricted network environments
+            - Achieved lower cost and faster memory operations with performance exceeding GPT-4o-mini
+            - Fine-tuned based on Qwen3-4b with human and model annotation data using supervised fine-tuning
+        - type: Cross-Platform Framework Adaptation
           changedInfo:
-            - Updated API documentation
-            - Added interactive tutorials
-            - Enhanced troubleshooting guides
-      Bug Fixes:
-        - type: Core
+            - Added Windows platform deployment support
+            - Added Mac platform deployment support
+            - Completed adaptation for Linux, Windows, and macOS mainstream operating systems
+            - Passed testing on Ubuntu 20.04+/CentOS, Windows 10+/11, macOS 14 Ventura+ platforms
+            - Supports stable operation of core modules (memory lifecycle management, MIP protocol, memory cache scheduling)
+        - type: Playground Progress
           changedInfo:
-            - Fixed memory corruption issues
-            - Resolved synchronization conflicts 
+            - Completed engineering, front-end, and algorithm end-to-end connection, and bug fixing and optimization in progress
+
+

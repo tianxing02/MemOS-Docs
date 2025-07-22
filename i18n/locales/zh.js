@@ -2,7 +2,8 @@ export default {
   header: {
     home: '首页',
     research: '研究论文',
-    changelog: '更新日志'
+    changelog: '更新日志',
+    docs: '文档'
   },
   community: {
     title: '社区',

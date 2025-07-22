@@ -14,12 +14,12 @@ interface OpenSourceChange {
   type: string
   description: string
   author: string
-  pr: number
-  prUrl: string
+  pr?: number
+  prUrl?: string
 }
 
 interface Version {
-  title: string
+  name: string
   date: string
   description?: string
   changedInfo: OpenSourceChange[]
@@ -67,7 +67,7 @@ const links = computed(() => {
       target: '_blank',
       variant: 'outline' as const,
       color: 'neutral' as const,
-      to: 'https://docs.dingtalk.com/i/nodes/Amq4vjg8903oeQA3TdQmNDRqJ3kdP0wQ'
+      to: 'https://alidocs.dingtalk.com/i/nodes/MyQA2dXW7ebBrQAbF6ReovdrJzlwrZgb'
     }
   ]
 })
@@ -138,42 +138,45 @@ function handleTabChange(val: string | number) {
 </script>
 
 <template>
-  <UContainer>
-    <UPage>
-      <UPageHero
-        :title="t('changelog.title')"
-        :description="t('changelog.description')"
-        class="border-b-[0px]"
-      >
-        <template #top>
-          <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-        </template>
+  <UPage class="mb-8">
+    <UPageHero
+      :title="t('changelog.title')"
+      :description="t('changelog.description')"
+      class="border-b-[0px] max-w-[100vw]"
+    >
+      <template #top>
+        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+      </template>
 
-        <LazyStarsBg />
+      <LazyStarsBg />
 
-        <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-        <template #links>
-          <UButton v-for="link of links" :key="link.label" v-bind="{ ...link, size: 'xl' }" />
-        </template>
-      </UPageHero>
+      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+      <template #links>
+        <UButton v-for="link of links" :key="link.label" v-bind="{ ...link, size: 'xl' }" />
+      </template>
+    </UPageHero>
 
-      <UTabs
-        v-model="activeTab"
-        :items="tabs"
-        variant="link"
-        class="gap-4 w-full"
-        :ui="{ trigger: 'grow' }"
-        @update:model-value="handleTabChange"
-      >
-        <template #default="{ item }">
-          {{ item.label }}
-        </template>
-      </UTabs>
+    <UTabs
+      v-model="activeTab"
+      :items="tabs"
+      variant="link"
+      class="gap-4 w-full"
+      :ui="{ trigger: 'grow' }"
+      @update:model-value="handleTabChange"
+    >
+      <template #default="{ item }">
+        {{ item.label }}
+      </template>
+    </UTabs>
 
+    <UContainer>
       <div class="mt-8">
         <UChangelogVersions
           v-if="activeTab === '0'"
           :versions="highlightVersions"
+          :ui="{
+            container: 'changelog-container'
+          }"
         >
           <template #body="{ version }">
             <div class="space-y-6 changelog-info rounded-lg">
@@ -186,7 +189,7 @@ function handleTabChange(val: string | number) {
                   {{ category }}
                 </div>
                 <div v-for="item in items" :key="item.type" class="space-y-2">
-                  <div class="text-sm flex items-center gap-2">
+                  <div class="text-l text-white flex items-center gap-2 changelog-info-title">
                     {{ item.type }}:
                   </div>
                   <ul class="text-sm list-disc list-inside space-y-1 ml-4">
@@ -203,15 +206,21 @@ function handleTabChange(val: string | number) {
         <UChangelogVersions
           v-if="activeTab === '1'"
           :versions="opensourceVersions"
+          :ui="{
+            container: 'changelog-container'
+          }"
         >
           <template #body="{ version }">
-            <ol class="list-decimal list-inside space-y-2">
+            <ol class="list-decimal list-inside space-y-2 changelog-list">
+              <div class="flex flex-col items-start mb-[24px]">
+                <span class="text-xl text-white font-bold">{{ version.name }}</span>
+              </div>
               <li v-for="(change, idx) in version.changedInfo" :key="idx" class="flex flex-wrap items-start gap-x-1">
                 <span class="text-highlight text-white font-bold flex items-center gap-2">
                   <UIcon :name="getCategoryIcon(change.type)" class="w-4 h-4 flex-shrink-0" />
                   {{ change.type }}:
                 </span>
-                <span class="break-words flex-1 min-w-0">{{ change.description }} by @{{ change.author }}
+                <span class="break-words flex-1 min-w-0 ml-6 -indent-6">{{ change.description }} by @{{ change.author }}
                   <ULink
                     v-if="change.pr"
                     :to="`https://github.com/MemTensor/MemOS/pull/${String(change.pr)}`"
@@ -224,19 +233,41 @@ function handleTabChange(val: string | number) {
           </template>
         </UChangelogVersions>
       </div>
-    </UPage>
+    </UContainer>
 
     <LayzyStarsBg />
-  </UContainer>
+  </UPage>
 </template>
 
 <style scoped>
+.changelog-container :deep(article) {
+  max-width: var(--container-3xl) !important;
+}
 .changelog-list {
   counter-reset: changelog;
 }
 
 .changelog-info {
-  background: var(--ui-bg-muted);
+  /* background: var(--ui-bg-muted); */
   padding: 1rem;
+}
+
+.changelog-list {
+  padding: 1.5rem;
+  /* background: var(--ui-bg-muted);
+  border-radius: 0.5rem; */
+}
+.changelog-list li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.changelog-list li:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .changelog-list {
+    width: max-content;
+  }
 }
 </style>

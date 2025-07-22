@@ -1,5 +1,5 @@
 ---
-标题: "TreeTextMemory: 分层结构的明文记忆"
+title: "TreeTextMemory: 分层结构的明文记忆"
 ---
 
 让我们在MemOS中构建你的第一个**基于图的、树形明文记忆**！

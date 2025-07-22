@@ -17,11 +17,14 @@ nav:
 
   - "(ri:cpu-line) MOS":
     - "(ri:eye-line) Overview": modules/mos/overview.md
+    - "(ri:book-open-line) MemOS NEO": modules/mos/memos_neo.md
+    - "(ri:tools-line) MemOS MCP": modules/mos/memos_mcp.md
     - "(ri:team-line) Users": modules/mos/users.md
     - "(ri:settings-3-line) Users Configurations": modules/mos/users_configurations.md
     - "(ri:checkbox-multiple-blank-line) MemCube": modules/mem_cube.md
     - "(ri:book-open-line) MemReader": modules/mem_reader.md
     - "(ri:calendar-line) MemScheduler": modules/mem_scheduler.md
+    - "(ri:robot-2-line) LLMs and Embeddings": modules/model_backend.md
 
   - "(ri:brain-line) Memories":
     - "(ri:database-2-line) KV Cache Memory": modules/memories/kv_cache_memory.md
@@ -36,6 +39,7 @@ nav:
     - "(ri:building-3-line) Memory Structure Design": best_practice/memory_structure_design.md
     - "(ri:wifi-line) Network Workarounds": best_practice/network_workarounds.md
     - "(ri:error-warning-line) Common Errors & Solutions": best_practice/common_errors_solutions.md
+    - "(ri:tools-line) MCP for Coze Space and Tools": best_practice/mcp_for_cozespace_and_tools.md
 
   - "(ri:heart-line) Contribution":
     - "(ri:eye-line) Overview": contribution/overview.md

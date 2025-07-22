@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-
-interface MenuItem {
-  to: string
-  label: string
-  target?: string
-}
-
-const config = useRuntimeConfig()
-
+const route = useRoute()
 const { t, locale, setLocale } = useI18n()
 const { header } = useAppConfig()
-
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-
-const localizedMenus = computed<MenuItem[]>(() => {
-  return (header.memus as MenuItem[]).map(menu => ({
-    ...menu,
-    label: t(`${menu.label}`)
-  }))
+const config = useRuntimeConfig()
+const localizedMenus = computed(() => {
+  return [
+    {
+      to: 'https://memos.openmem.net',
+      label: t('header.home')
+    },
+    {
+      to: '/home/overview',
+      label: t('header.docs'),
+      active: !route.path.includes('/changelog')
+    },
+    {
+      label: t('header.research'),
+      target: '_blank',
+      to: 'https://memos.openmem.net/paper_memos_v2'
+    },
+    {
+      label: t('header.changelog'),
+      to: '/changelog',
+      active: route.path.includes('/changelog')
+    }
+  ]
 })
 
 function handleLocaleSwitch() {

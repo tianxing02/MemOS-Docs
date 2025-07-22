@@ -39,6 +39,5 @@ import pageYml from './.index.yml'
       </template>
       <LazyStarsBg />
     </UPageHero>
-    <AppFooter />
   </UPage>
 </template>

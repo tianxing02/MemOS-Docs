@@ -10,6 +10,8 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
   server: false
 })
 
+console.log('test auto flow 3')
+
 // Process files to remove language prefix
 const processedFiles = computed(() => {
   if (!files.value) return []
@@ -44,8 +46,9 @@ provide('navigation', contentNavigation)
   <UApp>
     <NuxtLoadingIndicator />
 
-    <AppHeader v-if="!route.path.startsWith('/docs/api/')"/>
+    <AppHeader v-if="!route.path.startsWith('/docs/api/')" />
 
+    <!-- Document pages -->
     <template v-if="showContentNavigation()">
       <UMain>
         <UContainer>
@@ -89,17 +92,18 @@ provide('navigation', contentNavigation)
             <NuxtPage />
           </UPage>
         </UContainer>
-
-        <AppFooter />
       </UMain>
     </template>
 
-    <template v-if="route.path === '/changelog'">
-      <NuxtPage />
+    <!-- Changelog page -->
+    <template v-if="!showContentNavigation() && route.path !== '/'">
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
     </template>
 
     <!-- Document home page -->
-    <template v-else>
+    <template v-if="route.path === '/'">
       <ClientOnly>
         <NuxtLayout>
           <NuxtPage />
@@ -107,7 +111,8 @@ provide('navigation', contentNavigation)
       </ClientOnly>
     </template>
 
-    <AppFooter v-if="route.path === '/'"/>
+    <!-- Document footer -->
+    <AppFooter v-if="!route.path.startsWith('/docs/api/')" />
 
     <ClientOnly>
       <LazyUContentSearch

@@ -33,6 +33,9 @@ export default defineAppConfig({
       to: 'https://memos.openmem.net',
       label: 'header.home'
     }, {
+      to: '/home/overview',
+      label: 'header.docs'
+    }, {
       label: 'header.research',
       target: '_blank',
       to: 'https://memos.openmem.net/paper_memos_v2'
